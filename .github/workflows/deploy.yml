@@ -38,7 +38,7 @@ jobs:
       # Build the book
       - name: Build the book
         run: |
-          jupyter-book build sotm_2024_ohsome_data_insights_workshop
+          jupyter-book build sotm-2024-workshop-book
 
       # Upload the book's HTML as an artifact
       - name: Upload artifact
