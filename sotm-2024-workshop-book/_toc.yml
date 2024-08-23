@@ -1,0 +1,10 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: notebooks/00_Getting_Started.ipynb
+- file: notebooks/01_Data_Extraction.ipynb
+- file: notebooks/02_building_currentness.ipynb
+- file: notebooks/03_highway_timeline.ipynb
