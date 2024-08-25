@@ -8,8 +8,10 @@ logo: HeiGIT_Logo_compact.svg
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  #execute_notebooks: force
-  execute_notebooks: auto
+  #execute_notebooks: auto
+  execute_notebooks: 'off'
+
+exclude_patterns: [venv, data]
 
 # Define the name of the latex output file for PDF builds
 latex:
