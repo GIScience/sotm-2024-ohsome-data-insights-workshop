@@ -5,7 +5,7 @@ title: SOTM 2024 ohsome-data-insights Workshop
 author: B.Herfort (HeiGIT)
 logo: HeiGIT_Logo_compact.svg
 
-# Force re-execution of notebooks on each build.
+# Force re-execution of book on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
   #execute_notebooks: auto
