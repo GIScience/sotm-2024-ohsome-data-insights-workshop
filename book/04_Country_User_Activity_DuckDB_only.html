@@ -57,11 +57,11 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/04b_Country_User_Activity_DuckDB_only';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/04_Country_User_Activity_DuckDB_only';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="DuckDB: Development of highways over time" href="03b_highways_timeline_DuckDB_only.html" />
-    <link rel="prev" title="DuckDB: Mapillary Coverage Analysis" href="05_mapillary_data_analysis.html" />
+    <link rel="next" title="DuckDB: Development of highways over time" href="04_highways_timeline_DuckDB_only.html" />
+    <link rel="prev" title="DuckDB: Mapillary Coverage Analysis" href="03_mapillary_data_analysis.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,7 +181,11 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="00_Getting_Started.html">Connect to MinIO Object Storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_motivation.html">Why you should be excited about this workshop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_data_structure.html">Data Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_partitioning_and_sorting.html">Partitioning and Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_MinIO_Object_Store.html">DuckDB: Connect to MinIO Object Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_Iceberg_Catalog.html">PyIceberg: Connect to Iceberg Catalog</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Extraction</span></p>
 <ul class="nav bd-sidenav">
@@ -206,7 +210,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Integration</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="05_mapillary_data_analysis.html">DuckDB: Mapillary Coverage Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_mapillary_data_analysis.html">DuckDB: Mapillary Coverage Analysis</a></li>
 
 
 
@@ -217,7 +221,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">DuckDB: Country user activity map</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="03b_highways_timeline_DuckDB_only.html">DuckDB: Development of highways over time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_highways_timeline_DuckDB_only.html">DuckDB: Development of highways over time</a></li>
 
 </ul>
 
@@ -273,7 +277,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/GIScience/sotm-2024-ohsome-data-insights-workshop/blob/main/notebooks/04b_Country_User_Activity_DuckDB_only.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/GIScience/sotm-2024-ohsome-data-insights-workshop/blob/main/book/04_Country_User_Activity_DuckDB_only.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -321,7 +325,7 @@
       
       
       
-      <li><a href="https://github.com/GIScience/sotm-2024-ohsome-data-insights-workshop/issues/new?title=Issue%20on%20page%20%2Fnotebooks/04b_Country_User_Activity_DuckDB_only.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/GIScience/sotm-2024-ohsome-data-insights-workshop/issues/new?title=Issue%20on%20page%20%2Fbook/04_Country_User_Activity_DuckDB_only.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -351,7 +355,7 @@
       
       
       
-      <li><a href="../_sources/notebooks/04b_Country_User_Activity_DuckDB_only.ipynb" target="_blank"
+      <li><a href="../_sources/book/04_Country_User_Activity_DuckDB_only.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -757,7 +761,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./notebooks"
+            path: "./book"
         },
         predefinedOutput: true
     }
@@ -775,7 +779,7 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="05_mapillary_data_analysis.html"
+       href="03_mapillary_data_analysis.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
@@ -784,7 +788,7 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="03b_highways_timeline_DuckDB_only.html"
+       href="04_highways_timeline_DuckDB_only.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>

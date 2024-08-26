@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>DuckDB: Data Extraction from geo-sorted ohsome contributions &#8212; SOTM 2024 ohsome-data-insights Workshop</title>
+    <title>DuckDB + PyIceberg: Data Extraction from geo-sorted ohsome contributions &#8212; SOTM 2024 ohsome-data-insights Workshop</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/01b_Data_Extraction_DuckDB_only';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/01a_Data_Extraction_DuckDB_PyIceberg';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="DuckDB + PyIceberg: Currentness of Buildings" href="02a_buildings_currentness_DuckDB_PyIceberg.html" />
-    <link rel="prev" title="DuckDB + PyIceberg: Data Extraction from geo-sorted ohsome contributions" href="01a_Data_Extraction_DuckDB_PyIceberg.html" />
+    <link rel="next" title="DuckDB: Data Extraction from geo-sorted ohsome contributions" href="01b_Data_Extraction_DuckDB_only.html" />
+    <link rel="prev" title="PyIceberg: Connect to Iceberg Catalog" href="00_Iceberg_Catalog.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,17 +181,21 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="00_Getting_Started.html">Connect to MinIO Object Storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_motivation.html">Why you should be excited about this workshop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_data_structure.html">Data Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_partitioning_and_sorting.html">Partitioning and Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_MinIO_Object_Store.html">DuckDB: Connect to MinIO Object Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_Iceberg_Catalog.html">PyIceberg: Connect to Iceberg Catalog</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Extraction</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01a_Data_Extraction_DuckDB_PyIceberg.html">DuckDB + PyIceberg: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">DuckDB + PyIceberg: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
 
 
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">DuckDB: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="01b_Data_Extraction_DuckDB_only.html">DuckDB: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
 
 
 
@@ -206,7 +210,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Integration</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="05_mapillary_data_analysis.html">DuckDB: Mapillary Coverage Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_mapillary_data_analysis.html">DuckDB: Mapillary Coverage Analysis</a></li>
 
 
 
@@ -215,9 +219,9 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Data Analysis</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="04b_Country_User_Activity_DuckDB_only.html">DuckDB: Country user activity map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Country_User_Activity_DuckDB_only.html">DuckDB: Country user activity map</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="03b_highways_timeline_DuckDB_only.html">DuckDB: Development of highways over time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_highways_timeline_DuckDB_only.html">DuckDB: Development of highways over time</a></li>
 
 </ul>
 
@@ -273,7 +277,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/GIScience/sotm-2024-ohsome-data-insights-workshop/blob/main/notebooks/01b_Data_Extraction_DuckDB_only.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/GIScience/sotm-2024-ohsome-data-insights-workshop/blob/main/book/01a_Data_Extraction_DuckDB_PyIceberg.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -321,7 +325,7 @@
       
       
       
-      <li><a href="https://github.com/GIScience/sotm-2024-ohsome-data-insights-workshop/issues/new?title=Issue%20on%20page%20%2Fnotebooks/01b_Data_Extraction_DuckDB_only.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/GIScience/sotm-2024-ohsome-data-insights-workshop/issues/new?title=Issue%20on%20page%20%2Fbook/01a_Data_Extraction_DuckDB_PyIceberg.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -351,7 +355,7 @@
       
       
       
-      <li><a href="../_sources/notebooks/01b_Data_Extraction_DuckDB_only.ipynb" target="_blank"
+      <li><a href="../_sources/book/01a_Data_Extraction_DuckDB_PyIceberg.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -435,7 +439,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>DuckDB: Data Extraction from geo-sorted ohsome contributions</h1>
+    <h1>DuckDB + PyIceberg: Data Extraction from geo-sorted ohsome contributions</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -445,9 +449,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">DuckDB: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">DuckDB + PyIceberg: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#download-with-duckdb">Download with DuckDB</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#download-data-with-pyiceberg-table-scan">Download data with PyIceberg table scan</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-and-process-data-with-duckdb">Filter and process data with DuckDB</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#save-data-as-geopackage">Save data as GeoPackage</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#work-with-the-data-in-qgis">Work with the data in QGIS</a></li>
 </ul>
@@ -462,15 +467,16 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="duckdb-data-extraction-from-geo-sorted-ohsome-contributions">
-<h1>DuckDB: Data Extraction from <em>geo-sorted ohsome contributions</em><a class="headerlink" href="#duckdb-data-extraction-from-geo-sorted-ohsome-contributions" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="duckdb-pyiceberg-data-extraction-from-geo-sorted-ohsome-contributions">
+<h1>DuckDB + PyIceberg: Data Extraction from <em>geo-sorted ohsome contributions</em><a class="headerlink" href="#duckdb-pyiceberg-data-extraction-from-geo-sorted-ohsome-contributions" title="Link to this heading">#</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ol class="arabic simple">
-<li><p>Set the connection params to MinIO s3 object storage and configure DuckDB.</p></li>
-<li><p>Download the data in 2 steps:</p>
+<li><p>Set the connection params and configure DuckDB.</p></li>
+<li><p>Download the data in 3 steps:</p>
 <ul class="simple">
-<li><p>Download and filter data with DuckDB in a single step.</p></li>
+<li><p>Download data with PyIceberg.</p></li>
+<li><p>Fitler and process data with DuckDB.</p></li>
 <li><p>Export results into geopackage file with GeoPandas.</p></li>
 </ul>
 </li>
@@ -508,39 +514,36 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Set connection to MinIO object storage.</p>
+<p>Set the connection params to Iceberg Rest Catalog.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">DROP SECRET IF EXISTS &quot;__default_s3&quot;;</span>
-<span class="s2">CREATE SECRET (</span>
-<span class="s2">      TYPE S3,</span>
-<span class="s2">      KEY_ID &#39;</span><span class="si">{</span><span class="n">s3_user</span><span class="si">}</span><span class="s2">&#39;,</span>
-<span class="s2">      SECRET &#39;</span><span class="si">{</span><span class="n">s3_password</span><span class="si">}</span><span class="s2">&#39;,</span>
-<span class="s2">      REGION &#39;eu-central-1&#39;,</span>
-<span class="s2">      endpoint &#39;sotm2024.minio.heigit.org&#39;,</span>
-<span class="s2">      use_ssl true,</span>
-<span class="s2">      url_style &#39;path&#39;</span>
-<span class="s2">  );</span>
-<span class="s2">&quot;&quot;&quot;</span>
-<span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;pyiceberg[s3fs,duckdb,sql-sqlite,pyarrow]&quot;</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌─────────┐
-│ Success │
-│ boolean │
-├─────────┤
-│ true    │
-└─────────┘
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyiceberg.catalog.rest</span> <span class="kn">import</span> <span class="n">RestCatalog</span>
+
+<span class="n">catalog</span> <span class="o">=</span> <span class="n">RestCatalog</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="o">**</span><span class="p">{</span>
+        <span class="s2">&quot;uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://sotm2024.iceberg.ohsome.org&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;s3.endpoint&quot;</span><span class="p">:</span> <span class="s2">&quot;https://sotm2024.minio.heigit.org&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;py-io-impl&quot;</span><span class="p">:</span> <span class="s2">&quot;pyiceberg.io.pyarrow.PyArrowFileIO&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;s3.access-key-id&quot;</span><span class="p">:</span> <span class="n">s3_user</span><span class="p">,</span>
+        <span class="s2">&quot;s3.secret-access-key&quot;</span><span class="p">:</span> <span class="n">s3_password</span><span class="p">,</span>
+        <span class="s2">&quot;s3.region&quot;</span><span class="p">:</span> <span class="s2">&quot;eu-central-1&quot;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="download-with-duckdb">
-<h1>Download with DuckDB<a class="headerlink" href="#download-with-duckdb" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="download-data-with-pyiceberg-table-scan">
+<h1>Download data with PyIceberg table scan<a class="headerlink" href="#download-data-with-pyiceberg-table-scan" title="Link to this heading">#</a></h1>
 <p>In this step we can already filter all OSM contributions by four major factors. We will perform more detailed filtering (e.g. for OSM tags values) later:</p>
 <ul class="simple">
 <li><p><strong>status</strong> (e.g. latest, historic or deleted OSM features)</p></li>
@@ -550,9 +553,10 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set s3 path for parquet input data</span>
-<span class="n">parquet_data_path</span> <span class="o">=</span> <span class="s2">&quot;s3a://heigit-ohsome-sotm24/data/geo_sort_ext/contributions_germany/**&quot;</span>
-<span class="c1">#parquet_data_path = &quot;s3a://heigit-ohsome-sotm24/data/geo_sort_ext/contributions/**&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set iceberg table</span>
+<span class="n">namespace</span> <span class="o">=</span> <span class="s1">&#39;geo_sort&#39;</span>
+<span class="n">tablename</span> <span class="o">=</span> <span class="s1">&#39;contributions&#39;</span>
+<span class="n">icebergtable</span> <span class="o">=</span> <span class="n">catalog</span><span class="o">.</span><span class="n">load_table</span><span class="p">((</span><span class="n">namespace</span><span class="p">,</span> <span class="n">tablename</span><span class="p">))</span>
 
 <span class="c1"># Define status filter</span>
 <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;latest&#39;</span>
@@ -565,9 +569,10 @@ document.write(`
     <span class="s1">&#39;berlin&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">13.088345</span><span class="p">,</span> <span class="mf">52.338271</span><span class="p">,</span> <span class="mf">13.761161</span><span class="p">,</span> <span class="mf">52.675509</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="n">selected_region</span> <span class="o">=</span> <span class="s1">&#39;heidelberg&#39;</span>
+<span class="n">selected_region</span> <span class="o">=</span> <span class="s1">&#39;nairobi&#39;</span>
 <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">bboxes</span><span class="p">[</span><span class="n">selected_region</span><span class="p">]</span>
 <span class="n">area_of_interest_file</span> <span class="o">=</span><span class="sa">f</span><span class="s2">&quot;../data/</span><span class="si">{</span><span class="n">selected_region</span><span class="si">}</span><span class="s2">.geojson&quot;</span>
+<span class="n">area_of_interest_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://raw.githubusercontent.com/GIScience/sotm-2024-ohsome-data-insights-workshop/main/data/</span><span class="si">{</span><span class="n">selected_region</span><span class="si">}</span><span class="s2">.geojson&quot;</span>
 
 <span class="c1"># Define geometry type filter</span>
 <span class="n">geometry_type</span> <span class="o">=</span> <span class="s1">&#39;Polygon&#39;</span>
@@ -599,34 +604,22 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
 <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
-<span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">DROP TABLE IF EXISTS osm_data;</span>
-<span class="s2">CREATE TABLE osm_data AS</span>
-<span class="s2">(</span>
-<span class="s2">SELECT</span>
-<span class="s2">    a.user_id,</span>
-<span class="s2">    a.osm_id,</span>
-<span class="s2">    a.osm_version,</span>
-<span class="s2">    a.valid_from,</span>
-<span class="s2">    a.tags,</span>
-<span class="s2">    a.geometry   </span>
-<span class="s2">FROM</span>
-<span class="s2">    read_parquet(&#39;</span><span class="si">{</span><span class="n">parquet_data_path</span><span class="si">}</span><span class="s2">&#39;, hive_partitioning=true) a,</span>
-<span class="s2">    st_read(&#39;</span><span class="si">{</span><span class="n">area_of_interest_file</span><span class="si">}</span><span class="s2">&#39;) as aoi</span>
-<span class="s2">WHERE 1=1</span>
-<span class="s2">    and status = &#39;latest&#39;</span>
-<span class="s2">    and geometry_type = &#39;Polygon&#39;</span>
-<span class="s2">    and tags[&#39;building&#39;][1] is not null</span>
-<span class="s2">    and tags[&#39;building&#39;][1] != &#39;no&#39;</span>
-<span class="s2">    -- spatial filtering part</span>
-<span class="s2">     and (a.bbox.xmax &gt;= </span><span class="si">{</span><span class="n">xmin</span><span class="si">}</span><span class="s2"> AND a.bbox.xmin &lt;= </span><span class="si">{</span><span class="n">xmax</span><span class="si">}</span><span class="s2">)</span>
-<span class="s2">     and (a.bbox.ymax &gt;= </span><span class="si">{</span><span class="n">ymin</span><span class="si">}</span><span class="s2"> AND a.bbox.ymin &lt;= </span><span class="si">{</span><span class="n">ymax</span><span class="si">}</span><span class="s2">)</span>
-<span class="s2">     and ST_Intersects(st_GeomFromText(a.geometry), aoi.geom)</span>
-<span class="s2">)</span>
-<span class="s2">;</span>
-<span class="s2">&quot;&quot;&quot;</span>
-<span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-
+<span class="n">icebergtable</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span>
+    <span class="n">row_filter</span><span class="o">=</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;status = &#39;</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&#39; &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;and geometry_type = &#39;</span><span class="si">{</span><span class="n">geometry_type</span><span class="si">}</span><span class="s2">&#39; &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;and (xmax &gt;= </span><span class="si">{</span><span class="n">xmin</span><span class="si">}</span><span class="s2"> and xmin &lt;= </span><span class="si">{</span><span class="n">xmax</span><span class="si">}</span><span class="s2">) &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;and (ymax &gt;= </span><span class="si">{</span><span class="n">ymin</span><span class="si">}</span><span class="s2"> and ymin &lt;= </span><span class="si">{</span><span class="n">ymax</span><span class="si">}</span><span class="s2">) &quot;</span>
+    <span class="p">),</span>
+    <span class="n">selected_fields</span><span class="o">=</span><span class="p">(</span>
+        <span class="s2">&quot;user_id&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;osm_id&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;osm_version&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;valid_from&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tags&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;geometry&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_duckdb</span><span class="p">(</span><span class="s1">&#39;raw_osm_data&#39;</span><span class="p">,</span><span class="n">connection</span><span class="o">=</span><span class="n">con</span><span class="p">)</span>
 
 <span class="n">download_time</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;download took </span><span class="si">{</span><span class="n">download_time</span><span class="si">}</span><span class="s2"> sec.&quot;</span><span class="p">)</span>
@@ -634,7 +627,63 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "e6953f8db31349a98f3de95b19c9362e", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>download took 6.382 sec.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>download took 198.388 sec.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="filter-and-process-data-with-duckdb">
+<h1>Filter and process data with DuckDB<a class="headerlink" href="#filter-and-process-data-with-duckdb" title="Link to this heading">#</a></h1>
+<p>Second, we use DuckDB to perform the more detailed filtering. In this step we can filter for:</p>
+<ul class="simple">
+<li><p><strong>tags</strong></p></li>
+<li><p><strong>location</strong> (using the exact geometry of each OSM contribution)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">DROP TABLE IF EXISTS osm_data;</span>
+<span class="s2">CREATE TABLE osm_data AS</span>
+<span class="s2">(</span>
+<span class="s2">SELECT a.*  </span>
+<span class="s2">FROM</span>
+<span class="s2">    raw_osm_data as a,</span>
+<span class="s2">    st_read(&#39;</span><span class="si">{</span><span class="n">area_of_interest_file</span><span class="si">}</span><span class="s2">&#39;) as aoi</span>
+<span class="s2">WHERE 1=1</span>
+<span class="s2">    and tags[&#39;building&#39;][1] is not null</span>
+<span class="s2">    and tags[&#39;building&#39;][1] != &#39;no&#39;</span>
+<span class="s2">    -- spatial filtering part</span>
+<span class="s2">    and ST_Intersects(st_GeomFromText(a.geometry), aoi.geom)</span>
+<span class="s2">)</span>
+<span class="s2">;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+<span class="n">processing_time</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;processing took </span><span class="si">{</span><span class="n">processing_time</span><span class="si">}</span><span class="s2"> sec.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">IOException</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">20</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span><span class="s2"> DROP TABLE IF EXISTS osm_data;</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span><span class="s2"> CREATE TABLE osm_data AS</span>
+<span class="s2">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span><span class="s2"> ;</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span><span class="s2"> &quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">20</span> <span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="n">processing_time</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;processing took </span><span class="si">{</span><span class="n">processing_time</span><span class="si">}</span><span class="s2"> sec.&quot;</span><span class="p">)</span>
+
+<span class="ne">IOException</span>: IO Error: GDAL Error (4): Failed to open file https://raw.githubusercontent.com/GIScience/sotm-2024-ohsome-data-insights-workshop/main/data/nairobi.geojson: {&quot;exception_type&quot;:&quot;IO&quot;,&quot;exception_message&quot;:&quot;Cannot open file \&quot;https://raw.githubusercontent.com/GIScience/sotm-2024-ohsome-data-insights-workshop/main/data/nairobi.geojson\&quot;: No such file or directory&quot;,&quot;errno&quot;:&quot;2&quot;}
 </pre></div>
 </div>
 </div>
@@ -654,17 +703,18 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌─────────────┬───────────────────────┬─────────┬─────────┬─────────┬─────────┐
-│ column_name │      column_type      │  null   │   key   │ default │  extra  │
-│   varchar   │        varchar        │ varchar │ varchar │ varchar │ varchar │
-├─────────────┼───────────────────────┼─────────┼─────────┼─────────┼─────────┤
-│ user_id     │ INTEGER               │ YES     │ NULL    │ NULL    │ NULL    │
-│ osm_id      │ VARCHAR               │ YES     │ NULL    │ NULL    │ NULL    │
-│ osm_version │ INTEGER               │ YES     │ NULL    │ NULL    │ NULL    │
-│ valid_from  │ TIMESTAMP             │ YES     │ NULL    │ NULL    │ NULL    │
-│ tags        │ MAP(VARCHAR, VARCHAR) │ YES     │ NULL    │ NULL    │ NULL    │
-│ geometry    │ VARCHAR               │ YES     │ NULL    │ NULL    │ NULL    │
-└─────────────┴───────────────────────┴─────────┴─────────┴─────────┴─────────┘
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌─────────────┬────────────────────────────────────────────────────────────┬─────────┬─────────┬─────────┬─────────┐
+│ column_name │                        column_type                         │  null   │   key   │ default │  extra  │
+│   varchar   │                          varchar                           │ varchar │ varchar │ varchar │ varchar │
+├─────────────┼────────────────────────────────────────────────────────────┼─────────┼─────────┼─────────┼─────────┤
+│ user_id     │ INTEGER                                                    │ YES     │ NULL    │ NULL    │ NULL    │
+│ valid_from  │ TIMESTAMP                                                  │ YES     │ NULL    │ NULL    │ NULL    │
+│ osm_id      │ VARCHAR                                                    │ YES     │ NULL    │ NULL    │ NULL    │
+│ osm_version │ INTEGER                                                    │ YES     │ NULL    │ NULL    │ NULL    │
+│ tags        │ MAP(VARCHAR, VARCHAR)                                      │ YES     │ NULL    │ NULL    │ NULL    │
+│ bbox        │ STRUCT(xmin DOUBLE, ymin DOUBLE, xmax DOUBLE, ymax DOUBLE) │ YES     │ NULL    │ NULL    │ NULL    │
+│ geometry    │ VARCHAR                                                    │ YES     │ NULL    │ NULL    │ NULL    │
+└─────────────┴────────────────────────────────────────────────────────────┴─────────┴─────────┴─────────┴─────────┘
 </pre></div>
 </div>
 </div>
@@ -682,16 +732,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌─────────┬───────────────┬─────────────┬─────────────────────┬──────────────────────┬─────────────────────────────────┐
-│ user_id │    osm_id     │ osm_version │     valid_from      │         tags         │            geometry             │
-│  int32  │    varchar    │    int32    │      timestamp      │ map(varchar, varch…  │             varchar             │
-├─────────┼───────────────┼─────────────┼─────────────────────┼──────────────────────┼─────────────────────────────────┤
-│  202726 │ way/389789385 │           1 │ 2016-01-05 21:45:29 │ {building=yes, sou…  │ POLYGON ((8.6298593 49.379877…  │
-│  202726 │ way/97716061  │           2 │ 2016-01-05 21:45:53 │ {building=yes, sou…  │ POLYGON ((8.6300405 49.379283…  │
-│  769836 │ way/97720617  │           7 │ 2023-09-21 21:19:00 │ {building=apartmen…  │ POLYGON ((8.6330643 49.379926…  │
-│  769836 │ way/97720623  │           7 │ 2023-09-21 21:19:00 │ {building=apartmen…  │ POLYGON ((8.632587599999999 4…  │
-│  769836 │ way/97753107  │           7 │ 2023-09-26 19:35:10 │ {building=apartmen…  │ POLYGON ((8.6317677 49.379866…  │
-└─────────┴───────────────┴─────────────┴─────────────────────┴──────────────────────┴─────────────────────────────────┘
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌─────────┬────────────┬─────────┬─────────────┬──────────────────────┬─────────────────────────────────────┬──────────┐
+│ user_id │ valid_from │ osm_id  │ osm_version │         tags         │                bbox                 │ geometry │
+│  int32  │ timestamp  │ varchar │    int32    │ map(varchar, varch…  │ struct(xmin double, ymin double, …  │ varchar  │
+├─────────┴────────────┴─────────┴─────────────┴──────────────────────┴─────────────────────────────────────┴──────────┤
+│                                                        0 rows                                                        │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 </pre></div>
 </div>
 </div>
@@ -712,7 +758,7 @@ document.write(`
 │ count_star() │
 │    int64     │
 ├──────────────┤
-│        21160 │
+│            0 │
 └──────────────┘
 </pre></div>
 </div>
@@ -739,7 +785,7 @@ document.write(`
     <span class="n">geometry</span><span class="o">=</span><span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="o">.</span><span class="n">from_wkt</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">])</span>
 <span class="p">)</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="s1">&#39;epsg:4326&#39;</span><span class="p">)</span>
 
-<span class="n">output_filename</span> <span class="o">=</span> <span class="s2">&quot;../data/heidelberg_osm_data.gpkg&quot;</span>
+<span class="n">output_filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;../data/</span><span class="si">{</span><span class="n">selected_region</span><span class="si">}</span><span class="s2">_osm_data.gpkg&quot;</span>
 <span class="n">gdf</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">output_filename</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s1">&#39;GPKG&#39;</span><span class="p">)</span>
 <span class="n">processing_time</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;processing took </span><span class="si">{</span><span class="n">processing_time</span><span class="si">}</span><span class="s2"> sec.&quot;</span><span class="p">)</span>
@@ -747,7 +793,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>processing took 1.778 sec.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>processing took 0.109 sec.
 </pre></div>
 </div>
 </div>
@@ -771,7 +817,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./notebooks"
+            path: "./book"
         },
         predefinedOutput: true
     }
@@ -789,20 +835,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="01a_Data_Extraction_DuckDB_PyIceberg.html"
+       href="00_Iceberg_Catalog.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">DuckDB + PyIceberg: Data Extraction from <em>geo-sorted ohsome contributions</em></p>
+        <p class="prev-next-title">PyIceberg: Connect to Iceberg Catalog</p>
       </div>
     </a>
     <a class="right-next"
-       href="02a_buildings_currentness_DuckDB_PyIceberg.html"
+       href="01b_Data_Extraction_DuckDB_only.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">DuckDB + PyIceberg: Currentness of Buildings</p>
+        <p class="prev-next-title">DuckDB: Data Extraction from <em>geo-sorted ohsome contributions</em></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -822,9 +868,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">DuckDB: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">DuckDB + PyIceberg: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#download-with-duckdb">Download with DuckDB</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#download-data-with-pyiceberg-table-scan">Download data with PyIceberg table scan</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-and-process-data-with-duckdb">Filter and process data with DuckDB</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#save-data-as-geopackage">Save data as GeoPackage</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#work-with-the-data-in-qgis">Work with the data in QGIS</a></li>
 </ul>

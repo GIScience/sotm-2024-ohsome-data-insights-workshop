@@ -57,10 +57,10 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/05_mapillary_data_analysis';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/03_mapillary_data_analysis';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="DuckDB: Country user activity map" href="04b_Country_User_Activity_DuckDB_only.html" />
+    <link rel="next" title="DuckDB: Country user activity map" href="04_Country_User_Activity_DuckDB_only.html" />
     <link rel="prev" title="DuckDB: Currentness of Buildings" href="02b_buildings_currentness_DuckDB_only.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -181,7 +181,11 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="00_Getting_Started.html">Connect to MinIO Object Storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_motivation.html">Why you should be excited about this workshop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_data_structure.html">Data Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_partitioning_and_sorting.html">Partitioning and Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_MinIO_Object_Store.html">DuckDB: Connect to MinIO Object Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_Iceberg_Catalog.html">PyIceberg: Connect to Iceberg Catalog</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Extraction</span></p>
 <ul class="nav bd-sidenav">
@@ -215,9 +219,9 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Data Analysis</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="04b_Country_User_Activity_DuckDB_only.html">DuckDB: Country user activity map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Country_User_Activity_DuckDB_only.html">DuckDB: Country user activity map</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="03b_highways_timeline_DuckDB_only.html">DuckDB: Development of highways over time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_highways_timeline_DuckDB_only.html">DuckDB: Development of highways over time</a></li>
 
 </ul>
 
@@ -273,7 +277,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/GIScience/sotm-2024-ohsome-data-insights-workshop/blob/main/notebooks/05_mapillary_data_analysis.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/GIScience/sotm-2024-ohsome-data-insights-workshop/blob/main/book/03_mapillary_data_analysis.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -321,7 +325,7 @@
       
       
       
-      <li><a href="https://github.com/GIScience/sotm-2024-ohsome-data-insights-workshop/issues/new?title=Issue%20on%20page%20%2Fnotebooks/05_mapillary_data_analysis.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/GIScience/sotm-2024-ohsome-data-insights-workshop/issues/new?title=Issue%20on%20page%20%2Fbook/03_mapillary_data_analysis.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -351,7 +355,7 @@
       
       
       
-      <li><a href="../_sources/notebooks/05_mapillary_data_analysis.ipynb" target="_blank"
+      <li><a href="../_sources/book/03_mapillary_data_analysis.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -544,8 +548,8 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set s3 path for parquet input data</span>
-<span class="c1">#osm_parquet_data_path = &quot;s3a://heigit-ohsome-sotm24/data/geo_sort_ext/contributions_germany/**&quot;</span>
-<span class="n">osm_parquet_data_path</span> <span class="o">=</span> <span class="s2">&quot;s3a://heigit-ohsome-sotm24/data/geo_sort_ext/global_wkt_smaller/**&quot;</span>
+<span class="n">osm_parquet_data_path</span> <span class="o">=</span> <span class="s2">&quot;s3a://heigit-ohsome-sotm24/data/geo_sort_ext/contributions_germany/**&quot;</span>
+<span class="c1">#osm_parquet_data_path = &quot;s3a://heigit-ohsome-sotm24/data/geo_sort_ext/global_wkt_smaller/**&quot;</span>
 
 
 <span class="n">mapillary_parquet_data_path</span> <span class="o">=</span> <span class="s2">&quot;s3a://heigit-ohsome-sotm24/data/mapillary_sequences/*&quot;</span>
@@ -621,7 +625,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "faf227f629284b928b06ce2701a79200", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>download took 35.288 sec.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>download took 1.619 sec.
 </pre></div>
 </div>
 </div>
@@ -673,7 +677,80 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "ae5394172fdf4094a561c2e940106d7a", "version_major": 2, "version_minor": 1}</script></div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">lonboard</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># the lonboard map definition</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">osm_layer</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">PathLayer</span><span class="o">.</span><span class="n">from_geopandas</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">osm_data_gdf</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">get_color</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">view_state</span> <span class="o">=</span> <span class="p">{</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="n">xmin</span> <span class="o">+</span> <span class="p">((</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="n">ymin</span> <span class="o">+</span> <span class="p">((</span><span class="n">ymax</span> <span class="o">-</span> <span class="n">ymin</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="s2">&quot;zoom&quot;</span><span class="p">:</span> <span class="mi">12</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="p">}</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">osm_map</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">basemap_style</span><span class="o">=</span><span class="n">lonboard</span><span class="o">.</span><span class="n">basemap</span><span class="o">.</span><span class="n">CartoBasemap</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">osm_layer</span><span class="p">],</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">view_state</span><span class="o">=</span><span class="n">view_state</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="p">)</span>
+
+<span class="nn">File ~/GIT_REPOS/sotm-2024-ohsome-data-insights-workshop/venv/lib/python3.12/site-packages/lonboard/_layer.py:1211,</span> in <span class="ni">PathLayer.from_geopandas</span><span class="nt">(cls, gdf, auto_downcast, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1203</span> <span class="nd">@classmethod</span>
+<span class="g g-Whitespace">   </span><span class="mi">1204</span> <span class="k">def</span> <span class="nf">from_geopandas</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1205</span>     <span class="bp">cls</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1209</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Unpack</span><span class="p">[</span><span class="n">PathLayerKwargs</span><span class="p">],</span>
+<span class="g g-Whitespace">   </span><span class="mi">1210</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1211</span>     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">from_geopandas</span><span class="p">(</span><span class="n">gdf</span><span class="o">=</span><span class="n">gdf</span><span class="p">,</span> <span class="n">auto_downcast</span><span class="o">=</span><span class="n">auto_downcast</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/GIT_REPOS/sotm-2024-ohsome-data-insights-workshop/venv/lib/python3.12/site-packages/lonboard/_layer.py:333,</span> in <span class="ni">BaseArrowLayer.from_geopandas</span><span class="nt">(cls, gdf, auto_downcast, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">329</span> <span class="k">if</span> <span class="n">auto_downcast</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">330</span>     <span class="c1"># Note: we don&#39;t deep copy because we don&#39;t need to clone geometries</span>
+<span class="g g-Whitespace">    </span><span class="mi">331</span>     <span class="n">gdf</span> <span class="o">=</span> <span class="n">_auto_downcast</span><span class="p">(</span><span class="n">gdf</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>  <span class="c1"># type: ignore</span>
+<span class="ne">--&gt; </span><span class="mi">333</span> <span class="n">table</span> <span class="o">=</span> <span class="n">geopandas_to_geoarrow</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">334</span> <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="n">table</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/GIT_REPOS/sotm-2024-ohsome-data-insights-workshop/venv/lib/python3.12/site-packages/lonboard/_geoarrow/geopandas_interop.py:21,</span> in <span class="ni">geopandas_to_geoarrow</span><span class="nt">(gdf, columns, preserve_index)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">df_attr</span> <span class="o">=</span> <span class="n">df_attr</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="n">table</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">df_attr</span><span class="p">,</span> <span class="n">preserve_index</span><span class="o">=</span><span class="n">preserve_index</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">21</span> <span class="n">field</span><span class="p">,</span> <span class="n">geom_arr</span> <span class="o">=</span> <span class="n">construct_geometry_array</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gdf</span><span class="o">.</span><span class="n">geometry</span><span class="p">),</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span>     <span class="n">crs_str</span><span class="o">=</span><span class="n">gdf</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span> <span class="k">if</span> <span class="n">gdf</span><span class="o">.</span><span class="n">crs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="k">return</span> <span class="n">table</span><span class="o">.</span><span class="n">append_column</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">geom_arr</span><span class="p">)</span>
+
+<span class="nn">File ~/GIT_REPOS/sotm-2024-ohsome-data-insights-workshop/venv/lib/python3.12/site-packages/lonboard/_geoarrow/extension_types.py:292,</span> in <span class="ni">construct_geometry_array</span><span class="nt">(shapely_arr, include_z, field_name, crs_str)</span>
+<span class="g g-Whitespace">    </span><span class="mi">282</span> <span class="k">def</span> <span class="nf">construct_geometry_array</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">283</span>     <span class="n">shapely_arr</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">object_</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">284</span>     <span class="n">include_z</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">290</span>     <span class="c1"># extension metadata on the field without instantiating extension types into the</span>
+<span class="g g-Whitespace">    </span><span class="mi">291</span>     <span class="c1"># global pyarrow registry</span>
+<span class="ne">--&gt; </span><span class="mi">292</span>     <span class="n">geom_type</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">offsets</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">to_ragged_array</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">293</span>         <span class="n">shapely_arr</span><span class="p">,</span> <span class="n">include_z</span><span class="o">=</span><span class="n">include_z</span>
+<span class="g g-Whitespace">    </span><span class="mi">294</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">296</span>     <span class="k">if</span> <span class="n">coords</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">297</span>         <span class="n">dims</span> <span class="o">=</span> <span class="n">CoordinateDimension</span><span class="o">.</span><span class="n">XY</span>
+
+<span class="nn">File ~/GIT_REPOS/sotm-2024-ohsome-data-insights-workshop/venv/lib/python3.12/site-packages/shapely/_ragged_array.py:292,</span> in <span class="ni">to_ragged_array</span><span class="nt">(geometries, include_z)</span>
+<span class="g g-Whitespace">    </span><span class="mi">287</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">288</span>             <span class="s2">&quot;Geometry type combination is not supported &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">289</span>             <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="p">[</span><span class="n">GeometryType</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">geom_types</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">290</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">291</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">292</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">293</span>         <span class="s2">&quot;Geometry type combination is not supported &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">294</span>         <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="p">[</span><span class="n">GeometryType</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">geom_types</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">295</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">297</span> <span class="k">return</span> <span class="n">typ</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">offsets</span>
+
+<span class="ne">ValueError</span>: Geometry type combination is not supported ([])
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="get-mapillary-data">
@@ -955,7 +1032,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./notebooks"
+            path: "./book"
         },
         predefinedOutput: true
     }
@@ -982,7 +1059,7 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="04b_Country_User_Activity_DuckDB_only.html"
+       href="04_Country_User_Activity_DuckDB_only.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
