@@ -9,13 +9,17 @@ parts:
       - file: notebooks/00_Getting_Started.ipynb
   - caption: Data Extraction
     chapters:
-        - file: notebooks/01_Data_Extraction.ipynb
+        - file: notebooks/01a_Data_Extraction_DuckDB_PyIceberg.ipynb
         - file: notebooks/01b_Data_Extraction_DuckDB_only.ipynb
   - caption: Simple Data Analysis
     chapters:
-        - file: notebooks/02_buildings_currentness.ipynb
+        - file: notebooks/02a_buildings_currentness_DuckDB_PyIceberg.ipynb
         - file: notebooks/02b_buildings_currentness_DuckDB_only.ipynb
-        - file: notebooks/03_highways_timeline.ipynb
+        - file: notebooks/attribute_completeness.ipynb
+  - caption: Data Integration
+    chapters:
+        - file: notebooks/05_mapillary_data_analysis.ipynb
   - caption: Advanced Data Analysis
     chapters:
-        - file: notebooks/04_quadkey_map_germany.ipynb
+        - file: notebooks/04b_Country_User_Activity_DuckDB_only.ipynb
+        - file: notebooks/03b_highways_timeline_DuckDB_only.ipynb
