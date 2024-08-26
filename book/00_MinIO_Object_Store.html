@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>DuckDB: Connect to MinIO Object Store &#8212; SOTM 2024 ohsome-data-insights Workshop</title>
+    <title>Connect to MinIO Object Store &#8212; SOTM 2024 ohsome-data-insights Workshop</title>
   
   
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/00_MinIO_Object_Store';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="PyIceberg: Connect to Iceberg Catalog" href="00_Iceberg_Catalog.html" />
-    <link rel="prev" title="Partitioning and Sorting" href="00_partitioning_and_sorting.html" />
+    <link rel="next" title="Connect to Apache Iceberg" href="00_Iceberg_Catalog.html" />
+    <link rel="prev" title="Why should you be excited about ohsome-data-insights?" href="00_motivation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,11 +181,12 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="00_motivation.html">Why you should be excited about this workshop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_motivation.html">Why should you be excited about <em>ohsome-data-insights</em>?</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Connect to MinIO Object Store</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="00_Iceberg_Catalog.html">Connect to Apache Iceberg</a></li>
 <li class="toctree-l1"><a class="reference internal" href="00_data_structure.html">Data Structure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="00_partitioning_and_sorting.html">Partitioning and Sorting</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">DuckDB: Connect to MinIO Object Store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="00_Iceberg_Catalog.html">PyIceberg: Connect to Iceberg Catalog</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Extraction</span></p>
 <ul class="nav bd-sidenav">
@@ -426,7 +427,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -437,11 +440,25 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>DuckDB: Connect to MinIO Object Store</h1>
+    <h1>Connect to MinIO Object Store</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Connect to MinIO Object Store</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-in-with-osm-account">Log-In with OSM Account</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-access-key">Create Access Key</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-to-minio-via-duckdb">Connect to MinIO via DuckDB</a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -451,33 +468,49 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="duckdb-connect-to-minio-object-store">
-<h1>DuckDB: Connect to MinIO Object Store<a class="headerlink" href="#duckdb-connect-to-minio-object-store" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="connect-to-minio-object-store">
+<h1>Connect to MinIO Object Store<a class="headerlink" href="#connect-to-minio-object-store" title="Link to this heading">#</a></h1>
+<section id="log-in-with-osm-account">
+<h2>Log-In with OSM Account<a class="headerlink" href="#log-in-with-osm-account" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Go to <a class="reference external" href="https://sotm2024.minio.heigit.org">https://sotm2024.minio.heigit.org</a> website.</p></li>
+<li><p>Log-in with your OSM Account credentials.</p></li>
+</ul>
+<p><img alt="minio_login" src="../_images/minio_login.png" /></p>
+</section>
+<section id="create-access-key">
+<h2>Create Access Key<a class="headerlink" href="#create-access-key" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Create a new access key.</p></li>
+</ul>
+<p><img alt="minio_login" src="../_images/minio_access_key_1.png" /></p>
+<ul class="simple">
+<li><p>Copy both keys, you’ll need them in the next step.</p></li>
+</ul>
+<p><img alt="minio_login" src="../_images/minio_access_key_2.png" /></p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="connect-to-minio-via-duckdb">
+<h1>Connect to MinIO via DuckDB<a class="headerlink" href="#connect-to-minio-via-duckdb" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">duckdb</span>
+<span class="n">con</span> <span class="o">=</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Adjust the code below and add your access keys in there:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">duckdb</span>
-
-<span class="n">con</span> <span class="o">=</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
-    <span class="n">config</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;threads&#39;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
-        <span class="s1">&#39;max_memory&#39;</span><span class="p">:</span> <span class="s1">&#39;50GB&#39;</span><span class="p">,</span>
-    <span class="p">}</span>
-<span class="p">)</span>
-<span class="n">con</span><span class="o">.</span><span class="n">install_extension</span><span class="p">(</span><span class="s2">&quot;spatial&quot;</span><span class="p">)</span>
-<span class="n">con</span><span class="o">.</span><span class="n">load_extension</span><span class="p">(</span><span class="s2">&quot;spatial&quot;</span><span class="p">)</span>
+<span class="n">s3_user</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;S3_ACCESS_KEY_ID&quot;</span><span class="p">]</span>  <span class="c1"># s3_user = &#39;my_user_access_key&#39;</span>
+<span class="n">s3_password</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;S3_SECRET_ACCESS_KEY&quot;</span><span class="p">]</span>  <span class="c1"># s3_password = &#39;my_user_secret_key&#39;</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s3_user</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;S3_ACCESS_KEY_ID&quot;</span><span class="p">]</span>  <span class="c1"># add your user here</span>
-<span class="n">s3_password</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;S3_SECRET_ACCESS_KEY&quot;</span><span class="p">]</span>  <span class="c1"># add your password here</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p>Create DuckDB connection to MinIO.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
@@ -507,6 +540,7 @@ document.write(`
 </div>
 </div>
 </div>
+<p>Now you are ready to explore Apache Iceberg Catalog and Iceberg tables in the next step.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -540,12 +574,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="00_partitioning_and_sorting.html"
+       href="00_motivation.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Partitioning and Sorting</p>
+        <p class="prev-next-title">Why should you be excited about <em>ohsome-data-insights</em>?</p>
       </div>
     </a>
     <a class="right-next"
@@ -553,7 +587,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">PyIceberg: Connect to Iceberg Catalog</p>
+        <p class="prev-next-title">Connect to Apache Iceberg</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -563,6 +597,27 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Connect to MinIO Object Store</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-in-with-osm-account">Log-In with OSM Account</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-access-key">Create Access Key</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-to-minio-via-duckdb">Connect to MinIO via DuckDB</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>

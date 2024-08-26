@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>PyIceberg: Connect to Iceberg Catalog &#8212; SOTM 2024 ohsome-data-insights Workshop</title>
+    <title>Connect to Apache Iceberg &#8212; SOTM 2024 ohsome-data-insights Workshop</title>
   
   
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/00_Iceberg_Catalog';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="DuckDB + PyIceberg: Data Extraction from geo-sorted ohsome contributions" href="01a_Data_Extraction_DuckDB_PyIceberg.html" />
-    <link rel="prev" title="DuckDB: Connect to MinIO Object Store" href="00_MinIO_Object_Store.html" />
+    <link rel="next" title="Data Structure" href="00_data_structure.html" />
+    <link rel="prev" title="Connect to MinIO Object Store" href="00_MinIO_Object_Store.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,11 +181,12 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="00_motivation.html">Why you should be excited about this workshop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_motivation.html">Why should you be excited about <em>ohsome-data-insights</em>?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_MinIO_Object_Store.html">Connect to MinIO Object Store</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Connect to Apache Iceberg</a></li>
 <li class="toctree-l1"><a class="reference internal" href="00_data_structure.html">Data Structure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="00_partitioning_and_sorting.html">Partitioning and Sorting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="00_MinIO_Object_Store.html">DuckDB: Connect to MinIO Object Store</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">PyIceberg: Connect to Iceberg Catalog</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Extraction</span></p>
 <ul class="nav bd-sidenav">
@@ -426,7 +427,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -437,11 +440,21 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>PyIceberg: Connect to Iceberg Catalog</h1>
+    <h1>Connect to Apache Iceberg</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-apache-iceberg">What is Apache Iceberg?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-to-apache-iceberg-catalog-via-pyiceberg">Connect to Apache Iceberg Catalog via PyIceberg</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-an-overview">Get an overview</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -451,8 +464,143 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="pyiceberg-connect-to-iceberg-catalog">
-<h1>PyIceberg: Connect to Iceberg Catalog<a class="headerlink" href="#pyiceberg-connect-to-iceberg-catalog" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="connect-to-apache-iceberg">
+<h1>Connect to Apache Iceberg<a class="headerlink" href="#connect-to-apache-iceberg" title="Link to this heading">#</a></h1>
+<section id="what-is-apache-iceberg">
+<h2>What is Apache Iceberg?<a class="headerlink" href="#what-is-apache-iceberg" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Iceberg brings together MinIO object store and things you are used to have from a database</p></li>
+</ul>
+</section>
+<section id="connect-to-apache-iceberg-catalog-via-pyiceberg">
+<h2>Connect to Apache Iceberg Catalog via PyIceberg<a class="headerlink" href="#connect-to-apache-iceberg-catalog-via-pyiceberg" title="Link to this heading">#</a></h2>
+<p>Adjust the code below and add your MinIO access keys in there:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">s3_user</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;S3_ACCESS_KEY_ID&quot;</span><span class="p">]</span>  <span class="c1"># add your user here</span>
+<span class="n">s3_password</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;S3_SECRET_ACCESS_KEY&quot;</span><span class="p">]</span>  <span class="c1"># add your password here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Run this line if you haven’t installed the python libraries yet, e.g. when you are running this in Google Colab.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;pyiceberg[s3fs,duckdb,sql-sqlite,pyarrow]&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Set up connection to Iceberg catalog.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyiceberg.catalog.rest</span> <span class="kn">import</span> <span class="n">RestCatalog</span>
+
+<span class="n">catalog</span> <span class="o">=</span> <span class="n">RestCatalog</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="o">**</span><span class="p">{</span>
+        <span class="s2">&quot;uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://sotm2024.iceberg.ohsome.org&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;s3.endpoint&quot;</span><span class="p">:</span> <span class="s2">&quot;https://sotm2024.minio.heigit.org&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;py-io-impl&quot;</span><span class="p">:</span> <span class="s2">&quot;pyiceberg.io.pyarrow.PyArrowFileIO&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;s3.access-key-id&quot;</span><span class="p">:</span> <span class="n">s3_user</span><span class="p">,</span>
+        <span class="s2">&quot;s3.secret-access-key&quot;</span><span class="p">:</span> <span class="n">s3_password</span><span class="p">,</span>
+        <span class="s2">&quot;s3.region&quot;</span><span class="p">:</span> <span class="s2">&quot;eu-central-1&quot;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="get-an-overview">
+<h2>Get an overview<a class="headerlink" href="#get-an-overview" title="Link to this heading">#</a></h2>
+<p>Find out what data exists and where to find it.
+Tables in Iceberg are organized in groups called NAMESPACES.</p>
+<ol class="arabic simple">
+<li><p>List all existing namespaces</p></li>
+<li><p>List the tables that exist in a namespace</p></li>
+<li><p>Get some table metadata</p></li>
+</ol>
+<p>Currently this catalog consists of only a single namespace. You can think of namespaces like a <code class="docutils literal notranslate"><span class="pre">schema</span></code> in postgres or other databases.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catalog</span><span class="o">.</span><span class="n">list_namespaces</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;geo_sort&#39;,)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this step we list which tables are available in this namespace.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catalog</span><span class="o">.</span><span class="n">list_tables</span><span class="p">(</span><span class="s1">&#39;geo_sort&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;geo_sort&#39;, &#39;benni_test_heidelberg&#39;),
+ (&#39;geo_sort&#39;, &#39;contributions&#39;),
+ (&#39;geo_sort&#39;, &#39;contributions_germany&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s inspect a single Iceberg table and list all columns / attributes from this table. (We will explain these in detail again on the next page.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iceberg_table</span> <span class="o">=</span> <span class="n">catalog</span><span class="o">.</span><span class="n">load_table</span><span class="p">((</span><span class="s1">&#39;geo_sort&#39;</span><span class="p">,</span> <span class="s1">&#39;contributions&#39;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">iceberg_table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>contributions(
+  1: user_id: optional int,
+  2: valid_from: optional timestamp,
+  3: valid_to: optional timestamp,
+  4: osm_type: optional string,
+  5: osm_id: optional string,
+  6: osm_version: optional int,
+  7: contrib_type: optional string,
+  8: members: optional list&lt;struct&lt;32: type: optional string, 33: id: optional long, 34: role: optional string, 35: geometry: optional binary&gt;&gt;,
+  9: status: optional string,
+  10: changeset: optional struct&lt;36: id: optional long, 37: timestamp: optional timestamp, 38: tags: optional map&lt;string, string&gt;, 39: hashtags: optional list&lt;string&gt;, 40: editor: optional string&gt;,
+  11: tags: optional map&lt;string, string&gt;,
+  12: tags_before: optional map&lt;string, string&gt;,
+  13: map_features: optional struct&lt;48: aerialway: optional boolean, 49: aeroway: optional boolean, 50: amenity: optional boolean, 51: barrier: optional boolean, 52: boundary: optional boolean, 53: building: optional boolean, 54: craft: optional boolean, 55: emergency: optional boolean, 56: geological: optional boolean, 57: healthcare: optional boolean, 58: highway: optional boolean, 59: historic: optional boolean, 60: landuse: optional boolean, 61: leisure: optional boolean, 62: man_made: optional boolean, 63: military: optional boolean, 64: natural: optional boolean, 65: office: optional boolean, 66: place: optional boolean, 67: power: optional boolean, 68: public_transport: optional boolean, 69: railway: optional boolean, 70: route: optional boolean, 71: shop: optional boolean, 72: sport: optional boolean, 73: telecom: optional boolean, 74: water: optional boolean, 75: waterway: optional boolean&gt;,
+  14: area: optional long,
+  15: area_delta: optional long,
+  16: length: optional long,
+  17: length_delta: optional long,
+  18: xzcode: optional struct&lt;76: level: optional int, 77: code: optional long&gt;,
+  19: country_iso_a3: optional list&lt;string&gt;,
+  20: bbox: optional struct&lt;79: xmin: optional double, 80: ymin: optional double, 81: xmax: optional double, 82: ymax: optional double&gt;,
+  21: xmin: optional double,
+  22: xmax: optional double,
+  23: ymin: optional double,
+  24: ymax: optional double,
+  25: centroid: optional struct&lt;83: x: optional double, 84: y: optional double&gt;,
+  26: quadkey_z10: optional string,
+  27: h3_r5: optional long,
+  28: geometry_type: optional string,
+  29: geometry_valid: optional boolean,
+  30: geometry: optional string
+),
+partition by: [status, geometry_type],
+sort order: [],
+snapshot: Operation.APPEND: id=1440840715635230871, schema_id=0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s dive deeper now into the data structure and what you can expect for your data analysis.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -491,15 +639,15 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">DuckDB: Connect to MinIO Object Store</p>
+        <p class="prev-next-title">Connect to MinIO Object Store</p>
       </div>
     </a>
     <a class="right-next"
-       href="01a_Data_Extraction_DuckDB_PyIceberg.html"
+       href="00_data_structure.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">DuckDB + PyIceberg: Data Extraction from <em>geo-sorted ohsome contributions</em></p>
+        <p class="prev-next-title">Data Structure</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -509,6 +657,23 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-apache-iceberg">What is Apache Iceberg?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-to-apache-iceberg-catalog-via-pyiceberg">Connect to Apache Iceberg Catalog via PyIceberg</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-an-overview">Get an overview</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
