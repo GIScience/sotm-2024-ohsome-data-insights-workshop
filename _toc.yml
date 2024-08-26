@@ -7,10 +7,10 @@ parts:
   - caption: Getting Started
     chapters:
       - file: book/00_motivation.md
-      - file: book/00_data_structure.md
-      - file: book/00_partitioning_and_sorting.md
       - file: book/00_MinIO_Object_Store.ipynb
       - file: book/00_Iceberg_Catalog.ipynb
+      - file: book/00_data_structure.md
+      - file: book/00_partitioning_and_sorting.md
   - caption: Data Extraction
     chapters:
         - file: book/01a_Data_Extraction_DuckDB_PyIceberg.ipynb
