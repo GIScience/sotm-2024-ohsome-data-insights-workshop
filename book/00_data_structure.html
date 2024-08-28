@@ -422,6 +422,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-osm-attributes">General OSM Attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#osm-changeset-attributes">OSM Changeset Attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geographic-attributes">Geographic Attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-attributes-for-osm-map-features">Special Attributes for OSM Map Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-attributes-for-osm-relations">Special Attributes for OSM Relations</a></li>
 </ul>
             </nav>
         </div>
@@ -437,12 +439,373 @@ document.write(`
 <h1>Data Structure<a class="headerlink" href="#data-structure" title="Link to this heading">#</a></h1>
 <section id="general-osm-attributes">
 <h2>General OSM Attributes<a class="headerlink" href="#general-osm-attributes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>attribute name</p></th>
+<th class="head"><p>data type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>user_id</p></td>
+<td><p>INTEGER</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>valid_from</p></td>
+<td><p>TIMESTAMP</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>valid_to</p></td>
+<td><p>TIMESTAMP</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>osm_type</p></td>
+<td><p>VARCHAR</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>osm_id</p></td>
+<td><p>VARCHAR</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>osm_version</p></td>
+<td><p>INTEGER</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>contrib_type</p></td>
+<td><p>VARCHAR</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>status</p></td>
+<td><p>VARCHAR</p></td>
+<td><p>Potential values are: <code class="docutils literal notranslate"><span class="pre">latest</span></code>, <code class="docutils literal notranslate"><span class="pre">history</span></code>, <code class="docutils literal notranslate"><span class="pre">deleted</span></code>, <code class="docutils literal notranslate"><span class="pre">invalid</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>tags</p></td>
+<td><p>MAP(VARCHAR, VARCHAR)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>tags_before</p></td>
+<td><p>MAP(VARCHAR, VARCHAR)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <section id="osm-changeset-attributes">
 <h2>OSM Changeset Attributes<a class="headerlink" href="#osm-changeset-attributes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>attribute name</p></th>
+<th class="head"><p>data type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>changeset</p></td>
+<td><p>STRUCT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://changeset.id">changeset.id</a></p></td>
+<td><p>BIGINT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>changeset.timestamp</p></td>
+<td><p>TIMESTAMP</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>changeset.tags</p></td>
+<td><p>MAP(VARCHAR, VARCHAR)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>changeset.hashtags</p></td>
+<td><p>VARCHAR[]</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>changeset.editor</p></td>
+<td><p>VARCHAR</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <section id="geographic-attributes">
 <h2>Geographic Attributes<a class="headerlink" href="#geographic-attributes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>attribute name</p></th>
+<th class="head"><p>data type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>area</p></td>
+<td><p>BIGINT</p></td>
+<td><p>The area of the OSM element in m². Will always be <code class="docutils literal notranslate"><span class="pre">0</span></code> for the following geometry types: <code class="docutils literal notranslate"><span class="pre">Point</span></code>, <code class="docutils literal notranslate"><span class="pre">LineString</span></code>, <code class="docutils literal notranslate"><span class="pre">GeometryCollection</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>area_delta</p></td>
+<td><p>BIGINT</p></td>
+<td><p>The length of the OSM element in m. Will always be <code class="docutils literal notranslate"><span class="pre">0</span></code> for the following geometry types: <code class="docutils literal notranslate"><span class="pre">Point</span></code>, <code class="docutils literal notranslate"><span class="pre">Polygon</span></code>, <code class="docutils literal notranslate"><span class="pre">MultiPolygon</span></code>, <code class="docutils literal notranslate"><span class="pre">GeometryCollection</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>length</p></td>
+<td><p>BIGINT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>length_delta</p></td>
+<td><p>BIGINT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>xzcode</p></td>
+<td><p>STRUCT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>xzcode.level</p></td>
+<td><p>INTEGER</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>xzcode.code</p></td>
+<td><p>BIGINT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>country_iso_a3</p></td>
+<td><p>VARCHAR[]</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>bbox</p></td>
+<td><p>STRUCT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>bbox.xmin</p></td>
+<td><p>DOUBLE</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>bbox.ymin</p></td>
+<td><p>DOUBLE</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>bbox.xmax</p></td>
+<td><p>DOUBLE</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>bbox.ymax</p></td>
+<td><p>DOUBLE</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>xmin</p></td>
+<td><p>DOUBLE</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>xmax</p></td>
+<td><p>DOUBLE</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>ymin</p></td>
+<td><p>DOUBLE</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>ymax</p></td>
+<td><p>DOUBLE</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>centroid</p></td>
+<td><p>STRUCT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>centroid.x</p></td>
+<td><p>DOUBLE</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>centroid.y</p></td>
+<td><p>DOUBLE</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>quadkey_z10</p></td>
+<td><p>VARCHAR</p></td>
+<td><p>Quadkey hierarchical geospatial index at zoom level 10. We have used the OSM element centroid location to determine the Quadkey ID. There are around 1 Million Quadkeys at this level globally. Check <a class="reference external" href="https://learn.microsoft.com/en-us/azure/azure-maps/zoom-levels-and-tile-grid?tabs=csharp">Bing Maps Tile System</a> for more details.</p></td>
+</tr>
+<tr class="row-odd"><td><p>h3_r5</p></td>
+<td><p>UBIGINT</p></td>
+<td><p>Cell ID in H3 hierarchical geospatial index at resolution level 5. We have used the OSM element centroid location to determine the H3 cell ID. There are about 2 Million cells at this level globally. The cell size varies between 150 - 300 km². Check <a class="reference external" href="https://h3geo.org/docs/">H3 docs</a> for more details.</p></td>
+</tr>
+<tr class="row-even"><td><p>geometry_type</p></td>
+<td><p>VARCHAR</p></td>
+<td><p>Potential values are: <code class="docutils literal notranslate"><span class="pre">Point</span></code>, <code class="docutils literal notranslate"><span class="pre">LineString</span></code>, <code class="docutils literal notranslate"><span class="pre">Polygon</span></code>, <code class="docutils literal notranslate"><span class="pre">MultiPolygon</span></code>, <code class="docutils literal notranslate"><span class="pre">GeometryCollection</span></code>, <code class="docutils literal notranslate"><span class="pre">InvalidGeometry</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>geometry_valid</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>geometry</p></td>
+<td><p>VARCHAR</p></td>
+<td><p>The geometry of the OSM element in <a class="reference external" href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT format</a>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="special-attributes-for-osm-map-features">
+<h2>Special Attributes for OSM Map Features<a class="headerlink" href="#special-attributes-for-osm-map-features" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>attribute name</p></th>
+<th class="head"><p>data type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>map_features</p></td>
+<td><p>STRUCT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>map_features.aerialway</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>map_features.aeroway</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>map_features.amenity</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>map_features.barrier</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>map_features.boundary</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>map_features.building</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>map_features.craft</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>map_features.emergency</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>map_features.geological</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>map_features.healthcare</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>map_features.highway</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>map_features.historic</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>map_features.landuse</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>map_features.leisure</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>map_features.man_made</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>map_features.military</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>map_features.natural</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>map_features.office</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>map_features.place</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>map_features.power</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>map_features.public_transport</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>map_features.railway</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>map_features.route</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>map_features.shop</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>map_features.sport</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>map_features.telecom</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>map_features.water</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>map_features.waterway</p></td>
+<td><p>BOOLEAN</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="special-attributes-for-osm-relations">
+<h2>Special Attributes for OSM Relations<a class="headerlink" href="#special-attributes-for-osm-relations" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>attribute name</p></th>
+<th class="head"><p>data type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>members</p></td>
+<td><p>STRUCT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>members.type</p></td>
+<td><p>VARCHAR</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://members.id">members.id</a></p></td>
+<td><p>BIGINT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>members.role</p></td>
+<td><p>VARCHAR</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>members.geometry</p></td>
+<td><p>BLOB</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 </section>
 
@@ -513,6 +876,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-osm-attributes">General OSM Attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#osm-changeset-attributes">OSM Changeset Attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geographic-attributes">Geographic Attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-attributes-for-osm-map-features">Special Attributes for OSM Map Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-attributes-for-osm-relations">Special Attributes for OSM Relations</a></li>
 </ul>
   </nav></div>
 

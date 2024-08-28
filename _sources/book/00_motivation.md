@@ -12,6 +12,7 @@
 
 ### Fits your style
 * choose your own favorite client and programming language 
+* you can use SQL to write your queries, e.g. using DuckDB or Trino.
 
 ![](../figs/flexibility_clients.png)
 
