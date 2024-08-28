@@ -474,6 +474,12 @@ document.write(`
 </tbody>
 </table>
 </div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="mf">222.3</span> <span class="n">GiB</span> <span class="p">[</span><span class="c1">#########################] /status=latest                                                                                                                          </span>
+  <span class="mf">195.7</span> <span class="n">GiB</span> <span class="p">[</span><span class="c1">######################   ] /status=history                                                                                                                         </span>
+   <span class="mf">27.2</span> <span class="n">GiB</span> <span class="p">[</span><span class="c1">###                      ] /status=deleted                                                                                                                         </span>
+  <span class="mf">540.0</span> <span class="n">KiB</span> <span class="p">[</span>                         <span class="p">]</span> <span class="o">/</span><span class="n">status</span><span class="o">=</span><span class="n">invalid</span>   
+</pre></div>
+</div>
 </section>
 <section id="nd-level-partition">
 <h3>2nd level partition<a class="headerlink" href="#nd-level-partition" title="Link to this heading">#</a></h3>
@@ -511,6 +517,35 @@ document.write(`
 </tr>
 </tbody>
 </table>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">---</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">processing</span><span class="o">/</span><span class="n">ohsome</span><span class="o">-</span><span class="n">parquet</span><span class="o">/</span><span class="n">contributions</span><span class="o">/</span><span class="n">contributions</span><span class="o">/</span><span class="n">status</span><span class="o">=</span><span class="n">latest</span> <span class="o">--------------------------------------------------------------------------------------------------</span>
+                                        <span class="o">/..</span>                                                                                                                                     
+  <span class="mf">115.0</span> <span class="n">GiB</span> <span class="p">[</span><span class="c1">#########################] /geometry_type=Polygon                                                                                                                  </span>
+   <span class="mf">63.4</span> <span class="n">GiB</span> <span class="p">[</span><span class="c1">#############            ] /geometry_type=LineString                                                                                                               </span>
+   <span class="mf">36.6</span> <span class="n">GiB</span> <span class="p">[</span><span class="c1">#######                  ] /geometry_type=Point                                                                                                                    </span>
+    <span class="mf">5.0</span> <span class="n">GiB</span> <span class="p">[</span><span class="c1">#                        ] /geometry_type=GeometryCollection                                                                                                       </span>
+    <span class="mf">2.1</span> <span class="n">GiB</span> <span class="p">[</span>                         <span class="p">]</span> <span class="o">/</span><span class="n">geometry_type</span><span class="o">=</span><span class="n">MultiPolygon</span>                                                                                                             
+  <span class="mf">243.2</span> <span class="n">MiB</span> <span class="p">[</span>                         <span class="p">]</span> <span class="o">/</span><span class="n">geometry_type</span><span class="o">=</span><span class="n">InvalidGeometry</span>      
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">---</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">processing</span><span class="o">/</span><span class="n">ohsome</span><span class="o">-</span><span class="n">parquet</span><span class="o">/</span><span class="n">contributions</span><span class="o">/</span><span class="n">contributions</span><span class="o">/</span><span class="n">status</span><span class="o">=</span><span class="n">history</span> <span class="o">-------------------------------------------------------------------------------------------------</span>
+                                        <span class="o">/..</span>                                                                                                                                     
+   <span class="mf">90.6</span> <span class="n">GiB</span> <span class="p">[</span><span class="c1">#########################] /geometry_type=LineString                                                                                                               </span>
+   <span class="mf">59.9</span> <span class="n">GiB</span> <span class="p">[</span><span class="c1">################         ] /geometry_type=Polygon                                                                                                                  </span>
+   <span class="mf">44.7</span> <span class="n">GiB</span> <span class="p">[</span><span class="c1">############             ] /geometry_type=Point                                                                                                                    </span>
+  <span class="mf">488.4</span> <span class="n">MiB</span> <span class="p">[</span>                         <span class="p">]</span> <span class="o">/</span><span class="n">geometry_type</span><span class="o">=</span><span class="n">InvalidGeometry</span>      
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="mf">9.8</span> <span class="n">GiB</span> <span class="p">[</span><span class="c1">#########################] /geometry_type=Polygon                                                                                                                  </span>
+    <span class="mf">9.0</span> <span class="n">GiB</span> <span class="p">[</span><span class="c1">######################   ] /geometry_type=Point                                                                                                                    </span>
+    <span class="mf">8.3</span> <span class="n">GiB</span> <span class="p">[</span><span class="c1">####################     ] /geometry_type=LineString                                                                                                               </span>
+   <span class="mf">59.9</span> <span class="n">MiB</span> <span class="p">[</span>                         <span class="p">]</span> <span class="o">/</span><span class="n">geometry_type</span><span class="o">=</span><span class="n">InvalidGeometry</span>   
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="mf">396.0</span> <span class="n">KiB</span> <span class="p">[</span><span class="c1">#########################] /geometry_type=Point                                                                                                                    </span>
+   <span class="mf">96.0</span> <span class="n">KiB</span> <span class="p">[</span><span class="c1">######                   ] /geometry_type=LineString                                                                                                               </span>
+   <span class="mf">44.0</span> <span class="n">KiB</span> <span class="p">[</span><span class="c1">##                       ] /geometry_type=InvalidGeometry    </span>
+</pre></div>
 </div>
 </section>
 <section id="sorting">
