@@ -2,7 +2,7 @@
 # Learn more at https://jupyterbook.org/customize/config.html
 
 title: SOTM 2024 ohsome-data-insights Workshop
-author: B.Herfort (HeiGIT)
+author: ohsome Team @ HeiGIT
 logo: HeiGIT_Logo_compact.svg
 
 # Force re-execution of book on each build.
