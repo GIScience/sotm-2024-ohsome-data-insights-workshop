@@ -13,11 +13,9 @@ parts:
   - caption: Data Extraction
     chapters:
         - file: book/01a_Data_Extraction_DuckDB_PyIceberg.ipynb
-        - file: book/01b_Data_Extraction_DuckDB_only.ipynb
   - caption: Simple Data Analysis
     chapters:
         - file: book/02a_buildings_currentness_DuckDB_PyIceberg.ipynb
-        - file: book/02b_buildings_currentness_DuckDB_only.ipynb
         - file: book/02_attribute_completeness.ipynb
   - caption: Data Integration
     chapters:
@@ -30,3 +28,5 @@ parts:
   - caption: Background
     chapters:
         - file: book/05_partitioning_and_sorting.md
+        - file: book/02b_buildings_currentness_DuckDB_only.ipynb
+        - file: book/01b_Data_Extraction_DuckDB_only.ipynb
