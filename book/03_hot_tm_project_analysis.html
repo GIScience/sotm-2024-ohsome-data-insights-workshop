@@ -1,0 +1,1352 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>HOT Tasking Manager project analysis &#8212; SOTM 2024 ohsome-data-insights Workshop</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/03_hot_tm_project_analysis';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="DuckDB: Mapillary Coverage Analysis" href="03_mapillary_data_analysis.html" />
+    <link rel="prev" title="DuckDB: Currentness of Buildings" href="02b_buildings_currentness_DuckDB_only.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/HeiGIT_Logo_compact.svg" class="logo__image only-light" alt="SOTM 2024 ohsome-data-insights Workshop - Home"/>
+    <script>document.write(`<img src="../_static/HeiGIT_Logo_compact.svg" class="logo__image only-dark" alt="SOTM 2024 ohsome-data-insights Workshop - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to ohsome-data-insights Workshop @ SOTM 2024
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_motivation.html">Why should you be excited about <em>ohsome-data-insights</em>?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_MinIO_Object_Store.html">Connect to MinIO Object Store</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="00_Iceberg_Catalog.html">Connect to Apache Iceberg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_data_structure.html">Data Structure</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Extraction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01a_Data_Extraction_DuckDB_PyIceberg.html">DuckDB + PyIceberg: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="01b_Data_Extraction_DuckDB_only.html">DuckDB: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Simple Data Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="02a_buildings_currentness_DuckDB_PyIceberg.html">DuckDB + PyIceberg: Currentness of Buildings</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="02b_buildings_currentness_DuckDB_only.html">DuckDB: Currentness of Buildings</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Integration</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">HOT Tasking Manager project analysis</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="03_mapillary_data_analysis.html">DuckDB: Mapillary Coverage Analysis</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Data Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="04_Country_User_Activity_DuckDB_only.html">DuckDB: Country user activity map</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="04_highways_timeline_DuckDB_only.html">DuckDB: Development of highways over time</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Background</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="05_partitioning_and_sorting.html">Partitioning and Sorting</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/GIScience/sotm-2024-ohsome-data-insights-workshop/blob/main/book/03_hot_tm_project_analysis.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/GIScience/sotm-2024-ohsome-data-insights-workshop" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/GIScience/sotm-2024-ohsome-data-insights-workshop/issues/new?title=Issue%20on%20page%20%2Fbook/03_hot_tm_project_analysis.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/03_hot_tm_project_analysis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>HOT Tasking Manager project analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">HOT Tasking Manager project analysis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-input-parameters-for-your-analysis">Prepare the input parameters for your analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-information-about-hot-tasking-manager-project">Get Information about HOT Tasking Manager project</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-data-osm-data">Download data OSM Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-data-using-osm-changeset-information">Filter data using OSM changeset information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#display-osm-user-statistics">Display OSM user statistics</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="hot-tasking-manager-project-analysis">
+<h1>HOT Tasking Manager project analysis<a class="headerlink" href="#hot-tasking-manager-project-analysis" title="Link to this heading">#</a></h1>
+<p>In this notebook we demonstrate how to combine two datasets: HOT Tasking Manager project data and OSM contributions.</p>
+<p>We want to investigate all contributions that have been made in OSM via HOT’s Tasking Manager. We will furthermore filter these contributions by using the <strong>OSM Changeset</strong> information.</p>
+<p>These are the steps you see further down:</p>
+<ul class="simple">
+<li><p>Set the connection parameters.</p></li>
+<li><p>Prepare your input parameters, e.g. define HOT Tasking Manager project ID.</p></li>
+<li><p>Download data using DuckDB. This time we also download HOT project data.</p></li>
+<li><p>Filter OSM contributions using changeset attributes.</p></li>
+<li><p>Display both datasets on a map.</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="getting-started">
+<h1>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h1>
+<p>Set connection params.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">s3_user</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;S3_ACCESS_KEY_ID&quot;</span><span class="p">]</span>  <span class="c1"># add your user here</span>
+<span class="n">s3_password</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;S3_SECRET_ACCESS_KEY&quot;</span><span class="p">]</span>  <span class="c1"># add your password here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Configure DuckDB.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">duckdb</span>
+
+<span class="n">con</span> <span class="o">=</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+    <span class="n">config</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;threads&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="s1">&#39;max_memory&#39;</span><span class="p">:</span> <span class="s1">&#39;8GB&#39;</span><span class="p">,</span>
+        <span class="c1"># &#39;enable_object_cache&#39;: True</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">con</span><span class="o">.</span><span class="n">install_extension</span><span class="p">(</span><span class="s2">&quot;spatial&quot;</span><span class="p">)</span>
+<span class="n">con</span><span class="o">.</span><span class="n">load_extension</span><span class="p">(</span><span class="s2">&quot;spatial&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Set the connection params to Iceberg Rest Catalog. (We need this for the OSM data.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyiceberg.catalog.rest</span> <span class="kn">import</span> <span class="n">RestCatalog</span>
+
+<span class="n">catalog</span> <span class="o">=</span> <span class="n">RestCatalog</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="o">**</span><span class="p">{</span>
+        <span class="s2">&quot;uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://sotm2024.iceberg.ohsome.org&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;s3.endpoint&quot;</span><span class="p">:</span> <span class="s2">&quot;https://sotm2024.minio.heigit.org&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;py-io-impl&quot;</span><span class="p">:</span> <span class="s2">&quot;pyiceberg.io.pyarrow.PyArrowFileIO&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;s3.access-key-id&quot;</span><span class="p">:</span> <span class="n">s3_user</span><span class="p">,</span>
+        <span class="s2">&quot;s3.secret-access-key&quot;</span><span class="p">:</span> <span class="n">s3_password</span><span class="p">,</span>
+        <span class="s2">&quot;s3.region&quot;</span><span class="p">:</span> <span class="s2">&quot;eu-central-1&quot;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Set connection to MinIO object storage. (We need this for HOT Tasking Manager data)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">DROP SECRET IF EXISTS &quot;__default_s3&quot;;</span>
+<span class="s2">CREATE SECRET (</span>
+<span class="s2">      TYPE S3,</span>
+<span class="s2">      KEY_ID &#39;</span><span class="si">{</span><span class="n">s3_user</span><span class="si">}</span><span class="s2">&#39;,</span>
+<span class="s2">      SECRET &#39;</span><span class="si">{</span><span class="n">s3_password</span><span class="si">}</span><span class="s2">&#39;,</span>
+<span class="s2">      REGION &#39;eu-central-1&#39;,</span>
+<span class="s2">      endpoint &#39;sotm2024.minio.heigit.org&#39;,</span>
+<span class="s2">      use_ssl true,</span>
+<span class="s2">      url_style &#39;path&#39;</span>
+<span class="s2">  );</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌─────────┐
+│ Success │
+│ boolean │
+├─────────┤
+│ true    │
+└─────────┘
+</pre></div>
+</div>
+</div>
+</div>
+<section id="prepare-the-input-parameters-for-your-analysis">
+<h2>Prepare the input parameters for your analysis<a class="headerlink" href="#prepare-the-input-parameters-for-your-analysis" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hot_tm_parquet_data_path</span> <span class="o">=</span> <span class="s2">&quot;s3a://heigit-ohsome-sotm24/data/hot_tasking_manager/**&quot;</span>
+
+<span class="c1"># Set iceberg table</span>
+<span class="n">namespace</span> <span class="o">=</span> <span class="s1">&#39;geo_sort&#39;</span>
+<span class="n">tablename</span> <span class="o">=</span> <span class="s1">&#39;contributions&#39;</span>
+<span class="n">icebergtable</span> <span class="o">=</span> <span class="n">catalog</span><span class="o">.</span><span class="n">load_table</span><span class="p">((</span><span class="n">namespace</span><span class="p">,</span> <span class="n">tablename</span><span class="p">))</span>
+
+<span class="n">hot_tm_project_id</span> <span class="o">=</span> <span class="mi">15996</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="get-information-about-hot-tasking-manager-project">
+<h2>Get Information about HOT Tasking Manager project<a class="headerlink" href="#get-information-about-hot-tasking-manager-project" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+
+<span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT *</span>
+<span class="s2">FROM read_parquet(&#39;</span><span class="si">{</span><span class="n">hot_tm_parquet_data_path</span><span class="si">}</span><span class="s2">&#39;) a</span>
+<span class="s2">WHERE project_id = </span><span class="si">{</span><span class="n">hot_tm_project_id</span><span class="si">}</span><span class="s2">;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">df</span><span class="p">()</span>
+
+<span class="n">bbox</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;bbox&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># convert the data to geodata</span>
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span>
+    <span class="n">geometry</span><span class="o">=</span><span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="o">.</span><span class="n">from_wkt</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">])</span>
+<span class="p">)</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="s1">&#39;epsg:4326&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Display where the project is located.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">lonboard</span>
+
+<span class="c1"># the lonboard map definition</span>
+<span class="n">hot_tm_layer</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">PolygonLayer</span><span class="o">.</span><span class="n">from_geopandas</span><span class="p">(</span>
+    <span class="n">gdf</span><span class="p">,</span>
+    <span class="n">get_fill_color</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="n">get_line_color</span><span class="o">=</span><span class="p">[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">],</span>
+    <span class="n">get_line_width</span><span class="o">=</span><span class="mi">10</span>
+<span class="p">)</span>
+
+<span class="n">view_state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;centroid&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;x&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;centroid&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;y&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;zoom&quot;</span><span class="p">:</span> <span class="mi">12</span>
+<span class="p">}</span>
+
+<span class="n">overview_map</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span>
+    <span class="n">basemap_style</span><span class="o">=</span><span class="n">lonboard</span><span class="o">.</span><span class="n">basemap</span><span class="o">.</span><span class="n">CartoBasemap</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span>
+    <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">hot_tm_layer</span><span class="p">],</span>
+    <span class="n">view_state</span><span class="o">=</span><span class="n">view_state</span>
+<span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">overview_map</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "bf52348fc99b4efdaf0cbabff1cc81fa", "version_major": 2, "version_minor": 1}</script></div>
+</div>
+</section>
+<section id="download-data-osm-data">
+<h2>Download data OSM Data<a class="headerlink" href="#download-data-osm-data" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+
+<span class="n">icebergtable</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span>
+    <span class="n">row_filter</span><span class="o">=</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;( status = &#39;latest&#39; or status = &#39;history&#39; )&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;and (xmax &gt;= </span><span class="si">{</span><span class="n">bbox</span><span class="p">[</span><span class="s1">&#39;xmin&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> and xmin &lt;= </span><span class="si">{</span><span class="n">bbox</span><span class="p">[</span><span class="s1">&#39;xmax&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">) &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;and (ymax &gt;= </span><span class="si">{</span><span class="n">bbox</span><span class="p">[</span><span class="s1">&#39;ymin&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> and ymin &lt;= </span><span class="si">{</span><span class="n">bbox</span><span class="p">[</span><span class="s1">&#39;ymax&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">) &quot;</span>
+    <span class="p">),</span>
+    <span class="n">selected_fields</span><span class="o">=</span><span class="p">(</span>
+        <span class="s2">&quot;user_id&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;osm_id&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;osm_version&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;valid_from&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;valid_to&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tags&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tags_before&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;changeset&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;geometry&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_duckdb</span><span class="p">(</span><span class="s1">&#39;raw_osm_data&#39;</span><span class="p">,</span><span class="n">connection</span><span class="o">=</span><span class="n">con</span><span class="p">)</span>
+
+<span class="n">download_time</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;download took </span><span class="si">{</span><span class="n">download_time</span><span class="si">}</span><span class="s2"> sec.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>download took 58.948 sec.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="filter-data-using-osm-changeset-information">
+<h2>Filter data using OSM changeset information<a class="headerlink" href="#filter-data-using-osm-changeset-information" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT *</span>
+<span class="s2">    FROM raw_osm_data</span>
+<span class="s2">    WHERE 1=1</span>
+<span class="s2">        and list_contains(changeset.hashtags, &#39;hotosm-project-</span><span class="si">{</span><span class="n">hot_tm_project_id</span><span class="si">}</span><span class="s2">&#39;)</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+<span class="n">osm_df</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">df</span><span class="p">()</span>
+
+<span class="c1"># convert the data to geodata</span>
+<span class="n">osm_gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span>
+    <span class="n">osm_df</span><span class="p">,</span>
+    <span class="n">geometry</span><span class="o">=</span><span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="o">.</span><span class="n">from_wkt</span><span class="p">(</span><span class="n">osm_df</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">])</span>
+<span class="p">)</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="s1">&#39;epsg:4326&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Display OSM data and HOT Tasking Manager project on map.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the lonboard map definition</span>
+<span class="n">osm_polygons_layer</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">PolygonLayer</span><span class="o">.</span><span class="n">from_geopandas</span><span class="p">(</span>
+    <span class="n">osm_gdf</span><span class="p">[</span><span class="n">osm_gdf</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;Polygon&#39;</span><span class="p">],</span>
+    <span class="n">get_fill_color</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="n">get_line_width</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="n">osm_lines_layer</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">PathLayer</span><span class="o">.</span><span class="n">from_geopandas</span><span class="p">(</span>
+    <span class="n">osm_gdf</span><span class="p">[</span><span class="n">osm_gdf</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;LineString&#39;</span><span class="p">],</span>
+<span class="p">)</span>
+
+
+<span class="n">osm_points_layer</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">ScatterplotLayer</span><span class="o">.</span><span class="n">from_geopandas</span><span class="p">(</span>
+    <span class="n">osm_gdf</span><span class="p">[</span><span class="n">osm_gdf</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">],</span>
+<span class="p">)</span>
+
+
+
+<span class="n">osm_map</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span>
+    <span class="n">basemap_style</span><span class="o">=</span><span class="n">lonboard</span><span class="o">.</span><span class="n">basemap</span><span class="o">.</span><span class="n">CartoBasemap</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span>
+    <span class="n">layers</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">hot_tm_layer</span><span class="p">,</span>
+        <span class="n">osm_polygons_layer</span><span class="p">,</span>
+        <span class="n">osm_lines_layer</span><span class="p">,</span>
+        <span class="n">osm_points_layer</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">view_state</span><span class="o">=</span><span class="n">view_state</span>
+<span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">osm_map</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "bd8113b0a97d4163a05f0d7f16b6e33d", "version_major": 2, "version_minor": 1}</script></div>
+</div>
+</section>
+<section id="display-osm-user-statistics">
+<h2>Display OSM user statistics<a class="headerlink" href="#display-osm-user-statistics" title="Link to this heading">#</a></h2>
+<p>Let’s analyse who mapped how much in this area.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT</span>
+<span class="s2">        user_id,</span>
+<span class="s2">        count(*) as n_edits,</span>
+<span class="s2">        SUM(CASE</span>
+<span class="s2">            WHEN contains(changeset.editor, &#39;JOSM&#39;) THEN 1</span>
+<span class="s2">            ELSE 0</span>
+<span class="s2">        END) as josm_edit,</span>
+<span class="s2">        SUM(CASE</span>
+<span class="s2">            WHEN contains(changeset.editor, &#39;iD&#39;) THEN 1</span>
+<span class="s2">            ELSE 0</span>
+<span class="s2">        END) as iD_edit</span>
+<span class="s2">    FROM raw_osm_data</span>
+<span class="s2">    WHERE 1=1</span>
+<span class="s2">        and list_contains(changeset.hashtags, &#39;hotosm-project-</span><span class="si">{</span><span class="n">hot_tm_project_id</span><span class="si">}</span><span class="s2">&#39;)</span>
+<span class="s2">    GROUP BY user_id</span>
+<span class="s2">    ORDER BY n_edits DESC</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+<span class="n">user_stats_df</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">df</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We are going to add OSM usernames to our dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+
+
+<span class="k">def</span> <span class="nf">get_current_usernames</span><span class="p">(</span><span class="n">user_ids_list</span><span class="p">):</span>
+    <span class="n">api_url</span> <span class="o">=</span> <span class="s2">&quot;http://textual.ru/whosthat/whosthat.php&quot;</span>
+    <span class="n">user_names_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">user_id</span> <span class="ow">in</span> <span class="n">user_ids_list</span><span class="p">:</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;info&quot;</span><span class="p">,</span>  <span class="c1"># Use &quot;info&quot; action to get detailed information</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">api_url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">data</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># The API returns an array of hashes with user information</span>
+                <span class="c1"># We need to extract the user ID from the first entry</span>
+                <span class="n">user_info</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">user_names_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">user_info</span><span class="p">[</span><span class="s1">&#39;names&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">user_names_list</span>
+
+
+<span class="n">user_stats_df</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_current_usernames</span><span class="p">(</span><span class="n">user_stats_df</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">user_stats_df</span><span class="p">[</span><span class="s2">&quot;link&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;https://www.openstreetmap.org/user/&quot;</span> <span class="o">+</span> <span class="n">user_stats_df</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Display a user leaderboard.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">user_stats_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>user_id</th>
+      <th>n_edits</th>
+      <th>josm_edit</th>
+      <th>iD_edit</th>
+      <th>username</th>
+      <th>link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>563947</td>
+      <td>898</td>
+      <td>0.0</td>
+      <td>858.0</td>
+      <td>notoncebut2x</td>
+      <td>https://www.openstreetmap.org/user/notoncebut2x</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>11010237</td>
+      <td>734</td>
+      <td>734.0</td>
+      <td>0.0</td>
+      <td>Dannyoung</td>
+      <td>https://www.openstreetmap.org/user/Dannyoung</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>10570996</td>
+      <td>468</td>
+      <td>468.0</td>
+      <td>0.0</td>
+      <td>Erick tamba</td>
+      <td>https://www.openstreetmap.org/user/Erick tamba</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>21292317</td>
+      <td>439</td>
+      <td>0.0</td>
+      <td>439.0</td>
+      <td>abhimanyubarun</td>
+      <td>https://www.openstreetmap.org/user/abhimanyubarun</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>17340053</td>
+      <td>388</td>
+      <td>388.0</td>
+      <td>0.0</td>
+      <td>Sally Mlingi</td>
+      <td>https://www.openstreetmap.org/user/Sally Mlingi</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>13722972</td>
+      <td>261</td>
+      <td>186.0</td>
+      <td>75.0</td>
+      <td>Jimerveille</td>
+      <td>https://www.openstreetmap.org/user/Jimerveille</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>21288883</td>
+      <td>251</td>
+      <td>0.0</td>
+      <td>251.0</td>
+      <td>BTR2</td>
+      <td>https://www.openstreetmap.org/user/BTR2</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>19063413</td>
+      <td>245</td>
+      <td>0.0</td>
+      <td>245.0</td>
+      <td>Aczel-Divin MOUNTOU</td>
+      <td>https://www.openstreetmap.org/user/Aczel-Divin...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>20450590</td>
+      <td>167</td>
+      <td>0.0</td>
+      <td>167.0</td>
+      <td>KOGNOKO ABOULATSAMBO</td>
+      <td>https://www.openstreetmap.org/user/KOGNOKO ABO...</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>9449463</td>
+      <td>150</td>
+      <td>150.0</td>
+      <td>0.0</td>
+      <td>Mercy14846</td>
+      <td>https://www.openstreetmap.org/user/Mercy14846</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>14962448</td>
+      <td>117</td>
+      <td>0.0</td>
+      <td>117.0</td>
+      <td>Abdul-Nayar Rabiatu Sungumu</td>
+      <td>https://www.openstreetmap.org/user/Abdul-Nayar...</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>8386618</td>
+      <td>104</td>
+      <td>0.0</td>
+      <td>104.0</td>
+      <td>Adele Birkenes</td>
+      <td>https://www.openstreetmap.org/user/Adele Birkenes</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>15320583</td>
+      <td>75</td>
+      <td>0.0</td>
+      <td>75.0</td>
+      <td>Eldablessing</td>
+      <td>https://www.openstreetmap.org/user/Eldablessing</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>21292063</td>
+      <td>60</td>
+      <td>0.0</td>
+      <td>60.0</td>
+      <td>GlobalTurtle</td>
+      <td>https://www.openstreetmap.org/user/GlobalTurtle</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>21304240</td>
+      <td>57</td>
+      <td>0.0</td>
+      <td>57.0</td>
+      <td>sbribri</td>
+      <td>https://www.openstreetmap.org/user/sbribri</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>20155561</td>
+      <td>51</td>
+      <td>13.0</td>
+      <td>38.0</td>
+      <td>BENYE MULTI MEDIA</td>
+      <td>https://www.openstreetmap.org/user/BENYE MULTI...</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>18790262</td>
+      <td>50</td>
+      <td>50.0</td>
+      <td>0.0</td>
+      <td>NzahT</td>
+      <td>https://www.openstreetmap.org/user/NzahT</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>20768452</td>
+      <td>44</td>
+      <td>0.0</td>
+      <td>44.0</td>
+      <td>BAZONZILA MBANI Gloire</td>
+      <td>https://www.openstreetmap.org/user/BAZONZILA M...</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>20982460</td>
+      <td>40</td>
+      <td>18.0</td>
+      <td>22.0</td>
+      <td>Jaco452</td>
+      <td>https://www.openstreetmap.org/user/Jaco452</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>21256164</td>
+      <td>33</td>
+      <td>17.0</td>
+      <td>16.0</td>
+      <td>Perey Wisdom</td>
+      <td>https://www.openstreetmap.org/user/Perey Wisdom</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>21186164</td>
+      <td>31</td>
+      <td>7.0</td>
+      <td>24.0</td>
+      <td>Ziggyentumi@20</td>
+      <td>https://www.openstreetmap.org/user/Ziggyentumi@20</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>21314713</td>
+      <td>29</td>
+      <td>0.0</td>
+      <td>29.0</td>
+      <td>Maryamarab</td>
+      <td>https://www.openstreetmap.org/user/Maryamarab</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>17496710</td>
+      <td>17</td>
+      <td>17.0</td>
+      <td>0.0</td>
+      <td>dellington_deli</td>
+      <td>https://www.openstreetmap.org/user/dellington_...</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>21125012</td>
+      <td>15</td>
+      <td>0.0</td>
+      <td>15.0</td>
+      <td>R237497</td>
+      <td>https://www.openstreetmap.org/user/R237497</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>21230154</td>
+      <td>15</td>
+      <td>0.0</td>
+      <td>15.0</td>
+      <td>VijayB2345</td>
+      <td>https://www.openstreetmap.org/user/VijayB2345</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>16690030</td>
+      <td>15</td>
+      <td>0.0</td>
+      <td>15.0</td>
+      <td>Bouyaossere</td>
+      <td>https://www.openstreetmap.org/user/Bouyaossere</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>13007399</td>
+      <td>14</td>
+      <td>0.0</td>
+      <td>14.0</td>
+      <td>elodienix</td>
+      <td>https://www.openstreetmap.org/user/elodienix</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>11500943</td>
+      <td>14</td>
+      <td>0.0</td>
+      <td>14.0</td>
+      <td>Mariannamukulunga</td>
+      <td>https://www.openstreetmap.org/user/Mariannamuk...</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>16739098</td>
+      <td>11</td>
+      <td>0.0</td>
+      <td>11.0</td>
+      <td>TUNGBANI FRANCIS XAVIER</td>
+      <td>https://www.openstreetmap.org/user/TUNGBANI FR...</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>21366183</td>
+      <td>9</td>
+      <td>0.0</td>
+      <td>9.0</td>
+      <td>George Nkpagneer Gmagnancha</td>
+      <td>https://www.openstreetmap.org/user/George Nkpa...</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>19297985</td>
+      <td>9</td>
+      <td>0.0</td>
+      <td>9.0</td>
+      <td>susan27</td>
+      <td>https://www.openstreetmap.org/user/susan27</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>15320557</td>
+      <td>8</td>
+      <td>0.0</td>
+      <td>8.0</td>
+      <td>GDC_Christie</td>
+      <td>https://www.openstreetmap.org/user/GDC_Christie</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>21363124</td>
+      <td>6</td>
+      <td>0.0</td>
+      <td>6.0</td>
+      <td>Ibrahim Wunpini Sulemana</td>
+      <td>https://www.openstreetmap.org/user/Ibrahim Wun...</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>10394726</td>
+      <td>5</td>
+      <td>0.0</td>
+      <td>5.0</td>
+      <td>Calvin Menttor</td>
+      <td>https://www.openstreetmap.org/user/Calvin Menttor</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>21363912</td>
+      <td>4</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>Panladawuda</td>
+      <td>https://www.openstreetmap.org/user/Panladawuda</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>21207980</td>
+      <td>2</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>Kenaurd OKAMA</td>
+      <td>https://www.openstreetmap.org/user/Kenaurd OKAMA</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>21331501</td>
+      <td>1</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>DEKU PETER MEDODZI</td>
+      <td>https://www.openstreetmap.org/user/DEKU PETER ...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Inspect the contributions made by the mapper with most edits.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top_mapper</span> <span class="o">=</span> <span class="n">user_stats_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;n_edits&quot;</span><span class="p">)[</span><span class="s2">&quot;user_id&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># the lonboard map definition</span>
+<span class="n">osm_polygons_layer</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">PolygonLayer</span><span class="o">.</span><span class="n">from_geopandas</span><span class="p">(</span>
+    <span class="n">osm_gdf</span><span class="p">[(</span><span class="n">osm_gdf</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;Polygon&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">osm_gdf</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">top_mapper</span><span class="p">)],</span>
+    <span class="n">get_fill_color</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="n">get_line_width</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="n">osm_lines_layer</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">PathLayer</span><span class="o">.</span><span class="n">from_geopandas</span><span class="p">(</span>
+    <span class="n">osm_gdf</span><span class="p">[(</span><span class="n">osm_gdf</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;LineString&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">osm_gdf</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">top_mapper</span><span class="p">)],</span>
+<span class="p">)</span>
+
+
+<span class="n">osm_points_layer</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">ScatterplotLayer</span><span class="o">.</span><span class="n">from_geopandas</span><span class="p">(</span>
+    <span class="n">osm_gdf</span><span class="p">[(</span><span class="n">osm_gdf</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">osm_gdf</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">top_mapper</span><span class="p">)],</span>
+<span class="p">)</span>
+
+
+
+<span class="n">osm_map</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span>
+    <span class="n">basemap_style</span><span class="o">=</span><span class="n">lonboard</span><span class="o">.</span><span class="n">basemap</span><span class="o">.</span><span class="n">CartoBasemap</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span>
+    <span class="n">layers</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">hot_tm_layer</span><span class="p">,</span>
+        <span class="n">osm_polygons_layer</span><span class="p">,</span>
+        <span class="n">osm_lines_layer</span><span class="p">,</span>
+        <span class="n">osm_points_layer</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">view_state</span><span class="o">=</span><span class="n">view_state</span>
+<span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">osm_map</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "b46eaec268be4204b46c2b50c4791b7e", "version_major": 2, "version_minor": 1}</script></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02b_buildings_currentness_DuckDB_only.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">DuckDB: Currentness of Buildings</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_mapillary_data_analysis.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">DuckDB: Mapillary Coverage Analysis</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">HOT Tasking Manager project analysis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-input-parameters-for-your-analysis">Prepare the input parameters for your analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-information-about-hot-tasking-manager-project">Get Information about HOT Tasking Manager project</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-data-osm-data">Download data OSM Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-data-using-osm-changeset-information">Filter data using OSM changeset information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#display-osm-user-statistics">Display OSM user statistics</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ohsome Team @ HeiGIT
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
