@@ -549,6 +549,8 @@ We are going to make use of the <strong>Changeset attributes</strong> we have ad
     <span class="s1">&#39;colombia&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">78.9909352282</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.29818694419</span><span class="p">,</span> <span class="o">-</span><span class="mf">66.8763258531</span><span class="p">,</span> <span class="mf">12.4373031682</span><span class="p">),</span>    
     <span class="s1">&#39;indonesia&#39;</span><span class="p">:</span>  <span class="p">(</span><span class="mf">95.2930261576</span><span class="p">,</span> <span class="o">-</span><span class="mf">10.3599874813</span><span class="p">,</span> <span class="mf">141.03385176</span><span class="p">,</span> <span class="mf">5.47982086834</span><span class="p">),</span>
     <span class="s1">&#39;united_arab_emirates&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">51.5795186705</span><span class="p">,</span> <span class="mf">22.4969475367</span><span class="p">,</span> <span class="mf">56.3968473651</span><span class="p">,</span> <span class="mf">26.055464179</span><span class="p">)</span>
+    <span class="c1">#&#39;south_america&#39;: (-93.691406,-58.263287,-22.675781,14.859850),  # only do this if you have a lot of RAM!</span>
+    <span class="c1">#&#39;africa&#39;: (-24.609375,-39.095963,56.074219,36.173357)  # only do this if you have a lot of RAM!</span>
 <span class="p">}</span>
 
 <span class="n">selected_region</span> <span class="o">=</span> <span class="s1">&#39;colombia&#39;</span>
@@ -582,6 +584,10 @@ We are going to make use of the <strong>Changeset attributes</strong> we have ad
     <span class="s2">&quot;Komoot&quot;</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span>
     <span class="s2">&quot;AppLogica&quot;</span><span class="p">:</span> <span class="mi">24</span>
 <span class="p">}</span>
+
+
+<span class="c1"># Define output h3 cell resolution</span>
+<span class="n">h3_cell_resolution</span> <span class="o">=</span> <span class="mi">5</span>
 </pre></div>
 </div>
 </div>
@@ -640,8 +646,8 @@ We are going to make use of the <strong>Changeset attributes</strong> we have ad
 <span class="s2">SELECT</span>
 <span class="s2">    a.user_id,</span>
 <span class="s2">    a.valid_from,</span>
-<span class="s2">    a.h3_r5,</span>
-<span class="s2">    h3_cell_to_boundary_wkt(a.h3_r5) as geometry,</span>
+<span class="s2">    h3_cell_to_parent(a.h3_r5, </span><span class="si">{</span><span class="n">h3_cell_resolution</span><span class="si">}</span><span class="s2">) as h3_cell,</span>
+<span class="s2">    h3_cell_to_boundary_wkt(h3_cell) as geometry,</span>
 <span class="s2">    CAST(changeset[&#39;hashtags&#39;][1] AS VARCHAR) as hashtag_string,</span>
 <span class="s2">    CASE</span>
 <span class="s2">		WHEN hashtag_string ILIKE &#39;%amap%&#39; THEN &#39;amap&#39;</span>
@@ -702,12 +708,12 @@ We are going to make use of the <strong>Changeset attributes</strong> we have ad
 <span class="s2">    SELECT</span>
 <span class="s2">        epoch_ms(date_trunc(&#39;month&#39;, valid_from)) as month,</span>
 <span class="s2">        corporation,</span>
-<span class="s2">        h3_r5,</span>
+<span class="s2">        h3_cell,</span>
 <span class="s2">        geometry,</span>
 <span class="s2">        count(*) as n_edits,</span>
 <span class="s2">        count(distinct user_id) as n_users</span>
 <span class="s2">    FROM osm_data</span>
-<span class="s2">    GROUP by month, corporation, h3_r5, geometry;</span>
+<span class="s2">    GROUP by month, corporation, h3_cell, geometry;</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">map_query</span><span class="p">)</span><span class="o">.</span><span class="n">df</span><span class="p">()</span>
