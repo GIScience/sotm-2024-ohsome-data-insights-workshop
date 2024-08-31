@@ -182,52 +182,32 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="00_motivation.html">Why should you be excited about <em>ohsome-data-insights</em>?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="00_MinIO_Object_Store.html">Connect to MinIO Object Store</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="00_Iceberg_Catalog.html">Connect to Apache Iceberg</a></li>
 <li class="toctree-l1"><a class="reference internal" href="00_data_structure.html">Data Structure</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Extraction</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01a_Data_Extraction_DuckDB_PyIceberg.html">DuckDB + PyIceberg: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="01a_Data_Extraction_DuckDB_PyIceberg.html">Download latest OSM data as GeoPackage</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Simple Data Analysis</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="02a_buildings_currentness_DuckDB_PyIceberg.html">DuckDB + PyIceberg: Currentness of Buildings</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="02a_buildings_currentness_DuckDB_PyIceberg.html">Currentness of Buildings</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Integration</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="03_hot_tm_project_analysis.html">HOT Tasking Manager project analysis</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="03_mapillary_data_analysis.html">DuckDB: Mapillary Coverage Analysis</a></li>
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="03_mapillary_data_analysis.html">Mapillary Coverage Analysis</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Data Analysis</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="04_Country_User_Activity_DuckDB_only.html">DuckDB: Country user activity map</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="04_highways_timeline_DuckDB_only.html">DuckDB: Development of highways over time</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="04_Country_User_Activity_DuckDB_only.html">User activity map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_highways_timeline_DuckDB_only.html">Road Network Evolution</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Background</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="05_partitioning_and_sorting.html">Partitioning and Sorting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02b_buildings_currentness_DuckDB_only.html">DuckDB: Currentness of Buildings</a></li>
-
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">DuckDB: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
-
-
-
-
 </ul>
 
     </div>
@@ -454,13 +434,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">DuckDB: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#download-with-duckdb">Download with DuckDB</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#save-data-as-geopackage">Save data as GeoPackage</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#work-with-the-data-in-qgis">Work with the data in QGIS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-with-duckdb">Download with DuckDB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-data-as-geopackage">Save data as GeoPackage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#work-with-the-data-in-qgis">Work with the data in QGIS</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -485,9 +463,8 @@ document.write(`
 </li>
 </ol>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="getting-started">
-<h1>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h1>
+<section id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
 <p>Set connection params.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -548,8 +525,8 @@ document.write(`
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="download-with-duckdb">
-<h1>Download with DuckDB<a class="headerlink" href="#download-with-duckdb" title="Link to this heading">#</a></h1>
+<section id="download-with-duckdb">
+<h2>Download with DuckDB<a class="headerlink" href="#download-with-duckdb" title="Link to this heading">#</a></h2>
 <p>In this step we can already filter all OSM contributions by four major factors. We will perform more detailed filtering (e.g. for OSM tags values) later:</p>
 <ul class="simple">
 <li><p><strong>status</strong> (e.g. latest, historic or deleted OSM features)</p></li>
@@ -649,8 +626,8 @@ document.write(`
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="save-data-as-geopackage">
-<h1>Save data as GeoPackage<a class="headerlink" href="#save-data-as-geopackage" title="Link to this heading">#</a></h1>
+<section id="save-data-as-geopackage">
+<h2>Save data as GeoPackage<a class="headerlink" href="#save-data-as-geopackage" title="Link to this heading">#</a></h2>
 <p>Show the structure of the data we have just downloaded.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -762,9 +739,10 @@ document.write(`
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="work-with-the-data-in-qgis">
-<h1>Work with the data in QGIS<a class="headerlink" href="#work-with-the-data-in-qgis" title="Link to this heading">#</a></h1>
+<section id="work-with-the-data-in-qgis">
+<h2>Work with the data in QGIS<a class="headerlink" href="#work-with-the-data-in-qgis" title="Link to this heading">#</a></h2>
 <p>Add your geopackage file in QGIS, e.g. via drag-and-drop or through file manager.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -822,13 +800,11 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">DuckDB: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#download-with-duckdb">Download with DuckDB</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#save-data-as-geopackage">Save data as GeoPackage</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#work-with-the-data-in-qgis">Work with the data in QGIS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-with-duckdb">Download with DuckDB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-data-as-geopackage">Save data as GeoPackage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#work-with-the-data-in-qgis">Work with the data in QGIS</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>

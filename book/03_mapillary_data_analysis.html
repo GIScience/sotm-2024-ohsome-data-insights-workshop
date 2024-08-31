@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>DuckDB: Mapillary Coverage Analysis &#8212; SOTM 2024 ohsome-data-insights Workshop</title>
+    <title>Mapillary Coverage Analysis &#8212; SOTM 2024 ohsome-data-insights Workshop</title>
   
   
   
@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/03_mapillary_data_analysis';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="DuckDB: Country user activity map" href="04_Country_User_Activity_DuckDB_only.html" />
+    <link rel="next" title="User activity map" href="04_Country_User_Activity_DuckDB_only.html" />
     <link rel="prev" title="HOT Tasking Manager project analysis" href="03_hot_tm_project_analysis.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -183,52 +183,32 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="00_motivation.html">Why should you be excited about <em>ohsome-data-insights</em>?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="00_MinIO_Object_Store.html">Connect to MinIO Object Store</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="00_Iceberg_Catalog.html">Connect to Apache Iceberg</a></li>
 <li class="toctree-l1"><a class="reference internal" href="00_data_structure.html">Data Structure</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Extraction</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01a_Data_Extraction_DuckDB_PyIceberg.html">DuckDB + PyIceberg: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="01a_Data_Extraction_DuckDB_PyIceberg.html">Download latest OSM data as GeoPackage</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Simple Data Analysis</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="02a_buildings_currentness_DuckDB_PyIceberg.html">DuckDB + PyIceberg: Currentness of Buildings</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="02a_buildings_currentness_DuckDB_PyIceberg.html">Currentness of Buildings</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Integration</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="03_hot_tm_project_analysis.html">HOT Tasking Manager project analysis</a></li>
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">DuckDB: Mapillary Coverage Analysis</a></li>
-
-
-
-
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Mapillary Coverage Analysis</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Data Analysis</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="04_Country_User_Activity_DuckDB_only.html">DuckDB: Country user activity map</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="04_highways_timeline_DuckDB_only.html">DuckDB: Development of highways over time</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="04_Country_User_Activity_DuckDB_only.html">User activity map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_highways_timeline_DuckDB_only.html">Road Network Evolution</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Background</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="05_partitioning_and_sorting.html">Partitioning and Sorting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02b_buildings_currentness_DuckDB_only.html">DuckDB: Currentness of Buildings</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="01b_Data_Extraction_DuckDB_only.html">DuckDB: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
-
-
-
-
 </ul>
 
     </div>
@@ -445,7 +425,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>DuckDB: Mapillary Coverage Analysis</h1>
+    <h1>Mapillary Coverage Analysis</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -455,17 +435,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">DuckDB: Mapillary Coverage Analysis</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-input-parameters-for-your-analysis">Prepare the input parameters for your analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-osm-data">Get OSM data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-mapillary-data">Get Mapillary Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-osm-ways-not-covered-by-buffered-mapillary-sequence">Find OSM ways not covered by (buffered) Mapillary sequence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-share-of-road-network-covered-by-mapillary">Calculate share of road network covered by Mapillary</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#get-osm-data">Get OSM data</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#get-mapillary-data">Get Mapillary Data</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#find-osm-ways-not-covered-by-buffered-mapillary-sequence">Find OSM ways not covered by (buffered) Mapillary sequence</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-share-of-road-network-covered-by-mapillary">Calculate share of road network covered by Mapillary</a></li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -476,8 +452,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="duckdb-mapillary-coverage-analysis">
-<h1>DuckDB: Mapillary Coverage Analysis<a class="headerlink" href="#duckdb-mapillary-coverage-analysis" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="mapillary-coverage-analysis">
+<h1>Mapillary Coverage Analysis<a class="headerlink" href="#mapillary-coverage-analysis" title="Link to this heading">#</a></h1>
 <p>In this notebook we demonstrate how to combine two datasets: Mapillary sequences and OSM road network.</p>
 <p>We want to find out which parts of the road network in a city are not yet covered by Mapillary street level imagery.</p>
 <p>These are the steps you see further down:</p>
@@ -488,9 +464,8 @@ document.write(`
 <li><p>Display both datasets on a map.</p></li>
 <li><p>Overlay OSM and Mapillary data using DuckDB.</p></li>
 </ul>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="getting-started">
-<h1>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h1>
+<section id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
 <p>Set connection params.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -515,6 +490,26 @@ document.write(`
 <span class="p">)</span>
 <span class="n">con</span><span class="o">.</span><span class="n">install_extension</span><span class="p">(</span><span class="s2">&quot;spatial&quot;</span><span class="p">)</span>
 <span class="n">con</span><span class="o">.</span><span class="n">load_extension</span><span class="p">(</span><span class="s2">&quot;spatial&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Set the connection params to Iceberg Rest Catalog.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyiceberg.catalog.rest</span> <span class="kn">import</span> <span class="n">RestCatalog</span>
+
+<span class="n">catalog</span> <span class="o">=</span> <span class="n">RestCatalog</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="o">**</span><span class="p">{</span>
+        <span class="s2">&quot;uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://sotm2024.iceberg.ohsome.org&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;s3.endpoint&quot;</span><span class="p">:</span> <span class="s2">&quot;https://sotm2024.minio.heigit.org&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;py-io-impl&quot;</span><span class="p">:</span> <span class="s2">&quot;pyiceberg.io.pyarrow.PyArrowFileIO&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;s3.access-key-id&quot;</span><span class="p">:</span> <span class="n">s3_user</span><span class="p">,</span>
+        <span class="s2">&quot;s3.secret-access-key&quot;</span><span class="p">:</span> <span class="n">s3_password</span><span class="p">,</span>
+        <span class="s2">&quot;s3.region&quot;</span><span class="p">:</span> <span class="s2">&quot;eu-central-1&quot;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -549,14 +544,15 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
 <section id="prepare-the-input-parameters-for-your-analysis">
 <h2>Prepare the input parameters for your analysis<a class="headerlink" href="#prepare-the-input-parameters-for-your-analysis" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set s3 path for parquet input data</span>
-<span class="n">osm_parquet_data_path</span> <span class="o">=</span> <span class="s2">&quot;s3a://heigit-ohsome-sotm24/data/geo_sort_ext/contributions_germany/**&quot;</span>
-<span class="c1">#osm_parquet_data_path = &quot;s3a://heigit-ohsome-sotm24/data/geo_sort_ext/global_wkt_smaller/**&quot;</span>
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set iceberg table</span>
+<span class="n">namespace</span> <span class="o">=</span> <span class="s1">&#39;geo_sort&#39;</span>
+<span class="n">tablename</span> <span class="o">=</span> <span class="s1">&#39;contributions&#39;</span>
+<span class="n">icebergtable</span> <span class="o">=</span> <span class="n">catalog</span><span class="o">.</span><span class="n">load_table</span><span class="p">((</span><span class="n">namespace</span><span class="p">,</span> <span class="n">tablename</span><span class="p">))</span>
 
 <span class="n">mapillary_parquet_data_path</span> <span class="o">=</span> <span class="s2">&quot;s3a://heigit-ohsome-sotm24/data/mapillary_sequences/*&quot;</span>
 
@@ -573,7 +569,7 @@ document.write(`
 
 <span class="n">selected_region</span> <span class="o">=</span> <span class="s1">&#39;nairobi&#39;</span>
 <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">bboxes</span><span class="p">[</span><span class="n">selected_region</span><span class="p">]</span>
-<span class="n">area_of_interest_file</span> <span class="o">=</span><span class="sa">f</span><span class="s2">&quot;../data/</span><span class="si">{</span><span class="n">selected_region</span><span class="si">}</span><span class="s2">.geojson&quot;</span>
+<span class="n">area_of_interest_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;s3a://heigit-ohsome-sotm24/data/sample_data/</span><span class="si">{</span><span class="n">selected_region</span><span class="si">}</span><span class="s2">.geojson&quot;</span>
 
 <span class="n">epsg_codes</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;heidelberg&#39;</span><span class="p">:</span> <span class="s1">&#39;EPSG:32632&#39;</span><span class="p">,</span>
@@ -591,9 +587,43 @@ document.write(`
 </div>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="get-osm-data">
-<h1>Get OSM data<a class="headerlink" href="#get-osm-data" title="Link to this heading">#</a></h1>
+<section id="get-osm-data">
+<h2>Get OSM data<a class="headerlink" href="#get-osm-data" title="Link to this heading">#</a></h2>
+<p>Download latest OSM data for bounding box.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="n">icebergtable</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span>
+    <span class="n">row_filter</span><span class="o">=</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;status = &#39;</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&#39; &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;and geometry_type = &#39;</span><span class="si">{</span><span class="n">geometry_type</span><span class="si">}</span><span class="s2">&#39; &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;and (xmax &gt;= </span><span class="si">{</span><span class="n">xmin</span><span class="si">}</span><span class="s2"> and xmin &lt;= </span><span class="si">{</span><span class="n">xmax</span><span class="si">}</span><span class="s2">) &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;and (ymax &gt;= </span><span class="si">{</span><span class="n">ymin</span><span class="si">}</span><span class="s2"> and ymin &lt;= </span><span class="si">{</span><span class="n">ymax</span><span class="si">}</span><span class="s2">) &quot;</span>
+    <span class="p">),</span>
+    <span class="n">selected_fields</span><span class="o">=</span><span class="p">(</span>
+        <span class="s2">&quot;user_id&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;osm_id&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;osm_version&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;valid_from&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tags&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;geometry&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_duckdb</span><span class="p">(</span><span class="s1">&#39;raw_osm_data&#39;</span><span class="p">,</span><span class="n">connection</span><span class="o">=</span><span class="n">con</span><span class="p">)</span>
+
+<span class="n">download_time</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;download took </span><span class="si">{</span><span class="n">download_time</span><span class="si">}</span><span class="s2"> sec.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>download took 17.048 sec.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Clip OSM highways with to area of interest and calculate road length in kilometer.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
@@ -610,33 +640,29 @@ document.write(`
 <span class="s2">    ST_GeomFromText(a.geometry) as geometry,</span>
 <span class="s2">    a.geometry.ST_GeomFromText().ST_Length_Spheroid() / 1000 as length_km,</span>
 <span class="s2">FROM</span>
-<span class="s2">    read_parquet(&#39;</span><span class="si">{</span><span class="n">osm_parquet_data_path</span><span class="si">}</span><span class="s2">&#39;, hive_partitioning=true) as a,</span>
+<span class="s2">    raw_osm_data as a,</span>
 <span class="s2">    st_read(&#39;</span><span class="si">{</span><span class="n">area_of_interest_file</span><span class="si">}</span><span class="s2">&#39;) as aoi</span>
 <span class="s2">WHERE 1=1</span>
-<span class="s2">    and status = &#39;</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&#39;</span>
-<span class="s2">    and geometry_type = &#39;</span><span class="si">{</span><span class="n">geometry_type</span><span class="si">}</span><span class="s2">&#39;</span>
 <span class="s2">    and tags[&#39;highway&#39;][1] is not null</span>
 <span class="s2">    -- spatial filtering part</span>
-<span class="s2">    and (a.bbox.xmax &gt;= </span><span class="si">{</span><span class="n">xmin</span><span class="si">}</span><span class="s2"> AND a.bbox.xmin &lt;= </span><span class="si">{</span><span class="n">xmax</span><span class="si">}</span><span class="s2">)</span>
-<span class="s2">    and (a.bbox.ymax &gt;= </span><span class="si">{</span><span class="n">ymin</span><span class="si">}</span><span class="s2"> AND a.bbox.ymin &lt;= </span><span class="si">{</span><span class="n">ymax</span><span class="si">}</span><span class="s2">)</span>
 <span class="s2">    and ST_Intersects(st_GeomFromText(a.geometry), aoi.geom)</span>
 <span class="s2">)</span>
 <span class="s2">;</span>
 <span class="s2">&quot;&quot;&quot;</span>
 <span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
 
-<span class="n">download_time</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;download took </span><span class="si">{</span><span class="n">download_time</span><span class="si">}</span><span class="s2"> sec.&quot;</span><span class="p">)</span>
+<span class="n">processing_time</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;processing took </span><span class="si">{</span><span class="n">processing_time</span><span class="si">}</span><span class="s2"> sec.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>download took 1.619 sec.
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "871b0e2dfb9c4247916b38b95d543210", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>processing took 3.557 sec.
 </pre></div>
 </div>
 </div>
 </div>
-<p>Display OSM data.</p>
+<p>Display OSM data on a map.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
@@ -683,84 +709,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">lonboard</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># the lonboard map definition</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">osm_layer</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">PathLayer</span><span class="o">.</span><span class="n">from_geopandas</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">osm_data_gdf</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">get_color</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">],</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">view_state</span> <span class="o">=</span> <span class="p">{</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="n">xmin</span> <span class="o">+</span> <span class="p">((</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="n">ymin</span> <span class="o">+</span> <span class="p">((</span><span class="n">ymax</span> <span class="o">-</span> <span class="n">ymin</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="s2">&quot;zoom&quot;</span><span class="p">:</span> <span class="mi">12</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="p">}</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">osm_map</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">basemap_style</span><span class="o">=</span><span class="n">lonboard</span><span class="o">.</span><span class="n">basemap</span><span class="o">.</span><span class="n">CartoBasemap</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">osm_layer</span><span class="p">],</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">view_state</span><span class="o">=</span><span class="n">view_state</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="p">)</span>
-
-<span class="nn">File ~/GIT_REPOS/sotm-2024-ohsome-data-insights-workshop/venv/lib/python3.12/site-packages/lonboard/_layer.py:1211,</span> in <span class="ni">PathLayer.from_geopandas</span><span class="nt">(cls, gdf, auto_downcast, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1203</span> <span class="nd">@classmethod</span>
-<span class="g g-Whitespace">   </span><span class="mi">1204</span> <span class="k">def</span> <span class="nf">from_geopandas</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1205</span>     <span class="bp">cls</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1209</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Unpack</span><span class="p">[</span><span class="n">PathLayerKwargs</span><span class="p">],</span>
-<span class="g g-Whitespace">   </span><span class="mi">1210</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1211</span>     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">from_geopandas</span><span class="p">(</span><span class="n">gdf</span><span class="o">=</span><span class="n">gdf</span><span class="p">,</span> <span class="n">auto_downcast</span><span class="o">=</span><span class="n">auto_downcast</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File ~/GIT_REPOS/sotm-2024-ohsome-data-insights-workshop/venv/lib/python3.12/site-packages/lonboard/_layer.py:333,</span> in <span class="ni">BaseArrowLayer.from_geopandas</span><span class="nt">(cls, gdf, auto_downcast, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">329</span> <span class="k">if</span> <span class="n">auto_downcast</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">330</span>     <span class="c1"># Note: we don&#39;t deep copy because we don&#39;t need to clone geometries</span>
-<span class="g g-Whitespace">    </span><span class="mi">331</span>     <span class="n">gdf</span> <span class="o">=</span> <span class="n">_auto_downcast</span><span class="p">(</span><span class="n">gdf</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>  <span class="c1"># type: ignore</span>
-<span class="ne">--&gt; </span><span class="mi">333</span> <span class="n">table</span> <span class="o">=</span> <span class="n">geopandas_to_geoarrow</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">334</span> <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="n">table</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File ~/GIT_REPOS/sotm-2024-ohsome-data-insights-workshop/venv/lib/python3.12/site-packages/lonboard/_geoarrow/geopandas_interop.py:21,</span> in <span class="ni">geopandas_to_geoarrow</span><span class="nt">(gdf, columns, preserve_index)</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">df_attr</span> <span class="o">=</span> <span class="n">df_attr</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="n">table</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">df_attr</span><span class="p">,</span> <span class="n">preserve_index</span><span class="o">=</span><span class="n">preserve_index</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">21</span> <span class="n">field</span><span class="p">,</span> <span class="n">geom_arr</span> <span class="o">=</span> <span class="n">construct_geometry_array</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gdf</span><span class="o">.</span><span class="n">geometry</span><span class="p">),</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span>     <span class="n">crs_str</span><span class="o">=</span><span class="n">gdf</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span> <span class="k">if</span> <span class="n">gdf</span><span class="o">.</span><span class="n">crs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="k">return</span> <span class="n">table</span><span class="o">.</span><span class="n">append_column</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">geom_arr</span><span class="p">)</span>
-
-<span class="nn">File ~/GIT_REPOS/sotm-2024-ohsome-data-insights-workshop/venv/lib/python3.12/site-packages/lonboard/_geoarrow/extension_types.py:292,</span> in <span class="ni">construct_geometry_array</span><span class="nt">(shapely_arr, include_z, field_name, crs_str)</span>
-<span class="g g-Whitespace">    </span><span class="mi">282</span> <span class="k">def</span> <span class="nf">construct_geometry_array</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">283</span>     <span class="n">shapely_arr</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">object_</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">284</span>     <span class="n">include_z</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">290</span>     <span class="c1"># extension metadata on the field without instantiating extension types into the</span>
-<span class="g g-Whitespace">    </span><span class="mi">291</span>     <span class="c1"># global pyarrow registry</span>
-<span class="ne">--&gt; </span><span class="mi">292</span>     <span class="n">geom_type</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">offsets</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">to_ragged_array</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">293</span>         <span class="n">shapely_arr</span><span class="p">,</span> <span class="n">include_z</span><span class="o">=</span><span class="n">include_z</span>
-<span class="g g-Whitespace">    </span><span class="mi">294</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">296</span>     <span class="k">if</span> <span class="n">coords</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">297</span>         <span class="n">dims</span> <span class="o">=</span> <span class="n">CoordinateDimension</span><span class="o">.</span><span class="n">XY</span>
-
-<span class="nn">File ~/GIT_REPOS/sotm-2024-ohsome-data-insights-workshop/venv/lib/python3.12/site-packages/shapely/_ragged_array.py:292,</span> in <span class="ni">to_ragged_array</span><span class="nt">(geometries, include_z)</span>
-<span class="g g-Whitespace">    </span><span class="mi">287</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">288</span>             <span class="s2">&quot;Geometry type combination is not supported &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">289</span>             <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="p">[</span><span class="n">GeometryType</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">geom_types</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">290</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">291</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">292</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">293</span>         <span class="s2">&quot;Geometry type combination is not supported &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">294</span>         <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="p">[</span><span class="n">GeometryType</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">geom_types</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">295</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">297</span> <span class="k">return</span> <span class="n">typ</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">offsets</span>
-
-<span class="ne">ValueError</span>: Geometry type combination is not supported ([])
-</pre></div>
-</div>
-</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "84c0e71559bd46f8857c9bc71153bcf8", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="get-mapillary-data">
-<h1>Get Mapillary Data<a class="headerlink" href="#get-mapillary-data" title="Link to this heading">#</a></h1>
+<section id="get-mapillary-data">
+<h2>Get Mapillary Data<a class="headerlink" href="#get-mapillary-data" title="Link to this heading">#</a></h2>
+<p>We are going to download Mapillary sequences.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
@@ -791,11 +745,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>download took 1.247 sec.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>download took 1.241 sec.
 </pre></div>
 </div>
 </div>
 </div>
+<p>Display Mapillary data on a map.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">map_query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -841,11 +796,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "8ac1aed14af542fbaf658988ebbf6734", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "b8352f7712924d11b563c744332d5845", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="find-osm-ways-not-covered-by-buffered-mapillary-sequence">
-<h1>Find OSM ways not covered by (buffered) Mapillary sequence<a class="headerlink" href="#find-osm-ways-not-covered-by-buffered-mapillary-sequence" title="Link to this heading">#</a></h1>
+<section id="find-osm-ways-not-covered-by-buffered-mapillary-sequence">
+<h2>Find OSM ways not covered by (buffered) Mapillary sequence<a class="headerlink" href="#find-osm-ways-not-covered-by-buffered-mapillary-sequence" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -889,8 +844,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "b923769266024fc2b7c6b15f9a7b2cca", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "53c6b2b8978045c3977416c142207b20", "version_major": 2, "version_minor": 0}</script></div>
 </div>
+<p>Display results on a map.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM not_covered_osm_data&quot;</span>
@@ -931,11 +887,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "519d5f1a28a04245a61acdce50e54981", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "8f5166aa808046d4bc0c2dd1b62948ca", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="calculate-share-of-road-network-covered-by-mapillary">
-<h1>Calculate share of road network covered by Mapillary<a class="headerlink" href="#calculate-share-of-road-network-covered-by-mapillary" title="Link to this heading">#</a></h1>
+<section id="calculate-share-of-road-network-covered-by-mapillary">
+<h2>Calculate share of road network covered by Mapillary<a class="headerlink" href="#calculate-share-of-road-network-covered-by-mapillary" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_osm_length</span> <span class="o">=</span> <span class="n">osm_data_df</span><span class="p">[</span><span class="s2">&quot;length_km&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -996,26 +952,26 @@ document.write(`
 │ highway_value  │ total_length_km │ not_covered_length_km │ mapillary_coverage │
 │    varchar     │     double      │        double         │       double       │
 ├────────────────┼─────────────────┼───────────────────────┼────────────────────┤
-│ motorway       │          40.216 │                 2.624 │              0.935 │
-│ trunk          │         183.263 │                19.269 │              0.895 │
-│ motorway_link  │          13.904 │                 1.776 │              0.872 │
-│ trunk_link     │          22.641 │                 4.927 │              0.782 │
+│ motorway       │          40.217 │                 2.624 │              0.935 │
+│ trunk          │         183.268 │                19.269 │              0.895 │
+│ motorway_link  │            13.9 │                 1.776 │              0.872 │
+│ trunk_link     │          22.638 │                 4.927 │              0.782 │
 │ primary_link   │           12.95 │                  3.43 │              0.735 │
-│ primary        │         105.382 │                 34.93 │              0.669 │
-│ cycleway       │          29.469 │                12.762 │              0.567 │
-│ secondary      │         365.844 │               165.322 │              0.548 │
-│ secondary_link │           9.282 │                 4.257 │              0.541 │
-│ tertiary       │         180.208 │                 97.04 │              0.462 │
-│ tertiary_link  │           1.126 │                 0.694 │              0.384 │
-│ unclassified   │         354.191 │               226.411 │              0.361 │
-│ steps          │           1.386 │                 0.946 │              0.317 │
-│ pedestrian     │           4.059 │                 3.114 │              0.233 │
-│ residential    │        3576.012 │              2868.926 │              0.198 │
-│ footway        │         136.649 │               110.634 │               0.19 │
-│ service        │        1391.092 │               1134.82 │              0.184 │
-│ living_street  │           8.259 │                 6.841 │              0.172 │
-│ track          │         401.247 │               335.547 │              0.164 │
-│ path           │         212.552 │               194.438 │              0.085 │
+│ primary        │         105.381 │                 34.93 │              0.669 │
+│ cycleway       │          29.471 │                12.762 │              0.567 │
+│ secondary      │         365.832 │               165.322 │              0.548 │
+│ secondary_link │           9.276 │                 4.257 │              0.541 │
+│ tertiary       │         180.199 │                 97.04 │              0.461 │
+│ tertiary_link  │           1.121 │                 0.694 │              0.381 │
+│ unclassified   │         354.176 │               226.411 │              0.361 │
+│ steps          │           1.389 │                 0.946 │              0.319 │
+│ pedestrian     │           4.057 │                 3.114 │              0.233 │
+│ residential    │        3575.996 │              2868.926 │              0.198 │
+│ footway        │         136.661 │               110.634 │               0.19 │
+│ service        │        1391.071 │               1134.82 │              0.184 │
+│ living_street  │           8.256 │                 6.841 │              0.171 │
+│ track          │         401.246 │               335.547 │              0.164 │
+│ path           │         212.548 │               194.438 │              0.085 │
 ├────────────────┴─────────────────┴───────────────────────┴────────────────────┤
 │ 20 rows                                                             4 columns │
 └───────────────────────────────────────────────────────────────────────────────┘
@@ -1023,6 +979,7 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1069,7 +1026,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">DuckDB: Country user activity map</p>
+        <p class="prev-next-title">User activity map</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1089,17 +1046,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">DuckDB: Mapillary Coverage Analysis</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-input-parameters-for-your-analysis">Prepare the input parameters for your analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-osm-data">Get OSM data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-mapillary-data">Get Mapillary Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-osm-ways-not-covered-by-buffered-mapillary-sequence">Find OSM ways not covered by (buffered) Mapillary sequence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-share-of-road-network-covered-by-mapillary">Calculate share of road network covered by Mapillary</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#get-osm-data">Get OSM data</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#get-mapillary-data">Get Mapillary Data</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#find-osm-ways-not-covered-by-buffered-mapillary-sequence">Find OSM ways not covered by (buffered) Mapillary sequence</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-share-of-road-network-covered-by-mapillary">Calculate share of road network covered by Mapillary</a></li>
-</ul>
-
   </nav></div>
 
 </div></div>

@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/03_hot_tm_project_analysis';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="DuckDB: Mapillary Coverage Analysis" href="03_mapillary_data_analysis.html" />
-    <link rel="prev" title="DuckDB + PyIceberg: Currentness of Buildings" href="02a_buildings_currentness_DuckDB_PyIceberg.html" />
+    <link rel="next" title="Mapillary Coverage Analysis" href="03_mapillary_data_analysis.html" />
+    <link rel="prev" title="Currentness of Buildings" href="02a_buildings_currentness_DuckDB_PyIceberg.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -183,52 +183,32 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="00_motivation.html">Why should you be excited about <em>ohsome-data-insights</em>?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="00_MinIO_Object_Store.html">Connect to MinIO Object Store</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="00_Iceberg_Catalog.html">Connect to Apache Iceberg</a></li>
 <li class="toctree-l1"><a class="reference internal" href="00_data_structure.html">Data Structure</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Extraction</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01a_Data_Extraction_DuckDB_PyIceberg.html">DuckDB + PyIceberg: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="01a_Data_Extraction_DuckDB_PyIceberg.html">Download latest OSM data as GeoPackage</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Simple Data Analysis</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="02a_buildings_currentness_DuckDB_PyIceberg.html">DuckDB + PyIceberg: Currentness of Buildings</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="02a_buildings_currentness_DuckDB_PyIceberg.html">Currentness of Buildings</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Integration</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">HOT Tasking Manager project analysis</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="03_mapillary_data_analysis.html">DuckDB: Mapillary Coverage Analysis</a></li>
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="03_mapillary_data_analysis.html">Mapillary Coverage Analysis</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Data Analysis</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="04_Country_User_Activity_DuckDB_only.html">DuckDB: Country user activity map</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="04_highways_timeline_DuckDB_only.html">DuckDB: Development of highways over time</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="04_Country_User_Activity_DuckDB_only.html">User activity map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_highways_timeline_DuckDB_only.html">Road Network Evolution</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Background</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="05_partitioning_and_sorting.html">Partitioning and Sorting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02b_buildings_currentness_DuckDB_only.html">DuckDB: Currentness of Buildings</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="01b_Data_Extraction_DuckDB_only.html">DuckDB: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
-
-
-
-
 </ul>
 
     </div>
@@ -455,17 +435,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">HOT Tasking Manager project analysis</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-input-parameters-for-your-analysis">Prepare the input parameters for your analysis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-information-about-hot-tasking-manager-project">Get Information about HOT Tasking Manager project</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-data-osm-data">Download data OSM Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-data-using-osm-changeset-information">Filter data using OSM changeset information</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#display-osm-user-statistics">Display OSM user statistics</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -488,9 +464,8 @@ document.write(`
 <li><p>Filter OSM contributions using changeset attributes.</p></li>
 <li><p>Display both datasets on a map.</p></li>
 </ul>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="getting-started">
-<h1>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h1>
+<section id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
 <p>Set connection params.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -570,6 +545,7 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
 <section id="prepare-the-input-parameters-for-your-analysis">
 <h2>Prepare the input parameters for your analysis<a class="headerlink" href="#prepare-the-input-parameters-for-your-analysis" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -1257,7 +1233,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">DuckDB + PyIceberg: Currentness of Buildings</p>
+        <p class="prev-next-title">Currentness of Buildings</p>
       </div>
     </a>
     <a class="right-next"
@@ -1265,7 +1241,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">DuckDB: Mapillary Coverage Analysis</p>
+        <p class="prev-next-title">Mapillary Coverage Analysis</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1285,17 +1261,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">HOT Tasking Manager project analysis</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-input-parameters-for-your-analysis">Prepare the input parameters for your analysis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-information-about-hot-tasking-manager-project">Get Information about HOT Tasking Manager project</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-data-osm-data">Download data OSM Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-data-using-osm-changeset-information">Filter data using OSM changeset information</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#display-osm-user-statistics">Display OSM user statistics</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>

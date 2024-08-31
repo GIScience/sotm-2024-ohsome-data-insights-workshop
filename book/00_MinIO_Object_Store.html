@@ -183,52 +183,32 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="00_motivation.html">Why should you be excited about <em>ohsome-data-insights</em>?</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Connect to MinIO Object Store</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="00_Iceberg_Catalog.html">Connect to Apache Iceberg</a></li>
 <li class="toctree-l1"><a class="reference internal" href="00_data_structure.html">Data Structure</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Extraction</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01a_Data_Extraction_DuckDB_PyIceberg.html">DuckDB + PyIceberg: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="01a_Data_Extraction_DuckDB_PyIceberg.html">Download latest OSM data as GeoPackage</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Simple Data Analysis</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="02a_buildings_currentness_DuckDB_PyIceberg.html">DuckDB + PyIceberg: Currentness of Buildings</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="02a_buildings_currentness_DuckDB_PyIceberg.html">Currentness of Buildings</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Integration</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="03_hot_tm_project_analysis.html">HOT Tasking Manager project analysis</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="03_mapillary_data_analysis.html">DuckDB: Mapillary Coverage Analysis</a></li>
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="03_mapillary_data_analysis.html">Mapillary Coverage Analysis</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Data Analysis</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="04_Country_User_Activity_DuckDB_only.html">DuckDB: Country user activity map</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="04_highways_timeline_DuckDB_only.html">DuckDB: Development of highways over time</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="04_Country_User_Activity_DuckDB_only.html">User activity map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_highways_timeline_DuckDB_only.html">Road Network Evolution</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Background</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="05_partitioning_and_sorting.html">Partitioning and Sorting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02b_buildings_currentness_DuckDB_only.html">DuckDB: Currentness of Buildings</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="01b_Data_Extraction_DuckDB_only.html">DuckDB: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
-
-
-
-
 </ul>
 
     </div>
@@ -455,14 +435,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Connect to MinIO Object Store</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-in-with-osm-account">Log-In with OSM Account</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-access-key">Create Access Key</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-to-minio-via-duckdb">Connect to MinIO via DuckDB</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-to-minio-via-duckdb">Connect to MinIO via DuckDB</a></li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -494,9 +470,8 @@ document.write(`
 </ul>
 <p><img alt="minio_login" src="../_images/minio_access_key_2.png" /></p>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="connect-to-minio-via-duckdb">
-<h1>Connect to MinIO via DuckDB<a class="headerlink" href="#connect-to-minio-via-duckdb" title="Link to this heading">#</a></h1>
+<section id="connect-to-minio-via-duckdb">
+<h2>Connect to MinIO via DuckDB<a class="headerlink" href="#connect-to-minio-via-duckdb" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">duckdb</span>
@@ -546,6 +521,7 @@ document.write(`
 </div>
 </div>
 <p>Now you are ready to explore Apache Iceberg Catalog and Iceberg tables in the next step.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -612,14 +588,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Connect to MinIO Object Store</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-in-with-osm-account">Log-In with OSM Account</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-access-key">Create Access Key</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-to-minio-via-duckdb">Connect to MinIO via DuckDB</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-to-minio-via-duckdb">Connect to MinIO via DuckDB</a></li>
-</ul>
-
   </nav></div>
 
 </div></div>

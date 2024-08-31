@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>DuckDB + PyIceberg: Data Extraction from geo-sorted ohsome contributions &#8212; SOTM 2024 ohsome-data-insights Workshop</title>
+    <title>Download latest OSM data as GeoPackage &#8212; SOTM 2024 ohsome-data-insights Workshop</title>
   
   
   
@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/01a_Data_Extraction_DuckDB_PyIceberg';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="DuckDB + PyIceberg: Currentness of Buildings" href="02a_buildings_currentness_DuckDB_PyIceberg.html" />
+    <link rel="next" title="Currentness of Buildings" href="02a_buildings_currentness_DuckDB_PyIceberg.html" />
     <link rel="prev" title="Data Structure" href="00_data_structure.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -183,52 +183,32 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="00_motivation.html">Why should you be excited about <em>ohsome-data-insights</em>?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="00_MinIO_Object_Store.html">Connect to MinIO Object Store</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="00_Iceberg_Catalog.html">Connect to Apache Iceberg</a></li>
 <li class="toctree-l1"><a class="reference internal" href="00_data_structure.html">Data Structure</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Extraction</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">DuckDB + PyIceberg: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
-
-
-
-
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Download latest OSM data as GeoPackage</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Simple Data Analysis</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="02a_buildings_currentness_DuckDB_PyIceberg.html">DuckDB + PyIceberg: Currentness of Buildings</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="02a_buildings_currentness_DuckDB_PyIceberg.html">Currentness of Buildings</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Integration</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="03_hot_tm_project_analysis.html">HOT Tasking Manager project analysis</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="03_mapillary_data_analysis.html">DuckDB: Mapillary Coverage Analysis</a></li>
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="03_mapillary_data_analysis.html">Mapillary Coverage Analysis</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Data Analysis</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="04_Country_User_Activity_DuckDB_only.html">DuckDB: Country user activity map</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="04_highways_timeline_DuckDB_only.html">DuckDB: Development of highways over time</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="04_Country_User_Activity_DuckDB_only.html">User activity map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_highways_timeline_DuckDB_only.html">Road Network Evolution</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Background</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="05_partitioning_and_sorting.html">Partitioning and Sorting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02b_buildings_currentness_DuckDB_only.html">DuckDB: Currentness of Buildings</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="01b_Data_Extraction_DuckDB_only.html">DuckDB: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
-
-
-
-
 </ul>
 
     </div>
@@ -445,7 +425,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>DuckDB + PyIceberg: Data Extraction from geo-sorted ohsome contributions</h1>
+    <h1>Download latest OSM data as GeoPackage</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -455,14 +435,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">DuckDB + PyIceberg: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#download-data-with-pyiceberg-table-scan">Download data with PyIceberg table scan</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-and-process-data-with-duckdb">Filter and process data with DuckDB</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#save-data-as-geopackage">Save data as GeoPackage</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#work-with-the-data-in-qgis">Work with the data in QGIS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-data-with-pyiceberg-table-scan">Download data with PyIceberg table scan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-and-process-data-with-duckdb">Filter and process data with DuckDB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-data-as-geopackage">Save data as GeoPackage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#work-with-the-data-in-qgis">Work with the data in QGIS</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -473,24 +451,19 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="duckdb-pyiceberg-data-extraction-from-geo-sorted-ohsome-contributions">
-<h1>DuckDB + PyIceberg: Data Extraction from <em>geo-sorted ohsome contributions</em><a class="headerlink" href="#duckdb-pyiceberg-data-extraction-from-geo-sorted-ohsome-contributions" title="Link to this heading">#</a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ol class="arabic simple">
-<li><p>Set the connection params and configure DuckDB.</p></li>
-<li><p>Download the data in 3 steps:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="download-latest-osm-data-as-geopackage">
+<h1>Download latest OSM data as GeoPackage<a class="headerlink" href="#download-latest-osm-data-as-geopackage" title="Link to this heading">#</a></h1>
+<p>In this notebook we demonstrate how you can download the latest OSM data in GeoPackage format.</p>
+<p>These are the steps you see further down:</p>
 <ul class="simple">
-<li><p>Download data with PyIceberg.</p></li>
-<li><p>Fitler and process data with DuckDB.</p></li>
+<li><p>Set the connection parameters.</p></li>
+<li><p>Prepare your input parameters, e.g. define area of interest and OSM tag filter.</p></li>
+<li><p><strong>Download data</strong> using PyIceberg and DuckDB.</p></li>
+<li><p>Filter and process data with DuckDB.</p></li>
 <li><p>Export results into geopackage file with GeoPandas.</p></li>
 </ul>
-</li>
-</ol>
-</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="getting-started">
-<h1>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h1>
+<section id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
 <p>Set connection params.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -511,7 +484,6 @@ document.write(`
     <span class="n">config</span><span class="o">=</span><span class="p">{</span>
         <span class="s1">&#39;threads&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
         <span class="s1">&#39;max_memory&#39;</span><span class="p">:</span> <span class="s1">&#39;8GB&#39;</span><span class="p">,</span>
-        <span class="c1"># &#39;enable_object_cache&#39;: True</span>
     <span class="p">}</span>
 <span class="p">)</span>
 <span class="n">con</span><span class="o">.</span><span class="n">install_extension</span><span class="p">(</span><span class="s2">&quot;spatial&quot;</span><span class="p">)</span>
@@ -548,8 +520,8 @@ document.write(`
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="download-data-with-pyiceberg-table-scan">
-<h1>Download data with PyIceberg table scan<a class="headerlink" href="#download-data-with-pyiceberg-table-scan" title="Link to this heading">#</a></h1>
+<section id="download-data-with-pyiceberg-table-scan">
+<h2>Download data with PyIceberg table scan<a class="headerlink" href="#download-data-with-pyiceberg-table-scan" title="Link to this heading">#</a></h2>
 <p>In this step we can already filter all OSM contributions by four major factors. We will perform more detailed filtering (e.g. for OSM tags values) later:</p>
 <ul class="simple">
 <li><p><strong>status</strong> (e.g. latest, historic or deleted OSM features)</p></li>
@@ -577,8 +549,6 @@ document.write(`
 
 <span class="n">selected_region</span> <span class="o">=</span> <span class="s1">&#39;nairobi&#39;</span>
 <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">bboxes</span><span class="p">[</span><span class="n">selected_region</span><span class="p">]</span>
-<span class="n">area_of_interest_file</span> <span class="o">=</span><span class="sa">f</span><span class="s2">&quot;../data/</span><span class="si">{</span><span class="n">selected_region</span><span class="si">}</span><span class="s2">.geojson&quot;</span>
-<span class="n">area_of_interest_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://raw.githubusercontent.com/GIScience/sotm-2024-ohsome-data-insights-workshop/main/data/</span><span class="si">{</span><span class="n">selected_region</span><span class="si">}</span><span class="s2">.geojson&quot;</span>
 
 <span class="c1"># Define geometry type filter</span>
 <span class="n">geometry_type</span> <span class="o">=</span> <span class="s1">&#39;Polygon&#39;</span>
@@ -633,14 +603,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>download took 198.388 sec.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>download took 15.965 sec.
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="filter-and-process-data-with-duckdb">
-<h1>Filter and process data with DuckDB<a class="headerlink" href="#filter-and-process-data-with-duckdb" title="Link to this heading">#</a></h1>
+<section id="filter-and-process-data-with-duckdb">
+<h2>Filter and process data with DuckDB<a class="headerlink" href="#filter-and-process-data-with-duckdb" title="Link to this heading">#</a></h2>
 <p>Second, we use DuckDB to perform the more detailed filtering. In this step we can filter for:</p>
 <ul class="simple">
 <li><p><strong>tags</strong></p></li>
@@ -658,12 +628,9 @@ document.write(`
 <span class="s2">SELECT a.*  </span>
 <span class="s2">FROM</span>
 <span class="s2">    raw_osm_data as a,</span>
-<span class="s2">    st_read(&#39;</span><span class="si">{</span><span class="n">area_of_interest_file</span><span class="si">}</span><span class="s2">&#39;) as aoi</span>
 <span class="s2">WHERE 1=1</span>
 <span class="s2">    and tags[&#39;building&#39;][1] is not null</span>
 <span class="s2">    and tags[&#39;building&#39;][1] != &#39;no&#39;</span>
-<span class="s2">    -- spatial filtering part</span>
-<span class="s2">    and ST_Intersects(st_GeomFromText(a.geometry), aoi.geom)</span>
 <span class="s2">)</span>
 <span class="s2">;</span>
 <span class="s2">&quot;&quot;&quot;</span>
@@ -675,28 +642,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">IOException</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">20</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span><span class="s2"> DROP TABLE IF EXISTS osm_data;</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span><span class="s2"> CREATE TABLE osm_data AS</span>
-<span class="s2">   (...)</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span><span class="s2"> ;</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span><span class="s2"> &quot;&quot;&quot;</span>
-<span class="ne">---&gt; </span><span class="mi">20</span> <span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="n">processing_time</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;processing took </span><span class="si">{</span><span class="n">processing_time</span><span class="si">}</span><span class="s2"> sec.&quot;</span><span class="p">)</span>
-
-<span class="ne">IOException</span>: IO Error: GDAL Error (4): Failed to open file https://raw.githubusercontent.com/GIScience/sotm-2024-ohsome-data-insights-workshop/main/data/nairobi.geojson: {&quot;exception_type&quot;:&quot;IO&quot;,&quot;exception_message&quot;:&quot;Cannot open file \&quot;https://raw.githubusercontent.com/GIScience/sotm-2024-ohsome-data-insights-workshop/main/data/nairobi.geojson\&quot;: No such file or directory&quot;,&quot;errno&quot;:&quot;2&quot;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>processing took 0.552 sec.
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="save-data-as-geopackage">
-<h1>Save data as GeoPackage<a class="headerlink" href="#save-data-as-geopackage" title="Link to this heading">#</a></h1>
+<section id="save-data-as-geopackage">
+<h2>Save data as GeoPackage<a class="headerlink" href="#save-data-as-geopackage" title="Link to this heading">#</a></h2>
 <p>Show the structure of the data we have just downloaded.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -709,18 +662,17 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌─────────────┬────────────────────────────────────────────────────────────┬─────────┬─────────┬─────────┬─────────┐
-│ column_name │                        column_type                         │  null   │   key   │ default │  extra  │
-│   varchar   │                          varchar                           │ varchar │ varchar │ varchar │ varchar │
-├─────────────┼────────────────────────────────────────────────────────────┼─────────┼─────────┼─────────┼─────────┤
-│ user_id     │ INTEGER                                                    │ YES     │ NULL    │ NULL    │ NULL    │
-│ valid_from  │ TIMESTAMP                                                  │ YES     │ NULL    │ NULL    │ NULL    │
-│ osm_id      │ VARCHAR                                                    │ YES     │ NULL    │ NULL    │ NULL    │
-│ osm_version │ INTEGER                                                    │ YES     │ NULL    │ NULL    │ NULL    │
-│ tags        │ MAP(VARCHAR, VARCHAR)                                      │ YES     │ NULL    │ NULL    │ NULL    │
-│ bbox        │ STRUCT(xmin DOUBLE, ymin DOUBLE, xmax DOUBLE, ymax DOUBLE) │ YES     │ NULL    │ NULL    │ NULL    │
-│ geometry    │ VARCHAR                                                    │ YES     │ NULL    │ NULL    │ NULL    │
-└─────────────┴────────────────────────────────────────────────────────────┴─────────┴─────────┴─────────┴─────────┘
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌─────────────┬───────────────────────┬─────────┬─────────┬─────────┬─────────┐
+│ column_name │      column_type      │  null   │   key   │ default │  extra  │
+│   varchar   │        varchar        │ varchar │ varchar │ varchar │ varchar │
+├─────────────┼───────────────────────┼─────────┼─────────┼─────────┼─────────┤
+│ user_id     │ INTEGER               │ YES     │ NULL    │ NULL    │ NULL    │
+│ valid_from  │ TIMESTAMP             │ YES     │ NULL    │ NULL    │ NULL    │
+│ osm_id      │ VARCHAR               │ YES     │ NULL    │ NULL    │ NULL    │
+│ osm_version │ INTEGER               │ YES     │ NULL    │ NULL    │ NULL    │
+│ tags        │ MAP(VARCHAR, VARCHAR) │ YES     │ NULL    │ NULL    │ NULL    │
+│ geometry    │ VARCHAR               │ YES     │ NULL    │ NULL    │ NULL    │
+└─────────────┴───────────────────────┴─────────┴─────────┴─────────┴─────────┘
 </pre></div>
 </div>
 </div>
@@ -738,12 +690,16 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌─────────┬────────────┬─────────┬─────────────┬──────────────────────┬─────────────────────────────────────┬──────────┐
-│ user_id │ valid_from │ osm_id  │ osm_version │         tags         │                bbox                 │ geometry │
-│  int32  │ timestamp  │ varchar │    int32    │ map(varchar, varch…  │ struct(xmin double, ymin double, …  │ varchar  │
-├─────────┴────────────┴─────────┴─────────────┴──────────────────────┴─────────────────────────────────────┴──────────┤
-│                                                        0 rows                                                        │
-└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌──────────┬─────────────────────┬────────────────┬─────────────┬──────────────────────┬───────────────────────────────┐
+│ user_id  │     valid_from      │     osm_id     │ osm_version │         tags         │           geometry            │
+│  int32   │      timestamp      │    varchar     │    int32    │ map(varchar, varch…  │            varchar            │
+├──────────┼─────────────────────┼────────────────┼─────────────┼──────────────────────┼───────────────────────────────┤
+│  1122708 │ 2021-09-07 23:04:37 │ way/500108893  │           5 │ {building=yes, rai…  │ POLYGON ((36.89974139999999…  │
+│ 13366421 │ 2023-01-10 06:13:29 │ way/1130552834 │           1 │ {building=yes, add…  │ POLYGON ((36.8719435 -1.241…  │
+│ 18306654 │ 2023-11-11 01:58:08 │ way/88406439   │          16 │ {building=yes, aer…  │ POLYGON ((36.9238579 -1.331…  │
+│ 17770290 │ 2022-11-27 17:57:39 │ way/1117632750 │           1 │ {building=yes}       │ POLYGON ((36.6824404 -1.442…  │
+│  3733993 │ 2023-04-11 09:02:45 │ way/1161291128 │           1 │ {building=yes}       │ POLYGON ((36.6824528 -1.438…  │
+└──────────┴─────────────────────┴────────────────┴─────────────┴──────────────────────┴───────────────────────────────┘
 </pre></div>
 </div>
 </div>
@@ -764,7 +720,7 @@ document.write(`
 │ count_star() │
 │    int64     │
 ├──────────────┤
-│            0 │
+│       527170 │
 └──────────────┘
 </pre></div>
 </div>
@@ -777,12 +733,7 @@ document.write(`
 
 <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">    SELECT osm_data.*</span>
-<span class="s2">    FROM</span>
-<span class="s2">        osm_data,</span>
-<span class="s2">        st_read(&#39;</span><span class="si">{</span><span class="n">area_of_interest_file</span><span class="si">}</span><span class="s2">&#39;) as aoi</span>
-<span class="s2">    WHERE 1=1</span>
-<span class="s2">        and ST_Intersects(st_GeomFromText(osm_data.geometry), aoi.geom)</span>
+<span class="s2">    SELECT * FROM osm_data</span>
 <span class="s2">&quot;&quot;&quot;</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">df</span><span class="p">()</span>
 
@@ -799,15 +750,16 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>processing took 0.109 sec.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>processing took 16.175 sec.
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="work-with-the-data-in-qgis">
-<h1>Work with the data in QGIS<a class="headerlink" href="#work-with-the-data-in-qgis" title="Link to this heading">#</a></h1>
+<section id="work-with-the-data-in-qgis">
+<h2>Work with the data in QGIS<a class="headerlink" href="#work-with-the-data-in-qgis" title="Link to this heading">#</a></h2>
 <p>Add your geopackage file in QGIS, e.g. via drag-and-drop or through file manager.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -854,7 +806,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">DuckDB + PyIceberg: Currentness of Buildings</p>
+        <p class="prev-next-title">Currentness of Buildings</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -874,14 +826,12 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">DuckDB + PyIceberg: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#download-data-with-pyiceberg-table-scan">Download data with PyIceberg table scan</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-and-process-data-with-duckdb">Filter and process data with DuckDB</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#save-data-as-geopackage">Save data as GeoPackage</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#work-with-the-data-in-qgis">Work with the data in QGIS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-data-with-pyiceberg-table-scan">Download data with PyIceberg table scan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-and-process-data-with-duckdb">Filter and process data with DuckDB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-data-as-geopackage">Save data as GeoPackage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#work-with-the-data-in-qgis">Work with the data in QGIS</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
