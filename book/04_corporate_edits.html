@@ -194,6 +194,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="02a_buildings_currentness_DuckDB_PyIceberg.html">Currentness of Buildings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_vandalism_detection.html">Vandalism Detection for LineStrings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_attribute_completeness.html">Attribute Completeness for Street Surface Tags</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Integration</span></p>
 <ul class="nav bd-sidenav">
@@ -824,17 +825,7 @@ We are going to make use of the <strong>Changeset attributes</strong> we have ad
     <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">)</span>
 
-<span class="n">corporate_slider</span> <span class="o">=</span> <span class="n">ipywidgets</span><span class="o">.</span><span class="n">SelectionSlider</span><span class="p">(</span>
-    <span class="n">options</span><span class="o">=</span><span class="n">group_options</span><span class="p">,</span>
-    <span class="n">index</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">group_options</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Group:&#39;</span><span class="p">,</span>
-    <span class="n">layout</span><span class="o">=</span><span class="n">ipywidgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;1000px&#39;</span><span class="p">),</span>
-    <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="nb">max</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">corporate_slider</span> <span class="o">=</span> <span class="n">ipywidgets</span><span class="o">.</span><span class="n">ToggleButtons</span><span class="p">(</span>
+<span class="n">corporate_toggle</span> <span class="o">=</span> <span class="n">ipywidgets</span><span class="o">.</span><span class="n">ToggleButtons</span><span class="p">(</span>
     <span class="n">options</span><span class="o">=</span><span class="n">group_options</span><span class="p">,</span>
     <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Group:&#39;</span><span class="p">,</span>
     <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -843,7 +834,7 @@ We are going to make use of the <strong>Changeset attributes</strong> we have ad
 
 
 <span class="n">directional_link</span><span class="p">(</span>
-    <span class="p">(</span><span class="n">corporate_slider</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">corporate_toggle</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">),</span>
     <span class="p">(</span><span class="n">corporate_slider_range</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
     <span class="n">transform</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 <span class="p">)</span>

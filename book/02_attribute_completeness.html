@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>User activity map &#8212; SOTM 2024 ohsome-data-insights Workshop</title>
+    <title>Attribute Completeness for Street Surface Tags &#8212; SOTM 2024 ohsome-data-insights Workshop</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'book/04_Country_User_Activity_DuckDB_only';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/02_attribute_completeness';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Road Network Evolution" href="04_highways_timeline_DuckDB_only.html" />
-    <link rel="prev" title="Corporate Edits Analysis" href="04_corporate_edits.html" />
+    <link rel="next" title="HOT Tasking Manager project analysis" href="03_hot_tm_project_analysis.html" />
+    <link rel="prev" title="Vandalism Detection for LineStrings" href="02_vandalism_detection.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -191,10 +191,10 @@
 <li class="toctree-l1"><a class="reference internal" href="01a_Data_Extraction_DuckDB_PyIceberg.html">Download latest OSM data as GeoPackage</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Simple Data Analysis</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="02a_buildings_currentness_DuckDB_PyIceberg.html">Currentness of Buildings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_vandalism_detection.html">Vandalism Detection for LineStrings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_attribute_completeness.html">Attribute Completeness for Street Surface Tags</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Attribute Completeness for Street Surface Tags</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Integration</span></p>
 <ul class="nav bd-sidenav">
@@ -202,9 +202,9 @@
 <li class="toctree-l1"><a class="reference internal" href="03_mapillary_data_analysis.html">Mapillary Coverage Analysis</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Data Analysis</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="04_corporate_edits.html">Corporate Edits Analysis</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">User activity map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Country_User_Activity_DuckDB_only.html">User activity map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_highways_timeline_DuckDB_only.html">Road Network Evolution</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Background</span></p>
@@ -266,7 +266,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/GIScience/sotm-2024-ohsome-data-insights-workshop/blob/main/book/04_Country_User_Activity_DuckDB_only.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/GIScience/sotm-2024-ohsome-data-insights-workshop/blob/main/book/02_attribute_completeness.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -314,7 +314,7 @@
       
       
       
-      <li><a href="https://github.com/GIScience/sotm-2024-ohsome-data-insights-workshop/issues/new?title=Issue%20on%20page%20%2Fbook/04_Country_User_Activity_DuckDB_only.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/GIScience/sotm-2024-ohsome-data-insights-workshop/issues/new?title=Issue%20on%20page%20%2Fbook/02_attribute_completeness.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -344,7 +344,7 @@
       
       
       
-      <li><a href="../_sources/book/04_Country_User_Activity_DuckDB_only.ipynb" target="_blank"
+      <li><a href="../_sources/book/02_attribute_completeness.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -428,7 +428,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>User activity map</h1>
+    <h1>Attribute Completeness for Street Surface Tags</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -441,7 +441,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-input-parameters-for-your-analysis">Prepare the input parameters for your analysis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-data">Get the Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#display-osm-user-activity-on-map">Display OSM user activity on map</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-and-process-data-with-duckdb">Filter and process data with DuckDB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proporation-of-roads-with-surface-tag">Proporation of Roads with Surface Tag</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proporation-of-roads-with-surface-tag-per-road-type">Proporation of Roads with Surface Tag per Road Type</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#map-of-roads-with-missing-road-surface-information">Map of roads with missing road surface information</a></li>
 </ul>
             </nav>
         </div>
@@ -453,15 +456,16 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="user-activity-map">
-<h1>User activity map<a class="headerlink" href="#user-activity-map" title="Link to this heading">#</a></h1>
-<p>In this notebook we demonstrate how to analyze and visualize daily OSM user activity for a country.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="attribute-completeness-for-street-surface-tags">
+<h1>Attribute Completeness for Street Surface Tags<a class="headerlink" href="#attribute-completeness-for-street-surface-tags" title="Link to this heading">#</a></h1>
+<p>In this notebook we demonstrate how can assess the completeness of tags in OSM.</p>
 <p>These are the steps you see further down:</p>
 <ul class="simple">
 <li><p>Set the connection parameters.</p></li>
-<li><p>Prepare your input parameters, e.g. define area of interest and time interval.</p></li>
-<li><p><strong>Download data</strong> using DuckDB.</p></li>
-<li><p>Create a <strong>Map</strong>, an <strong>interactive Slider</strong> to filter the map data.</p></li>
+<li><p>Prepare your input parameters, e.g. define area of interest and attribute filters.</p></li>
+<li><p><strong>Download data</strong> using PyIceberg and DuckDB.</p></li>
+<li><p>Filter and process data with DuckDB.</p></li>
+<li><p>Visualize the results on a map.</p></li>
 </ul>
 <section id="getting-started">
 <h2>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
@@ -490,9 +494,8 @@ document.write(`
 
 <span class="n">con</span> <span class="o">=</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
     <span class="n">config</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;threads&#39;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
-        <span class="s1">&#39;max_memory&#39;</span><span class="p">:</span> <span class="s1">&#39;50GB&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;enable_object_cache&#39;</span><span class="p">:</span> <span class="kc">True</span>
+        <span class="s1">&#39;threads&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="s1">&#39;max_memory&#39;</span><span class="p">:</span> <span class="s1">&#39;8GB&#39;</span><span class="p">,</span>
     <span class="p">}</span>
 <span class="p">)</span>
 <span class="n">con</span><span class="o">.</span><span class="n">install_extension</span><span class="p">(</span><span class="s2">&quot;spatial&quot;</span><span class="p">)</span>
@@ -561,11 +564,6 @@ document.write(`
 </section>
 <section id="prepare-the-input-parameters-for-your-analysis">
 <h2>Prepare the input parameters for your analysis<a class="headerlink" href="#prepare-the-input-parameters-for-your-analysis" title="Link to this heading">#</a></h2>
-<p>For this analysis mainly two parameters matter:</p>
-<ul class="simple">
-<li><p><strong>time range</strong></p></li>
-<li><p><strong>location</strong> (approximated by country bounding boxes)</p></li>
-</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set iceberg table</span>
@@ -573,19 +571,25 @@ document.write(`
 <span class="n">tablename</span> <span class="o">=</span> <span class="s1">&#39;contributions&#39;</span>
 <span class="n">icebergtable</span> <span class="o">=</span> <span class="n">catalog</span><span class="o">.</span><span class="n">load_table</span><span class="p">((</span><span class="n">namespace</span><span class="p">,</span> <span class="n">tablename</span><span class="p">))</span>
 
+
+<span class="c1"># Define status filter</span>
+<span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;latest&#39;</span>
+
+
 <span class="c1"># Define location filter</span>
 <span class="n">bboxes</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;kenya&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">33.89</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.68</span><span class="p">,</span> <span class="mf">41.86</span><span class="p">,</span> <span class="mf">5.51</span><span class="p">),</span>
-    <span class="s1">&#39;germany&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">5.99</span><span class="p">,</span> <span class="mf">47.3</span><span class="p">,</span> <span class="mf">15.02</span><span class="p">,</span> <span class="mf">54.98</span><span class="p">),</span>
-    <span class="s1">&#39;brazil&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">73.99</span><span class="p">,</span> <span class="o">-</span><span class="mf">33.77</span><span class="p">,</span> <span class="o">-</span><span class="mf">34.73</span><span class="p">,</span> <span class="mf">5.24</span><span class="p">)</span>
+    <span class="s1">&#39;heidelberg&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">8.629761</span><span class="p">,</span> <span class="mf">49.379556</span><span class="p">,</span> <span class="mf">8.742371</span><span class="p">,</span> <span class="mf">49.437890</span><span class="p">),</span>
+    <span class="s1">&#39;nairobi&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">36.650938</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.444471</span><span class="p">,</span> <span class="mf">37.103887</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.163522</span><span class="p">),</span>
+    <span class="s1">&#39;mannheim&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">8.41416</span><span class="p">,</span> <span class="mf">49.410362</span><span class="p">,</span> <span class="mf">8.58999</span><span class="p">,</span> <span class="mf">49.590489</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="n">selected_region</span> <span class="o">=</span> <span class="s1">&#39;kenya&#39;</span>
+<span class="n">selected_region</span> <span class="o">=</span> <span class="s1">&#39;mannheim&#39;</span>
 <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">bboxes</span><span class="p">[</span><span class="n">selected_region</span><span class="p">]</span>
+<span class="n">area_of_interest_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;s3a://heigit-ohsome-sotm24/data/sample_data/</span><span class="si">{</span><span class="n">selected_region</span><span class="si">}</span><span class="s2">.geojson&quot;</span>
 
-<span class="c1"># Define time range filter</span>
-<span class="n">start_timestamp</span> <span class="o">=</span> <span class="s1">&#39;2024-01-01T00:00:00&#39;</span>
-<span class="n">time_interval</span> <span class="o">=</span> <span class="s1">&#39;day&#39;</span>
+
+<span class="c1"># Define geometry type filter</span>
+<span class="n">geometry_type</span> <span class="o">=</span> <span class="s1">&#39;LineString&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -593,7 +597,7 @@ document.write(`
 </section>
 <section id="get-the-data">
 <h2>Get the Data<a class="headerlink" href="#get-the-data" title="Link to this heading">#</a></h2>
-<p>Here we download the H3 cell ID instead of the actual OSM geometry. This allows  us to download the entire history of OSM. Furthermore, we get the OSM user ID and contribution timestamp.</p>
+<p>First, we do an iceberg table scan with a pre-filter. This is a fast way to download all potential OSM elements that are needed for our analysis.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
@@ -601,15 +605,16 @@ document.write(`
 
 <span class="n">icebergtable</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span>
     <span class="n">row_filter</span><span class="o">=</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;(status = &#39;latest&#39; or status = &#39;history&#39;)&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;status = &#39;</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&#39; &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;and geometry_type = &#39;</span><span class="si">{</span><span class="n">geometry_type</span><span class="si">}</span><span class="s2">&#39; &quot;</span>
         <span class="sa">f</span><span class="s2">&quot;and (xmax &gt;= </span><span class="si">{</span><span class="n">xmin</span><span class="si">}</span><span class="s2"> and xmin &lt;= </span><span class="si">{</span><span class="n">xmax</span><span class="si">}</span><span class="s2">) &quot;</span>
         <span class="sa">f</span><span class="s2">&quot;and (ymax &gt;= </span><span class="si">{</span><span class="n">ymin</span><span class="si">}</span><span class="s2"> and ymin &lt;= </span><span class="si">{</span><span class="n">ymax</span><span class="si">}</span><span class="s2">) &quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;and valid_from &gt;= &#39;</span><span class="si">{</span><span class="n">start_timestamp</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
     <span class="p">),</span>
     <span class="n">selected_fields</span><span class="o">=</span><span class="p">(</span>
-        <span class="s2">&quot;user_id&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;valid_from&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;h3_r5&quot;</span>
+        <span class="s2">&quot;osm_id&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tags&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;length&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;geometry&quot;</span><span class="p">,</span>
     <span class="p">),</span>
 <span class="p">)</span><span class="o">.</span><span class="n">to_duckdb</span><span class="p">(</span><span class="s1">&#39;raw_osm_data&#39;</span><span class="p">,</span><span class="n">connection</span><span class="o">=</span><span class="n">con</span><span class="p">)</span>
 
@@ -619,32 +624,47 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>download took 16.318 sec.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>download took 18.676 sec.
 </pre></div>
 </div>
 </div>
 </div>
-<p>Count number of users per time interval.</p>
-<p>Use H3 library to calculate H3 polygon geometries.</p>
+</section>
+<section id="filter-and-process-data-with-duckdb">
+<h2>Filter and process data with DuckDB<a class="headerlink" href="#filter-and-process-data-with-duckdb" title="Link to this heading">#</a></h2>
+<p>Here we extract the tag values for highways and their correspoding road surface type (if mapped). We also clip the road geometry to the area of interest and calculate the length for the clipped geometry.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
 <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">INSTALL h3 FROM community;</span>
-<span class="s2">LOAD h3;</span>
-
+<span class="s2">DROP TABLE IF EXISTS osm_data;</span>
+<span class="s2">CREATE TABLE osm_data AS</span>
+<span class="s2">(</span>
 <span class="s2">SELECT</span>
-<span class="s2">    h3_r5,</span>
-<span class="s2">    1.0 * epoch_ms(date_trunc(&#39;</span><span class="si">{</span><span class="n">time_interval</span><span class="si">}</span><span class="s2">&#39;, valid_from)) as time_interval,</span>
-<span class="s2">    count(distinct user_id) as n_users,</span>
-<span class="s2">    h3_cell_to_boundary_wkt(h3_r5) as geometry</span>
-<span class="s2">FROM raw_osm_data</span>
-<span class="s2">GROUP BY 1, 2</span>
-<span class="s2">ORDER BY 2, 1;</span>
+<span class="s2">    tags[&#39;highway&#39;][1] as highway_tag_value,</span>
+<span class="s2">    tags[&#39;surface&#39;][1] as surface_tag_value,</span>
+<span class="s2">    ST_GeomFromText(a.geometry) as osm_geom,</span>
+<span class="s2">    CASE</span>
+<span class="s2">        WHEN ST_Within(osm_geom, aoi.geom) THEN osm_geom</span>
+<span class="s2">        ELSE ST_Intersection(osm_geom, aoi.geom)</span>
+<span class="s2">    END as clipped_geometry,</span>
+<span class="s2">    CASE</span>
+<span class="s2">        WHEN ST_Within(osm_geom, aoi.geom) THEN length</span>
+<span class="s2">        ELSE ST_Length_Spheroid(clipped_geometry) / 1000</span>
+<span class="s2">    END as length_km</span>
+<span class="s2">FROM</span>
+<span class="s2">    raw_osm_data as a,</span>
+<span class="s2">    st_read(&#39;</span><span class="si">{</span><span class="n">area_of_interest_file</span><span class="si">}</span><span class="s2">&#39;) as aoi</span>
+<span class="s2">WHERE 1=1</span>
+<span class="s2">    and tags[&#39;highway&#39;][1] is not null</span>
+<span class="s2">    -- spatial filtering part</span>
+<span class="s2">    and ST_Intersects(st_GeomFromText(a.geometry), aoi.geom)</span>
+<span class="s2">)</span>
+<span class="s2">;</span>
 <span class="s2">&quot;&quot;&quot;</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">df</span><span class="p">()</span>
+<span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
 
 <span class="n">processing_time</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;processing took </span><span class="si">{</span><span class="n">processing_time</span><span class="si">}</span><span class="s2"> sec.&quot;</span><span class="p">)</span>
@@ -652,19 +672,330 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>processing took 0.166 sec.
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "962e47d4e319425b8be86f4067868eb8", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>processing took 7.358 sec.
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="display-osm-user-activity-on-map">
-<h2>Display OSM user activity on map<a class="headerlink" href="#display-osm-user-activity-on-map" title="Link to this heading">#</a></h2>
-<p>Get data from DucDKB into GeoPandas dataframe.</p>
+<section id="proporation-of-roads-with-surface-tag">
+<h2>Proporation of Roads with Surface Tag<a class="headerlink" href="#proporation-of-roads-with-surface-tag" title="Link to this heading">#</a></h2>
+<p>Let’s inspect how many roads have a surface tag.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT</span>
+<span class="s2">    SUM(length_km) as length_km_total,</span>
+<span class="s2">    SUM(CASE</span>
+<span class="s2">      WHEN surface_tag_value IS NOT NULL THEN length_km</span>
+<span class="s2">      ELSE 0</span>
+<span class="s2">    END) as length_km_with_surface_tag,</span>
+<span class="s2">    round(length_km_with_surface_tag / length_km_total, 3) as proportion_with_surface_tag</span>
+<span class="s2">FROM osm_data</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌──────────────────┬────────────────────────────┬─────────────────────────────┐
+│ length_km_total  │ length_km_with_surface_tag │ proportion_with_surface_tag │
+│      double      │           double           │           double            │
+├──────────────────┼────────────────────────────┼─────────────────────────────┤
+│ 3285612.61274888 │          2259704.672583999 │                       0.688 │
+└──────────────────┴────────────────────────────┴─────────────────────────────┘
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="proporation-of-roads-with-surface-tag-per-road-type">
+<h2>Proporation of Roads with Surface Tag per Road Type<a class="headerlink" href="#proporation-of-roads-with-surface-tag-per-road-type" title="Link to this heading">#</a></h2>
+<p>We can break down by road type. For some road types the surface tag is mapped better than for others.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT</span>
+<span class="s2">    highway_tag_value,</span>
+<span class="s2">    SUM(length_km) as length_km_total,</span>
+<span class="s2">    SUM(CASE</span>
+<span class="s2">      WHEN surface_tag_value IS NOT NULL THEN length_km</span>
+<span class="s2">      ELSE 0</span>
+<span class="s2">    END) as length_km_with_surface_tag,</span>
+<span class="s2">    round(length_km_with_surface_tag / length_km_total, 3) as proportion_with_surface_tag</span>
+<span class="s2">FROM osm_data</span>
+<span class="s2">GROUP BY highway_tag_value</span>
+<span class="s2">ORDER BY length_km_total DESC</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">df</span><span class="p">()</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>highway_tag_value</th>
+      <th>length_km_total</th>
+      <th>length_km_with_surface_tag</th>
+      <th>proportion_with_surface_tag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>service</td>
+      <td>694704.602918</td>
+      <td>278210.148166</td>
+      <td>0.400</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>footway</td>
+      <td>546853.269568</td>
+      <td>307684.651441</td>
+      <td>0.563</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>track</td>
+      <td>477267.685579</td>
+      <td>285274.586297</td>
+      <td>0.598</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>residential</td>
+      <td>464907.754558</td>
+      <td>447053.629756</td>
+      <td>0.962</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>path</td>
+      <td>446605.435393</td>
+      <td>343686.039051</td>
+      <td>0.770</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>unclassified</td>
+      <td>118270.021870</td>
+      <td>97051.021870</td>
+      <td>0.821</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>tertiary</td>
+      <td>110620.269124</td>
+      <td>109950.269124</td>
+      <td>0.994</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>secondary</td>
+      <td>83886.049524</td>
+      <td>83724.049524</td>
+      <td>0.998</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>primary</td>
+      <td>70041.951266</td>
+      <td>69604.951266</td>
+      <td>0.994</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>living_street</td>
+      <td>48703.000000</td>
+      <td>42401.000000</td>
+      <td>0.871</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>motorway</td>
+      <td>47689.847847</td>
+      <td>47511.847847</td>
+      <td>0.996</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>cycleway</td>
+      <td>36750.000000</td>
+      <td>31285.000000</td>
+      <td>0.851</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>trunk</td>
+      <td>26581.871319</td>
+      <td>25673.869133</td>
+      <td>0.966</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>bridleway</td>
+      <td>25781.881633</td>
+      <td>18633.871521</td>
+      <td>0.723</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>motorway_link</td>
+      <td>18060.630577</td>
+      <td>17632.630577</td>
+      <td>0.976</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>trunk_link</td>
+      <td>14148.107011</td>
+      <td>13349.107011</td>
+      <td>0.944</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>pedestrian</td>
+      <td>12229.000000</td>
+      <td>10507.000000</td>
+      <td>0.859</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>secondary_link</td>
+      <td>11996.000000</td>
+      <td>11982.000000</td>
+      <td>0.999</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>steps</td>
+      <td>11948.002884</td>
+      <td>5219.000000</td>
+      <td>0.437</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>primary_link</td>
+      <td>10418.000000</td>
+      <td>10171.000000</td>
+      <td>0.976</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>construction</td>
+      <td>2905.231679</td>
+      <td>620.000000</td>
+      <td>0.213</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>tertiary_link</td>
+      <td>1958.000000</td>
+      <td>1902.000000</td>
+      <td>0.971</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>corridor</td>
+      <td>935.000000</td>
+      <td>339.000000</td>
+      <td>0.363</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>busway</td>
+      <td>818.000000</td>
+      <td>49.000000</td>
+      <td>0.060</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>proposed</td>
+      <td>612.000000</td>
+      <td>0.000000</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>platform</td>
+      <td>441.000000</td>
+      <td>0.000000</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>raceway</td>
+      <td>189.000000</td>
+      <td>189.000000</td>
+      <td>1.000</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>fi</td>
+      <td>177.000000</td>
+      <td>0.000000</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>bus_stop</td>
+      <td>82.000000</td>
+      <td>0.000000</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>street_lamp</td>
+      <td>32.000000</td>
+      <td>0.000000</td>
+      <td>0.000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="map-of-roads-with-missing-road-surface-information">
+<h2>Map of roads with missing road surface information<a class="headerlink" href="#map-of-roads-with-missing-road-surface-information" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+
+
+<span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT</span>
+<span class="s2">    highway_tag_value,</span>
+<span class="s2">    surface_tag_value,</span>
+<span class="s2">    CASE </span>
+<span class="s2">       WHEN surface_tag_value IS NULL THEN &#39;missing&#39;</span>
+<span class="s2">       WHEN list_contains([&#39;paved&#39;, &#39;asphalt&#39;, &#39;chipseal&#39;, &#39;concrete&#39;, &#39;concrete:lanes&#39;, &#39;concrete:plates&#39;, &#39;paving_stones&#39;, &#39;sett&#39;, &#39;unhewn_cobblestone&#39;, &#39;cobblestone&#39;, &#39;bricks&#39;, &#39;metal&#39;, &#39;wood&#39;], surface_tag_value) THEN &#39;paved&#39;</span>
+<span class="s2">       WHEN list_contains([&#39;unpaved&#39;, &#39;compacted&#39;, &#39;fine_gravel&#39;, &#39;gravel&#39;, &#39;shells&#39;, &#39;rock&#39;, &#39;pebblestone&#39;, &#39;ground&#39;, &#39;dirt&#39;, &#39;earth&#39;, &#39;grass&#39;, &#39;grass_paver&#39;, &#39;metal_grid&#39;, &#39;mud&#39;, &#39;sand&#39;, &#39;woodchips&#39;, &#39;snow&#39;, &#39;ice&#39;, &#39;salt&#39;], surface_tag_value) THEN &#39;unpaved&#39;</span>
+<span class="s2">       ELSE &#39;other&#39;</span>
+<span class="s2">    END as surface_type,</span>
+<span class="s2">    ST_AsText(clipped_geometry) as geometry</span>
+<span class="s2">FROM osm_data</span>
+<span class="s2">WHERE ST_GeometryType(clipped_geometry) = &#39;LINESTRING&#39;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">df</span><span class="p">()</span>
 
 <span class="c1"># convert the data to geodata</span>
 <span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span>
@@ -678,95 +1009,78 @@ document.write(`
 <p>Define map parameters and style.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">datetime</span>
-<span class="kn">import</span> <span class="nn">lonboard</span>
-<span class="kn">from</span> <span class="nn">palettable.colorbrewer.sequential</span> <span class="kn">import</span> <span class="n">Blues_9</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">lonboard</span>
+<span class="kn">from</span> <span class="nn">palettable.matplotlib</span> <span class="kn">import</span> <span class="n">Viridis_20</span>
 
-<span class="n">min_value</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">max_value</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;n_users&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 
-<span class="c1"># normalized color values from 0 to 1</span>
-<span class="n">user_activity_style</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;n_users&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
-    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">min_value</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">max_value</span> <span class="o">-</span> <span class="n">min_value</span><span class="p">))</span>
+<span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;surface_type_codes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;surface_type&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">codes</span>
 
-<span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;height&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2500</span> <span class="o">*</span> <span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;n_users&quot;</span><span class="p">]</span> 
-<span class="n">heights</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;height&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
-<span class="n">heights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">nan</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">min_valid_from</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
-<span class="n">max_valid_from</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
-
-<span class="c1"># the lonboard map definition</span>
-<span class="n">layer</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">PolygonLayer</span><span class="o">.</span><span class="n">from_geopandas</span><span class="p">(</span>
-    <span class="n">gdf</span><span class="p">,</span>
-    <span class="n">get_fill_color</span><span class="o">=</span><span class="n">lonboard</span><span class="o">.</span><span class="n">colormap</span><span class="o">.</span><span class="n">apply_continuous_cmap</span><span class="p">(</span><span class="n">user_activity_style</span><span class="p">,</span> <span class="n">Blues_9</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.85</span><span class="p">),</span>
-    <span class="n">extruded</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">get_elevation</span><span class="o">=</span><span class="n">heights</span><span class="p">,</span>
-    <span class="n">extensions</span><span class="o">=</span><span class="p">[</span><span class="n">lonboard</span><span class="o">.</span><span class="n">layer_extension</span><span class="o">.</span><span class="n">DataFilterExtension</span><span class="p">(</span><span class="n">filter_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)],</span>
-    <span class="n">get_filter_value</span><span class="o">=</span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;time_interval&quot;</span><span class="p">],</span>  <span class="c1"># replace with desired column</span>
-    <span class="n">filter_range</span><span class="o">=</span><span class="p">[</span><span class="n">min_valid_from</span><span class="p">,</span> <span class="n">max_valid_from</span><span class="p">]</span>  <span class="c1"># replace with desired filter range</span>
-<span class="p">)</span>
-
-<span class="n">view_state</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="n">xmin</span> <span class="o">+</span> <span class="p">((</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
-    <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="n">ymin</span> <span class="o">+</span> <span class="p">((</span><span class="n">ymax</span> <span class="o">-</span> <span class="n">ymin</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
-    <span class="s2">&quot;zoom&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-    <span class="s2">&quot;pitch&quot;</span><span class="p">:</span> <span class="mi">25</span>
+<span class="n">surface_type_colormap</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;missing&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">228</span><span class="p">,</span><span class="mi">26</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span> <span class="mi">255</span><span class="p">],</span>
+    <span class="s2">&quot;other&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">152</span><span class="p">,</span><span class="mi">78</span><span class="p">,</span><span class="mi">163</span><span class="p">,</span> <span class="mi">255</span><span class="p">],</span>
+    <span class="s2">&quot;paved&quot;</span><span class="p">:</span>  <span class="p">[</span><span class="mi">55</span><span class="p">,</span><span class="mi">126</span><span class="p">,</span><span class="mi">184</span><span class="p">,</span> <span class="mi">255</span><span class="p">],</span>
+    <span class="s2">&quot;unpaved&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">77</span><span class="p">,</span><span class="mi">175</span><span class="p">,</span><span class="mi">74</span><span class="p">,</span> <span class="mi">255</span><span class="p">]</span>
 <span class="p">}</span>
 
-<span class="n">user_activity_map</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span>
+
+<span class="c1"># the lonboard map definition</span>
+<span class="n">layer</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">PathLayer</span><span class="o">.</span><span class="n">from_geopandas</span><span class="p">(</span>
+    <span class="n">gdf</span><span class="p">,</span>
+    <span class="n">get_color</span><span class="o">=</span><span class="n">lonboard</span><span class="o">.</span><span class="n">colormap</span><span class="o">.</span><span class="n">apply_categorical_cmap</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;surface_type&quot;</span><span class="p">],</span> <span class="n">surface_type_colormap</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">get_width</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span>
+    <span class="n">width_units</span><span class="o">=</span><span class="s1">&#39;pixels&#39;</span><span class="p">,</span>
+    <span class="n">extensions</span><span class="o">=</span><span class="p">[</span><span class="n">lonboard</span><span class="o">.</span><span class="n">layer_extension</span><span class="o">.</span><span class="n">DataFilterExtension</span><span class="p">(</span><span class="n">filter_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)],</span>
+    <span class="n">get_filter_value</span><span class="o">=</span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;surface_type_codes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">),</span>  <span class="c1"># replace with desired column</span>
+    <span class="n">filter_range</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">],</span>  <span class="c1"># replace with desired filter range</span>
+<span class="p">)</span>
+
+
+<span class="n">highway_map</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span>
     <span class="n">basemap_style</span><span class="o">=</span><span class="n">lonboard</span><span class="o">.</span><span class="n">basemap</span><span class="o">.</span><span class="n">CartoBasemap</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span>
     <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">layer</span><span class="p">],</span>
-    <span class="n">view_state</span><span class="o">=</span><span class="n">view_state</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Set date slider.</p>
+<p>Set toggle buttons for different road surface types.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span><span class="p">,</span> <span class="n">timedelta</span>
-<span class="kn">import</span> <span class="nn">ipywidgets</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ipywidgets</span>
 <span class="kn">from</span> <span class="nn">traitlets</span> <span class="kn">import</span> <span class="n">directional_link</span>
 
-<span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">delta</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>   <span class="c1"># returns timedelta</span>
-<span class="n">dates</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">delta</span><span class="o">.</span><span class="n">days</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
-<span class="n">options</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">-%b-%Y&#39;</span><span class="p">),</span> <span class="mi">1000</span><span class="o">*</span> <span class="n">i</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">())</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dates</span><span class="p">]</span>
+<span class="n">group_options</span> <span class="o">=</span> <span class="p">[(</span><span class="n">key</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">surface_type_colormap</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="p">]</span>
 
-<span class="n">date_slider</span> <span class="o">=</span> <span class="n">ipywidgets</span><span class="o">.</span><span class="n">SelectionSlider</span><span class="p">(</span>
-    <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span>
-    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Day:&#39;</span><span class="p">,</span>
-    <span class="n">layout</span><span class="o">=</span><span class="n">ipywidgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;1000px&#39;</span><span class="p">),</span>
-    <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span>
+<span class="n">surface_toggle</span> <span class="o">=</span> <span class="n">ipywidgets</span><span class="o">.</span><span class="n">ToggleButtons</span><span class="p">(</span>
+    <span class="n">options</span><span class="o">=</span><span class="n">group_options</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Surface Type:&#39;</span><span class="p">,</span>
+    <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">button_style</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="c1"># &#39;success&#39;, &#39;info&#39;, &#39;warning&#39;, &#39;danger&#39; or &#39;&#39;</span>
 <span class="p">)</span>
 
 <span class="n">directional_link</span><span class="p">(</span>
-    <span class="p">(</span><span class="n">date_slider</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">surface_toggle</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">),</span>
     <span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="s2">&quot;filter_range&quot;</span><span class="p">),</span>
-    <span class="n">transform</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+    <span class="n">transform</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;traitlets.traitlets.directional_link at 0x7da1d41f6720&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;traitlets.traitlets.directional_link at 0x73003c0b4c80&gt;
 </pre></div>
 </div>
 </div>
 </div>
-<p>Display the map. Have fun exploring and moving around the time slider!</p>
+<p>Display the map. You can click on the buttons to change the surface type displayed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">user_activity_map</span><span class="p">,</span> <span class="n">date_slider</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">highway_map</span><span class="p">,</span> <span class="n">surface_toggle</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "f0abda2707564f008a48071ccd169db0", "version_major": 2, "version_minor": 1}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "9b62e0719de04a948fb41741e2e977a8", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "217caff9b18d4751bb58caf8fc9b20b8", "version_major": 2, "version_minor": 1}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "2b2bdbc137a3414ca7be45141369e425", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 </section>
 </section>
@@ -802,20 +1116,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="04_corporate_edits.html"
+       href="02_vandalism_detection.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Corporate Edits Analysis</p>
+        <p class="prev-next-title">Vandalism Detection for LineStrings</p>
       </div>
     </a>
     <a class="right-next"
-       href="04_highways_timeline_DuckDB_only.html"
+       href="03_hot_tm_project_analysis.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Road Network Evolution</p>
+        <p class="prev-next-title">HOT Tasking Manager project analysis</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -838,7 +1152,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-input-parameters-for-your-analysis">Prepare the input parameters for your analysis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-data">Get the Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#display-osm-user-activity-on-map">Display OSM user activity on map</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-and-process-data-with-duckdb">Filter and process data with DuckDB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proporation-of-roads-with-surface-tag">Proporation of Roads with Surface Tag</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proporation-of-roads-with-surface-tag-per-road-type">Proporation of Roads with Surface Tag per Road Type</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#map-of-roads-with-missing-road-surface-information">Map of roads with missing road surface information</a></li>
 </ul>
   </nav></div>
 
