@@ -5,10 +5,11 @@
 | attribute name | data type             | description                                                      |
 |----------------|-----------------------|------------------------------------------------------------------|
 | user_id        | INTEGER               |                                                                  |
+| user_name      | VARCHAR               |                                                                  |
 | valid_from     | TIMESTAMP             |                                                                  |
-| valid_to       | TIMESTAMP             |                                                                  |
+| valid_to       | TIMESTAMP             | if status == latest, valid_to timestamp is set to `2525-01-01`   |                                                                 |
 | osm_type       | VARCHAR               |                                                                  |
-| osm_id         | VARCHAR               |                                                                  |
+| osm_id         | VARCHAR               | type/id e.g. `way/1234`                                          |
 | osm_version    | INTEGER               |                                                                  |
 | contrib_type   | VARCHAR               |                                                                  |
 | status         | VARCHAR               | Potential values are: `latest`, `history`, `deleted`, `invalid`. |
@@ -51,7 +52,7 @@
 | centroid.x     | DOUBLE    |                                                                                                                                                                                                                                                                                                                                           |
 | centroid.y     | DOUBLE    |                                                                                                                                                                                                                                                                                                                                           |
 | quadkey_z10    | VARCHAR   | Quadkey hierarchical geospatial index at zoom level 10. We have used the OSM element centroid location to determine the Quadkey ID. There are around 1 Million Quadkeys at this level globally. Check [Bing Maps Tile System](https://learn.microsoft.com/en-us/azure/azure-maps/zoom-levels-and-tile-grid?tabs=csharp) for more details. |
-| h3_r5          | UBIGINT   | Cell ID in H3 hierarchical geospatial index at resolution level 5. We have used the OSM element centroid location to determine the H3 cell ID. There are about 2 Million cells at this level globally. The cell size varies between 150 - 300 km². Check [H3 docs](https://h3geo.org/docs/) for more details.                             |
+| h3_r5          | BIGINT   | Cell ID in H3 hierarchical geospatial index at resolution level 5. We have used the OSM element centroid location to determine the H3 cell ID. There are about 2 Million cells at this level globally. The cell size varies between 150 - 300 km². Check [H3 docs](https://h3geo.org/docs/) for more details.                             |
 | geometry_type  | VARCHAR   | Potential values are: `Point`, `LineString`, `Polygon`, `MultiPolygon`, `GeometryCollection`, `InvalidGeometry`.                                                                                                                                                                                                                          |
 | geometry_valid | BOOLEAN   |                                                                                                                                                                                                                                                                                                                                           |
 | geometry       | VARCHAR   | The geometry of the OSM element in [WKT format](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry).                                                                                                                                                                                                                |
@@ -92,7 +93,7 @@
 | map_features.waterway         | BOOLEAN    |             |
 
 
-## Special Attributes for OSM Relations
+## Special Attributes for OSM Relations (PREVIEW)
 
 | attribute name   | data type | description |
 |------------------|-----------|-------------|
