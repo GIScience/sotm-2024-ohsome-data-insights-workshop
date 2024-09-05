@@ -4,9 +4,10 @@ This workshop teaches you how you can accelerate OSM data analysis without the n
 We will provide a sneak preview about our new cloud hosted ohsome full history contributions data and will show you how can use it to understand the dynamics in OSM.
 
 ### Contact
-> Benjamin Herfort
+> Benjamin Herfort `benjamin.herfort [at] heigit.org`
+> <br> Michael Auer `michael.auer [at] heigit.org`
+> <br> Rafael Troilo `rafael.troilo [at] heigit.org`
 > 
-> `benjamin.herfort [at] heigit.org`
 > 
 > HeiGIT gGmbH, affiliated Institute at Heidelberg University
 > 
