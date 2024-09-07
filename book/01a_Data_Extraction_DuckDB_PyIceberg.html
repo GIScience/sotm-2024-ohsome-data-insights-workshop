@@ -594,8 +594,8 @@ document.write(`
     <span class="n">row_filter</span><span class="o">=</span><span class="p">(</span>
         <span class="sa">f</span><span class="s2">&quot;status = &#39;</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&#39; &quot;</span>
         <span class="sa">f</span><span class="s2">&quot;and geometry_type = &#39;</span><span class="si">{</span><span class="n">geometry_type</span><span class="si">}</span><span class="s2">&#39; &quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;and (xmax &gt;= </span><span class="si">{</span><span class="n">xmin</span><span class="si">}</span><span class="s2"> and xmin &lt;= </span><span class="si">{</span><span class="n">xmax</span><span class="si">}</span><span class="s2">) &quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;and (ymax &gt;= </span><span class="si">{</span><span class="n">ymin</span><span class="si">}</span><span class="s2"> and ymin &lt;= </span><span class="si">{</span><span class="n">ymax</span><span class="si">}</span><span class="s2">) &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;and (bbox.xmax &gt;= </span><span class="si">{</span><span class="n">xmin</span><span class="si">}</span><span class="s2"> and bbox.xmin &lt;= </span><span class="si">{</span><span class="n">xmax</span><span class="si">}</span><span class="s2">) &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;and (bbox.ymax &gt;= </span><span class="si">{</span><span class="n">ymin</span><span class="si">}</span><span class="s2"> and bbox.ymin &lt;= </span><span class="si">{</span><span class="n">ymax</span><span class="si">}</span><span class="s2">) &quot;</span>
     <span class="p">),</span>
     <span class="n">selected_fields</span><span class="o">=</span><span class="p">(</span>
         <span class="s2">&quot;user_id&quot;</span><span class="p">,</span>
