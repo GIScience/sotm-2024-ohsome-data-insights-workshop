@@ -465,9 +465,23 @@ We are going to make use of the <strong>Changeset attributes</strong> we have ad
 <li><p>Filter and process data with DuckDB.</p></li>
 <li><p>Visualize the results on a map.</p></li>
 </ul>
+<p><video src="04_corporate_edits.webm" width="90%" controls></video></p>
 <section id="getting-started">
 <h2>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
 <p>Set connection params.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="n">load_dotenv</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -492,8 +506,8 @@ We are going to make use of the <strong>Changeset attributes</strong> we have ad
 
 <span class="n">con</span> <span class="o">=</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
     <span class="n">config</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;threads&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-        <span class="s1">&#39;max_memory&#39;</span><span class="p">:</span> <span class="s1">&#39;8GB&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;threads&#39;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+        <span class="s1">&#39;max_memory&#39;</span><span class="p">:</span> <span class="s1">&#39;100GB&#39;</span><span class="p">,</span>
     <span class="p">}</span>
 <span class="p">)</span>
 <span class="n">con</span><span class="o">.</span><span class="n">install_extension</span><span class="p">(</span><span class="s2">&quot;spatial&quot;</span><span class="p">)</span>
@@ -549,12 +563,12 @@ We are going to make use of the <strong>Changeset attributes</strong> we have ad
 <span class="n">bboxes</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;colombia&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">78.9909352282</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.29818694419</span><span class="p">,</span> <span class="o">-</span><span class="mf">66.8763258531</span><span class="p">,</span> <span class="mf">12.4373031682</span><span class="p">),</span>    
     <span class="s1">&#39;indonesia&#39;</span><span class="p">:</span>  <span class="p">(</span><span class="mf">95.2930261576</span><span class="p">,</span> <span class="o">-</span><span class="mf">10.3599874813</span><span class="p">,</span> <span class="mf">141.03385176</span><span class="p">,</span> <span class="mf">5.47982086834</span><span class="p">),</span>
-    <span class="s1">&#39;united_arab_emirates&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">51.5795186705</span><span class="p">,</span> <span class="mf">22.4969475367</span><span class="p">,</span> <span class="mf">56.3968473651</span><span class="p">,</span> <span class="mf">26.055464179</span><span class="p">)</span>
-    <span class="c1">#&#39;south_america&#39;: (-93.691406,-58.263287,-22.675781,14.859850),  # only do this if you have a lot of RAM!</span>
-    <span class="c1">#&#39;africa&#39;: (-24.609375,-39.095963,56.074219,36.173357)  # only do this if you have a lot of RAM!</span>
+    <span class="s1">&#39;united_arab_emirates&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">51.5795186705</span><span class="p">,</span> <span class="mf">22.4969475367</span><span class="p">,</span> <span class="mf">56.3968473651</span><span class="p">,</span> <span class="mf">26.055464179</span><span class="p">),</span>
+    <span class="s1">&#39;south_america&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">93.691406</span><span class="p">,</span><span class="o">-</span><span class="mf">58.263287</span><span class="p">,</span><span class="o">-</span><span class="mf">22.675781</span><span class="p">,</span><span class="mf">14.859850</span><span class="p">),</span>
+    <span class="s1">&#39;africa&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">24.609375</span><span class="p">,</span><span class="o">-</span><span class="mf">39.095963</span><span class="p">,</span><span class="mf">56.074219</span><span class="p">,</span><span class="mf">36.173357</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="n">selected_region</span> <span class="o">=</span> <span class="s1">&#39;colombia&#39;</span>
+<span class="n">selected_region</span> <span class="o">=</span> <span class="s1">&#39;south_america&#39;</span>
 <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">bboxes</span><span class="p">[</span><span class="n">selected_region</span><span class="p">]</span>
 
 
@@ -588,7 +602,7 @@ We are going to make use of the <strong>Changeset attributes</strong> we have ad
 
 
 <span class="c1"># Define output h3 cell resolution</span>
-<span class="n">h3_cell_resolution</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">h3_cell_resolution</span> <span class="o">=</span> <span class="mi">3</span>
 </pre></div>
 </div>
 </div>
@@ -626,7 +640,7 @@ We are going to make use of the <strong>Changeset attributes</strong> we have ad
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>download took 32.696 sec.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>download took 119.03 sec.
 </pre></div>
 </div>
 </div>
@@ -693,7 +707,7 @@ We are going to make use of the <strong>Changeset attributes</strong> we have ad
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "54a805e4f6d64ea68e9a44ecaecdd579", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>processing took 30.636 sec.
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "9add85455dd74b62914dc043e9e52763", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>processing took 23.118 sec.
 </pre></div>
 </div>
 </div>
@@ -825,7 +839,17 @@ We are going to make use of the <strong>Changeset attributes</strong> we have ad
     <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">)</span>
 
-<span class="n">corporate_toggle</span> <span class="o">=</span> <span class="n">ipywidgets</span><span class="o">.</span><span class="n">ToggleButtons</span><span class="p">(</span>
+<span class="n">corporate_slider</span> <span class="o">=</span> <span class="n">ipywidgets</span><span class="o">.</span><span class="n">SelectionSlider</span><span class="p">(</span>
+    <span class="n">options</span><span class="o">=</span><span class="n">group_options</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">group_options</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Group:&#39;</span><span class="p">,</span>
+    <span class="n">layout</span><span class="o">=</span><span class="n">ipywidgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;1000px&#39;</span><span class="p">),</span>
+    <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="nb">max</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">corporate_slider</span> <span class="o">=</span> <span class="n">ipywidgets</span><span class="o">.</span><span class="n">ToggleButtons</span><span class="p">(</span>
     <span class="n">options</span><span class="o">=</span><span class="n">group_options</span><span class="p">,</span>
     <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Group:&#39;</span><span class="p">,</span>
     <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -834,7 +858,7 @@ We are going to make use of the <strong>Changeset attributes</strong> we have ad
 
 
 <span class="n">directional_link</span><span class="p">(</span>
-    <span class="p">(</span><span class="n">corporate_toggle</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">corporate_slider</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">),</span>
     <span class="p">(</span><span class="n">corporate_slider_range</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
     <span class="n">transform</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 <span class="p">)</span>
@@ -849,7 +873,7 @@ We are going to make use of the <strong>Changeset attributes</strong> we have ad
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;traitlets.traitlets.directional_link at 0x746b25b953d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;traitlets.traitlets.directional_link at 0x7864804edd00&gt;
 </pre></div>
 </div>
 </div>
@@ -862,7 +886,7 @@ We are going to make use of the <strong>Changeset attributes</strong> we have ad
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "4f4af7bb93a2481485b4ee372b642142", "version_major": 2, "version_minor": 1}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "0868f8b868464d45a2069d3fec7078de", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "42e68e9d005941f9a8664597601bb736", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "0c67eaebeec94cd4bd598f03cb0bc0e9", "version_major": 2, "version_minor": 1}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "7121017969d14553a252712200a99f22", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "a066f72e94c24cd5a3ffd1a9891e2a25", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 </section>
 </section>

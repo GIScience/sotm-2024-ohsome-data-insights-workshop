@@ -442,7 +442,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-input-parameters-for-your-analysis">Prepare the input parameters for your analysis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-osm-data">Get OSM data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-mapillary-data">Get Mapillary Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-osm-ways-not-covered-by-buffered-mapillary-sequence">Find OSM ways not covered by (buffered) Mapillary sequence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-osm-ways-not-covered-by-5m-buffered-mapillary-sequence">Find OSM ways not covered by (5m buffered) Mapillary sequence</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-share-of-road-network-covered-by-mapillary">Calculate share of road network covered by Mapillary</a></li>
 </ul>
             </nav>
@@ -470,6 +470,19 @@ document.write(`
 <section id="getting-started">
 <h2>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
 <p>Set connection params.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="n">load_dotenv</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -587,7 +600,7 @@ document.write(`
     <span class="s1">&#39;nairobi&#39;</span><span class="p">:</span> <span class="s1">&#39;EPSG:32737&#39;</span><span class="p">,</span>
     <span class="s1">&#39;berlin&#39;</span><span class="p">:</span> <span class="s1">&#39;EPSG:32632&#39;</span>
 <span class="p">}</span>
-<span class="n">espg_code</span> <span class="o">=</span> <span class="n">epsg_codes</span><span class="p">[</span><span class="n">selected_region</span><span class="p">]</span>
+<span class="n">epsg_code</span> <span class="o">=</span> <span class="n">epsg_codes</span><span class="p">[</span><span class="n">selected_region</span><span class="p">]</span>
 
 
 <span class="c1"># Define geometry type filter</span>
@@ -628,7 +641,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>download took 17.048 sec.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>download took 14.303 sec.
 </pre></div>
 </div>
 </div>
@@ -667,7 +680,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "871b0e2dfb9c4247916b38b95d543210", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>processing took 3.557 sec.
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "f1c22621ab644c35b52fed1d31c32a07", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>processing took 2.446 sec.
 </pre></div>
 </div>
 </div>
@@ -700,6 +713,7 @@ document.write(`
 <span class="n">osm_layer</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">PathLayer</span><span class="o">.</span><span class="n">from_geopandas</span><span class="p">(</span>
     <span class="n">osm_data_gdf</span><span class="p">,</span>
     <span class="n">get_color</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">],</span>
+    <span class="n">width_min_pixels</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">view_state</span> <span class="o">=</span> <span class="p">{</span>
@@ -709,7 +723,7 @@ document.write(`
 <span class="p">}</span>
 
 <span class="n">osm_map</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span>
-    <span class="n">basemap_style</span><span class="o">=</span><span class="n">lonboard</span><span class="o">.</span><span class="n">basemap</span><span class="o">.</span><span class="n">CartoBasemap</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span>
+    <span class="n">basemap_style</span><span class="o">=</span><span class="n">lonboard</span><span class="o">.</span><span class="n">basemap</span><span class="o">.</span><span class="n">CartoBasemap</span><span class="o">.</span><span class="n">DarkMatter</span><span class="p">,</span>
     <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">osm_layer</span><span class="p">],</span>
     <span class="n">view_state</span><span class="o">=</span><span class="n">view_state</span>
 <span class="p">)</span>
@@ -719,7 +733,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "84c0e71559bd46f8857c9bc71153bcf8", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "650ed30bcad147d68b438394297e3346", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 <section id="get-mapillary-data">
@@ -755,7 +769,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>download took 1.241 sec.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>download took 1.716 sec.
 </pre></div>
 </div>
 </div>
@@ -787,6 +801,7 @@ document.write(`
 <span class="n">mapillary_layer</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">PathLayer</span><span class="o">.</span><span class="n">from_geopandas</span><span class="p">(</span>
     <span class="n">gdf</span><span class="p">,</span>
     <span class="n">get_color</span><span class="o">=</span><span class="p">[</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">],</span>
+    <span class="n">width_min_pixels</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">view_state</span> <span class="o">=</span> <span class="p">{</span>
@@ -796,7 +811,7 @@ document.write(`
 <span class="p">}</span>
 
 <span class="n">mapillary_map</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span>
-    <span class="n">basemap_style</span><span class="o">=</span><span class="n">lonboard</span><span class="o">.</span><span class="n">basemap</span><span class="o">.</span><span class="n">CartoBasemap</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span>
+    <span class="n">basemap_style</span><span class="o">=</span><span class="n">lonboard</span><span class="o">.</span><span class="n">basemap</span><span class="o">.</span><span class="n">CartoBasemap</span><span class="o">.</span><span class="n">DarkMatter</span><span class="p">,</span>
     <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">mapillary_layer</span><span class="p">],</span>
     <span class="n">view_state</span><span class="o">=</span><span class="n">view_state</span>
 <span class="p">)</span>
@@ -806,23 +821,23 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "b8352f7712924d11b563c744332d5845", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "510a0eac840a4083b44f46f7ccb74faa", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
-<section id="find-osm-ways-not-covered-by-buffered-mapillary-sequence">
-<h2>Find OSM ways not covered by (buffered) Mapillary sequence<a class="headerlink" href="#find-osm-ways-not-covered-by-buffered-mapillary-sequence" title="Link to this heading">#</a></h2>
+<section id="find-osm-ways-not-covered-by-5m-buffered-mapillary-sequence">
+<h2>Find OSM ways not covered by (5m buffered) Mapillary sequence<a class="headerlink" href="#find-osm-ways-not-covered-by-5m-buffered-mapillary-sequence" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">CREATE TABLE not_covered_osm_data AS</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">CREATE OR REPLACE TABLE not_covered_osm_data AS</span>
 <span class="s2">(</span>
 <span class="s2">WITH mapillary_coverage AS</span>
 <span class="s2">(</span>
 <span class="s2">SELECT</span>
 <span class="s2">    id,</span>
-<span class="s2">    geometry.ST_Transform(&#39;EPSG:4326&#39;, &#39;EPSG:32632&#39;)</span>
-<span class="s2">        .ST_Buffer(5)</span>
-<span class="s2">        .ST_Transform(&#39;EPSG:32632&#39;, &#39;EPSG:4326&#39;)</span>
+<span class="s2">    geometry.ST_Transform(&#39;EPSG:4326&#39;, &#39;</span><span class="si">{</span><span class="n">epsg_code</span><span class="si">}</span><span class="s2">&#39;)</span>
+<span class="s2">        .ST_Buffer(10)</span>
+<span class="s2">        .ST_Transform(&#39;</span><span class="si">{</span><span class="n">epsg_code</span><span class="si">}</span><span class="s2">&#39;, &#39;EPSG:4326&#39;)</span>
 <span class="s2">    as geometry</span>
 <span class="s2">FROM mapillary_data</span>
 <span class="s2">),</span>
@@ -854,7 +869,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "53c6b2b8978045c3977416c142207b20", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "67eb23d2e6d54e339fd5801d5b17185b", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <p>Display results on a map.</p>
 <div class="cell docutils container">
@@ -876,8 +891,9 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the lonboard map definition</span>
 <span class="n">not_covered_osm_data</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">PathLayer</span><span class="o">.</span><span class="n">from_geopandas</span><span class="p">(</span>
     <span class="n">gdf</span><span class="p">,</span>
-    <span class="n">get_color</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">],</span>
-    <span class="n">get_width</span><span class="o">=</span><span class="mi">3</span>
+    <span class="n">get_color</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">],</span>
+    <span class="n">get_width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">width_min_pixels</span><span class="o">=</span><span class="mf">0.8</span>
 <span class="p">)</span>
 
 <span class="n">view_state</span> <span class="o">=</span> <span class="p">{</span>
@@ -887,7 +903,7 @@ document.write(`
 <span class="p">}</span>
 
 <span class="n">mapillary_map</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span>
-    <span class="n">basemap_style</span><span class="o">=</span><span class="n">lonboard</span><span class="o">.</span><span class="n">basemap</span><span class="o">.</span><span class="n">CartoBasemap</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span>
+    <span class="n">basemap_style</span><span class="o">=</span><span class="n">lonboard</span><span class="o">.</span><span class="n">basemap</span><span class="o">.</span><span class="n">CartoBasemap</span><span class="o">.</span><span class="n">DarkMatter</span><span class="p">,</span>
     <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">not_covered_osm_data</span><span class="p">,</span> <span class="n">mapillary_layer</span><span class="p">],</span>
     <span class="n">view_state</span><span class="o">=</span><span class="n">view_state</span>
 <span class="p">)</span>
@@ -897,7 +913,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "8f5166aa808046d4bc0c2dd1b62948ca", "version_major": 2, "version_minor": 1}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "bf93b8f8dc10445da0e3fc86a8a757d8", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 </section>
 <section id="calculate-share-of-road-network-covered-by-mapillary">
@@ -913,7 +929,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mapillary coverage: 0.258
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mapillary coverage: 0.277
 </pre></div>
 </div>
 </div>
@@ -962,26 +978,26 @@ document.write(`
 │ highway_value  │ total_length_km │ not_covered_length_km │ mapillary_coverage │
 │    varchar     │     double      │        double         │       double       │
 ├────────────────┼─────────────────┼───────────────────────┼────────────────────┤
-│ motorway       │          40.217 │                 2.624 │              0.935 │
-│ trunk          │         183.268 │                19.269 │              0.895 │
-│ motorway_link  │            13.9 │                 1.776 │              0.872 │
-│ trunk_link     │          22.638 │                 4.927 │              0.782 │
-│ primary_link   │           12.95 │                  3.43 │              0.735 │
-│ primary        │         105.381 │                 34.93 │              0.669 │
-│ cycleway       │          29.471 │                12.762 │              0.567 │
-│ secondary      │         365.832 │               165.322 │              0.548 │
-│ secondary_link │           9.276 │                 4.257 │              0.541 │
-│ tertiary       │         180.199 │                 97.04 │              0.461 │
-│ tertiary_link  │           1.121 │                 0.694 │              0.381 │
-│ unclassified   │         354.176 │               226.411 │              0.361 │
-│ steps          │           1.389 │                 0.946 │              0.319 │
-│ pedestrian     │           4.057 │                 3.114 │              0.233 │
-│ residential    │        3575.996 │              2868.926 │              0.198 │
-│ footway        │         136.661 │               110.634 │               0.19 │
-│ service        │        1391.071 │               1134.82 │              0.184 │
-│ living_street  │           8.256 │                 6.841 │              0.171 │
-│ track          │         401.246 │               335.547 │              0.164 │
-│ path           │         212.548 │               194.438 │              0.085 │
+│ motorway       │          40.216 │                 2.602 │              0.935 │
+│ trunk          │         183.263 │                14.096 │              0.923 │
+│ motorway_link  │          13.904 │                 1.647 │              0.882 │
+│ trunk_link     │          22.641 │                 3.948 │              0.826 │
+│ primary_link   │           12.95 │                 2.376 │              0.817 │
+│ primary        │         105.382 │                33.001 │              0.687 │
+│ cycleway       │          29.469 │                11.735 │              0.602 │
+│ secondary      │         365.844 │               152.154 │              0.584 │
+│ secondary_link │           9.282 │                 4.035 │              0.565 │
+│ tertiary       │         180.208 │                88.922 │              0.507 │
+│ steps          │           1.386 │                 0.724 │              0.478 │
+│ tertiary_link  │           1.126 │                 0.629 │              0.442 │
+│ unclassified   │         354.191 │               219.945 │              0.379 │
+│ pedestrian     │           4.059 │                 2.855 │              0.297 │
+│ residential    │        3576.012 │              2809.398 │              0.214 │
+│ service        │        1391.092 │              1110.059 │              0.202 │
+│ footway        │         136.649 │               109.162 │              0.201 │
+│ living_street  │           8.259 │                 6.724 │              0.186 │
+│ track          │         401.247 │               326.452 │              0.186 │
+│ path           │         212.552 │               192.475 │              0.094 │
 ├────────────────┴─────────────────┴───────────────────────┴────────────────────┤
 │ 20 rows                                                             4 columns │
 └───────────────────────────────────────────────────────────────────────────────┘
@@ -1060,7 +1076,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-input-parameters-for-your-analysis">Prepare the input parameters for your analysis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-osm-data">Get OSM data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-mapillary-data">Get Mapillary Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-osm-ways-not-covered-by-buffered-mapillary-sequence">Find OSM ways not covered by (buffered) Mapillary sequence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-osm-ways-not-covered-by-5m-buffered-mapillary-sequence">Find OSM ways not covered by (5m buffered) Mapillary sequence</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-share-of-road-network-covered-by-mapillary">Calculate share of road network covered by Mapillary</a></li>
 </ul>
   </nav></div>
