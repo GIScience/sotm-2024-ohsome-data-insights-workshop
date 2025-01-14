@@ -1,0 +1,1102 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Completeness of OSM building data &#8212; SOTM 2024 ohsome-data-insights Workshop</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/06_Completeness_of_OSM_building_data';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="HOT Tasking Manager project analysis" href="03_hot_tm_project_analysis.html" />
+    <link rel="prev" title="Attribute Completeness for Street Surface Tags" href="02_attribute_completeness.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/HeiGIT_Logo_compact.svg" class="logo__image only-light" alt="SOTM 2024 ohsome-data-insights Workshop - Home"/>
+    <img src="../_static/HeiGIT_Logo_compact.svg" class="logo__image only-dark pst-js-only" alt="SOTM 2024 ohsome-data-insights Workshop - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to ohsome-data-insights Workshop @ SOTM 2024
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_motivation.html">Why should you be excited about <em>ohsome-data-insights</em>?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_MinIO_Object_Store.html">Connect to MinIO Object Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_Iceberg_Catalog.html">Connect to Apache Iceberg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_data_structure.html">Data Structure</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Extraction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01a_Data_Extraction_DuckDB_PyIceberg.html">Download latest OSM data as GeoPackage</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Simple Data Analysis</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="02a_buildings_currentness_DuckDB_PyIceberg.html">Currentness of Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_vandalism_detection.html">Vandalism Detection for LineStrings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_attribute_completeness.html">Attribute Completeness for Street Surface Tags</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Completeness of OSM building data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Integration</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="03_hot_tm_project_analysis.html">HOT Tasking Manager project analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_mapillary_data_analysis.html">Mapillary Coverage Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Data Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="04_corporate_edits.html">Corporate Edits Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Country_User_Activity_DuckDB_only.html">User activity map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_highways_timeline_DuckDB_only.html">Road Network Evolution</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Background</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="05_partitioning_and_sorting.html">Partitioning and Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02b_buildings_currentness_DuckDB_only.html">DuckDB: Currentness of Buildings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01b_Data_Extraction_DuckDB_only.html">DuckDB: Data Extraction from <em>geo-sorted ohsome contributions</em></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/GIScience/sotm-2024-ohsome-data-insights-workshop/blob/main/book/06_Completeness_of_OSM_building_data.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/GIScience/sotm-2024-ohsome-data-insights-workshop" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/GIScience/sotm-2024-ohsome-data-insights-workshop/issues/new?title=Issue%20on%20page%20%2Fbook/06_Completeness_of_OSM_building_data.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/06_Completeness_of_OSM_building_data.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Completeness of OSM building data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-packages">Import packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-bounding-boxes">Create bounding boxes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-data-from-overture-maps">Downloading data from Overture Maps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-processing">Data processing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-the-completeness-of-osm-buildings">Visualize the completeness of OSM buildings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-results-with-a-standard-bar-chart">Visualize results with a standard bar chart</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-results-with-a-lonboard-map">Visualize results with a lonboard map</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="completeness-of-osm-building-data">
+<h1>Completeness of OSM building data<a class="headerlink" href="#completeness-of-osm-building-data" title="Link to this heading">#</a></h1>
+<p>In this notebook, we demonstrate how to analyze the completeness of OSM building data for different study areas across the globe.</p>
+<p>The task can be done by only using data provided by the <a class="reference external" href="https://overturemaps.org/">Overture Maps Foundation</a>, a collaborative initiative to gather  geodata and provide open and global map data. The building data on Overture containes data of OpenStreetMaps, as well as other sources. We can use the labeled data to compare the OSM building data in Overture with data of other sources and get the completness of OSM building data.</p>
+<p>The notebook contains following steps:</p>
+<ul class="simple">
+<li><p>Importing necessary libraries</p></li>
+<li><p>Create bounding boxes</p></li>
+<li><p>Downloading data from Overture Maps</p></li>
+<li><p>Data processing</p></li>
+<li><p>Visualizing the results</p></li>
+</ul>
+<section id="import-packages">
+<h2>Import packages<a class="headerlink" href="#import-packages" title="Link to this heading">#</a></h2>
+<p>For handling the data we use the database system duckdb. Feel free to use the database management system you feel most confortable with. Please make sure that your chosen system supports the Structured Query Language (SQL).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">duckdb</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-bounding-boxes">
+<h2>Create bounding boxes<a class="headerlink" href="#create-bounding-boxes" title="Link to this heading">#</a></h2>
+<p>With this method, you can check the completeness from any given area you are interested in. You only need to provide the coordinates of your area of interest as a bounding box. Here we have set a list of multiple bounding boxes of different cities as an example. Please note that downloading all the data of the example bounding boxes can last a few minutes. To speed the process up, you can adjust the bounding box list and shrink down the area of interest or put your own bounding box.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bboxes</span> <span class="o">=</span> <span class="p">{</span>    
+    <span class="s1">&#39;Berlin&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">13.088345</span><span class="p">,</span><span class="mf">52.338271</span><span class="p">,</span><span class="mf">13.761161</span><span class="p">,</span><span class="mf">52.675509</span><span class="p">),</span>
+    <span class="s1">&#39;Kathmandu&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">85.188235</span><span class="p">,</span><span class="mf">27.5701</span><span class="p">,</span><span class="mf">85.565959</span><span class="p">,</span><span class="mf">27.818056</span><span class="p">),</span>
+    <span class="s1">&#39;Vienna&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">16.181831</span><span class="p">,</span> <span class="mf">48.117907</span><span class="p">,</span> <span class="mf">16.577513</span><span class="p">,</span> <span class="mf">48.322668</span><span class="p">),</span>
+    <span class="s1">&#39;Nairobi&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">36.650938</span><span class="p">,</span><span class="o">-</span><span class="mf">1.444471</span><span class="p">,</span><span class="mf">37.103887</span><span class="p">,</span><span class="o">-</span><span class="mf">1.163522</span><span class="p">),</span>
+    <span class="s1">&#39;Rio_de_Janeiro&#39;</span><span class="p">:(</span><span class="o">-</span><span class="mf">43.796252</span><span class="p">,</span><span class="o">-</span><span class="mf">23.082705</span><span class="p">,</span><span class="o">-</span><span class="mf">43.099081</span><span class="p">,</span><span class="o">-</span><span class="mf">22.746088</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="downloading-data-from-overture-maps">
+<h2>Downloading data from Overture Maps<a class="headerlink" href="#downloading-data-from-overture-maps" title="Link to this heading">#</a></h2>
+<p>Configuring DuckDB</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">con</span> <span class="o">=</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+    <span class="n">config</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;threads&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="s1">&#39;max_memory&#39;</span><span class="p">:</span> <span class="s1">&#39;8GB&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This function is downloading building data from Overture Maps for the defined study areas using DuckDB.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">overture_download</span><span class="p">(</span><span class="n">region_name</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span><span class="p">):</span>
+
+    <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SET s3_region=&#39;us-west-2&#39;;</span>
+
+<span class="s2">    CREATE OR REPLACE TABLE buildings_Overture_</span><span class="si">{</span><span class="n">region_name</span><span class="si">}</span><span class="s2"> AS</span>
+<span class="s2">        (SELECT </span>
+<span class="s2">            id, </span>
+<span class="s2">            bbox,</span>
+<span class="s2">            sources, </span>
+<span class="s2">            geometry</span>
+<span class="s2">        FROM read_parquet(&#39;s3://overturemaps-us-west-2/release/2024-11-13.0/theme=buildings/type=building/*&#39;, filename=true, hive_partitioning=1)</span>
+<span class="s2">        WHERE bbox.xmin &gt; </span><span class="si">{</span><span class="n">xmin</span><span class="si">}</span>
+<span class="s2">        AND bbox.ymin &gt; </span><span class="si">{</span><span class="n">ymin</span><span class="si">}</span>
+<span class="s2">        AND bbox.xmax &lt; </span><span class="si">{</span><span class="n">xmax</span><span class="si">}</span>
+<span class="s2">        AND bbox.ymax &lt; </span><span class="si">{</span><span class="n">ymax</span><span class="si">}</span>
+<span class="s2">        );</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Overture download completed for </span><span class="si">{</span><span class="n">region_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The download function is called and we define the study areas as our bounding box list. This step of downloading can last a few minutes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">region_name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">bboxes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">bboxes</span><span class="p">[</span><span class="n">region_name</span><span class="p">]</span>
+    <span class="n">overture_download</span><span class="p">(</span><span class="n">region_name</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "ac3260665a67413c8176974f58c01eb0", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overture download completed for Berlin
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "8759259bdd634ad6be91748d33f3d635", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overture download completed for Kathmandu
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "54f7cb85545a4b3e8cb1439932b2e18d", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overture download completed for Vienna
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "5fb507754e97410ebb88c9213f0702de", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overture download completed for Nairobi
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "376e06018d9b49528502a6f502944a4c", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overture download completed for Rio_de_Janeiro
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-processing">
+<h2>Data processing<a class="headerlink" href="#data-processing" title="Link to this heading">#</a></h2>
+<p>We first make sure that the data download was successful and contains all the regions of the bounding box list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">show tables </span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌───────────────────────────────────┐
+│               name                │
+│              varchar              │
+├───────────────────────────────────┤
+│ buildings_Overture_Berlin         │
+│ buildings_Overture_Kathmandu      │
+│ buildings_Overture_Nairobi        │
+│ buildings_Overture_Rio_de_Janeiro │
+│ buildings_Overture_Vienna         │
+└───────────────────────────────────┘
+</pre></div>
+</div>
+</div>
+</div>
+<p>A loop is employed to run over all created tables and give back the number of buildings with OpenStreetMap as source, buildings with other source and the percentage of OSM building of the total count. Those numbers are saved in a data frame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">region_name</span> <span class="ow">in</span> <span class="n">bboxes</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT </span>
+<span class="s2">        &#39;</span><span class="si">{</span><span class="n">region_name</span><span class="si">}</span><span class="s2">&#39; AS region, </span>
+<span class="s2">        SUM(CASE</span>
+<span class="s2">            WHEN sources[1][&#39;dataset&#39;] = &#39;OpenStreetMap&#39; THEN 1</span>
+<span class="s2">            ELSE 0</span>
+<span class="s2">        END) AS osm_count,</span>
+<span class="s2">  </span>
+<span class="s2">        SUM(CASE</span>
+<span class="s2">            WHEN sources[1][&#39;dataset&#39;] != &#39;OpenStreetMap&#39; THEN 1</span>
+<span class="s2">            ELSE 0</span>
+<span class="s2">        END) AS other_count,</span>
+<span class="s2">        </span>
+<span class="s2">        COUNT(*) AS total_count,</span>
+<span class="s2">        ROUND((osm_count * 1.0 / total_count), 2) AS osm_completeness </span>
+<span class="s2">    FROM buildings_Overture_</span><span class="si">{</span><span class="n">region_name</span><span class="si">}</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">(),</span> 
+        <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Region&#39;</span><span class="p">,</span> <span class="s1">&#39;OSM&#39;</span><span class="p">,</span> <span class="s1">&#39;Other Sources&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Count&#39;</span><span class="p">,</span> <span class="s1">&#39;OSM Completeness&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+    
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="n">final_result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">final_result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Region</th>
+      <th>OSM</th>
+      <th>Other Sources</th>
+      <th>Total Count</th>
+      <th>OSM Completeness</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Berlin</td>
+      <td>706122</td>
+      <td>185767</td>
+      <td>891889</td>
+      <td>0.79</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Kathmandu</td>
+      <td>494058</td>
+      <td>419939</td>
+      <td>913997</td>
+      <td>0.54</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Vienna</td>
+      <td>295496</td>
+      <td>15974</td>
+      <td>311470</td>
+      <td>0.95</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Nairobi</td>
+      <td>535583</td>
+      <td>782270</td>
+      <td>1317853</td>
+      <td>0.41</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Rio_de_Janeiro</td>
+      <td>322461</td>
+      <td>1769997</td>
+      <td>2092458</td>
+      <td>0.15</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="visualize-the-completeness-of-osm-buildings">
+<h2>Visualize the completeness of OSM buildings<a class="headerlink" href="#visualize-the-completeness-of-osm-buildings" title="Link to this heading">#</a></h2>
+<section id="visualize-results-with-a-standard-bar-chart">
+<h3>Visualize results with a standard bar chart<a class="headerlink" href="#visualize-results-with-a-standard-bar-chart" title="Link to this heading">#</a></h3>
+<p>The results can be visualized in different ways. We chose a bar chart to highlight how much the completeness of OSM building data can differ from region to region.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sorted_results</span> <span class="o">=</span> <span class="n">final_result</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;OSM Completeness&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> 
+
+<span class="n">bars</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span>
+    <span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;Region&#39;</span><span class="p">],</span> 
+    <span class="mi">100</span><span class="o">*</span><span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;OSM Completeness&#39;</span><span class="p">],</span> 
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;y&#39;</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span>
+    <span class="n">bars</span><span class="p">,</span> 
+    <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%&#39;</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">sorted_results</span><span class="p">[</span><span class="s1">&#39;OSM Completeness&#39;</span><span class="p">]],</span> 
+    <span class="n">label_type</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Completeness of OSM buildings&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;OSM Completeness in %&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/962e0350a8e5083c38aeced988e5269448981e32f95e1c0893b2153d3352721a.png" src="../_images/962e0350a8e5083c38aeced988e5269448981e32f95e1c0893b2153d3352721a.png" />
+</div>
+</div>
+</section>
+<section id="visualize-results-with-a-lonboard-map">
+<h3>Visualize results with a lonboard map<a class="headerlink" href="#visualize-results-with-a-lonboard-map" title="Link to this heading">#</a></h3>
+<p>The statistics and charts can give us overall numbers on the completeness, but we can access more detailed information by loading the results into a map. Here we have can see exacltly which buildings are included and which are missing in the OSM dataset.</p>
+<p>For loading the results in a map we use <a class="reference external" href="https://developmentseed.org/lonboard/latest/">lonboard</a>. We visualized the results of the city Berlin. Feel free to try it with your own area of interest.</p>
+<p>Herefore, we first need to access the spatial dimensions of our downloaded data, transfere it into a geodataframe and transform it to a suitable coordinate reference system.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;INSTALL spatial;&quot;</span><span class="p">)</span>
+<span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;LOAD spatial;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calling the data from DuckDB.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">region_name</span> <span class="o">=</span> <span class="s2">&quot;Berlin&quot;</span>
+
+<span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT </span>
+<span class="s2">    ST_AsText(ST_GeomFromWKB(geometry)) AS geometry,</span>
+<span class="s2">    sources[1][&#39;dataset&#39;] AS source</span>
+<span class="s2">FROM buildings_Overture_</span><span class="si">{</span><span class="n">region_name</span><span class="si">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">df</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Setting up the geodataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span>
+    <span class="n">geometry</span><span class="o">=</span><span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="o">.</span><span class="n">from_wkt</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">])</span>
+<span class="p">)</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="s1">&#39;epsg:4326&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We want the colour codes shown in the map to be based on the source of the building data (OSM or other source). Here we convert the source into a cathegory.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;source_codes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;OpenStreetMap&#39;</span><span class="p">,</span> <span class="s1">&#39;source_codes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s have a look at our geodataframe and the different the categories we have set up.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+      <th>source</th>
+      <th>source_codes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>POLYGON ((13.09111 52.33882, 13.0913 52.33875,...</td>
+      <td>OpenStreetMap</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>POLYGON ((13.09142 52.33869, 13.09138 52.3387,...</td>
+      <td>OpenStreetMap</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>POLYGON ((13.092 52.33853, 13.09195 52.33848, ...</td>
+      <td>OpenStreetMap</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>POLYGON ((13.09216 52.33845, 13.0921 52.33841,...</td>
+      <td>OpenStreetMap</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>POLYGON ((13.09165 52.33855, 13.09168 52.33858...</td>
+      <td>OpenStreetMap</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>891891</th>
+      <td>POLYGON ((13.72285 52.66864, 13.72285 52.6685,...</td>
+      <td>OpenStreetMap</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>891892</th>
+      <td>POLYGON ((13.74536 52.67531, 13.7453 52.67531,...</td>
+      <td>Microsoft ML Buildings</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>891893</th>
+      <td>POLYGON ((13.74532 52.67532, 13.74539 52.67531...</td>
+      <td>Microsoft ML Buildings</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>891894</th>
+      <td>POLYGON ((13.74539 52.67541, 13.74536 52.67538...</td>
+      <td>Microsoft ML Buildings</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>891895</th>
+      <td>POLYGON ((13.75248 52.67421, 13.75251 52.6742,...</td>
+      <td>Esri Community Maps</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>891896 rows × 3 columns</p>
+</div></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;OpenStreetMap&#39;, &#39;Esri Community Maps&#39;, &#39;Microsoft ML Buildings&#39;],
+      dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can define the lonboard map layout.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">lonboard</span>
+
+<span class="c1"># adjust color values</span>
+<span class="n">source_colormap</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">55</span><span class="p">,</span> <span class="mi">126</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">255</span><span class="p">],</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">152</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">163</span><span class="p">,</span> <span class="mi">255</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">colormap</span><span class="o">.</span><span class="n">apply_categorical_cmap</span><span class="p">(</span>
+    <span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;source_codes&quot;</span><span class="p">],</span>
+    <span class="n">source_colormap</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="n">layer</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">SolidPolygonLayer</span><span class="o">.</span><span class="n">from_geopandas</span><span class="p">(</span>
+    <span class="n">gdf</span><span class="p">,</span>
+    <span class="n">get_fill_color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span>
+    <span class="n">extensions</span><span class="o">=</span><span class="p">[</span><span class="n">lonboard</span><span class="o">.</span><span class="n">layer_extension</span><span class="o">.</span><span class="n">DataFilterExtension</span><span class="p">(</span><span class="n">filter_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)],</span>
+    <span class="n">get_filter_value</span><span class="o">=</span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;source_codes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">),</span>  <span class="c1"># Numerische Werte für den Filter</span>
+    <span class="n">filter_range</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Including toggle buttons</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ipywidgets</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">traitlets</span><span class="w"> </span><span class="kn">import</span> <span class="n">directional_link</span>
+
+<span class="c1"># define toogle button name and value</span>
+<span class="n">group_options</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;OpenStreetMap&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Other&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">source_toggle</span> <span class="o">=</span> <span class="n">ipywidgets</span><span class="o">.</span><span class="n">ToggleButtons</span><span class="p">(</span>
+    <span class="n">options</span><span class="o">=</span><span class="n">group_options</span><span class="p">,</span>
+    <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">directional_link</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">source_toggle</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="s2">&quot;filter_range&quot;</span><span class="p">),</span>
+    <span class="n">transform</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;traitlets.traitlets.directional_link at 0x1bf722936d0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s have a look at our map, displaying OSM building data and missing building data. Soom into the map to get a more detailed depiction.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">building_map</span> <span class="o">=</span> <span class="n">lonboard</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span>
+    <span class="n">basemap_style</span><span class="o">=</span><span class="n">lonboard</span><span class="o">.</span><span class="n">basemap</span><span class="o">.</span><span class="n">CartoBasemap</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span>
+    <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="n">layer</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">building_map</span><span class="p">,</span> <span class="n">source_toggle</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "8c2446366c704e1a8051b3e5f4391fbc", "version_major": 2, "version_minor": 1}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "f61044963a4d459a8fdf1446b5eed86d", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_attribute_completeness.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Attribute Completeness for Street Surface Tags</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_hot_tm_project_analysis.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">HOT Tasking Manager project analysis</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-packages">Import packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-bounding-boxes">Create bounding boxes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-data-from-overture-maps">Downloading data from Overture Maps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-processing">Data processing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-the-completeness-of-osm-buildings">Visualize the completeness of OSM buildings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-results-with-a-standard-bar-chart">Visualize results with a standard bar chart</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-results-with-a-lonboard-map">Visualize results with a lonboard map</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ohsome Team @ HeiGIT
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
