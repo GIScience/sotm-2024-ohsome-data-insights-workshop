@@ -18,6 +18,7 @@ parts:
         - file: book/02a_buildings_currentness_DuckDB_PyIceberg.ipynb
         - file: book/02_vandalism_detection.ipynb
         - file: book/02_attribute_completeness.ipynb
+        - file: book/06_Completeness_of_OSM_building_data.ipynb
   - caption: Data Integration
     chapters:
         - file: book/03_hot_tm_project_analysis.ipynb
